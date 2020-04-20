@@ -9,15 +9,19 @@ class Sheet
 
 protected:
     std::string m_name{""};
+
     uint8_t m_strength{10u};
     uint8_t m_dexterity{10u};
     uint8_t m_constitution{10u};
     uint8_t m_inteligence{10u};
     uint8_t m_wisdom{10u};
     uint8_t m_charisma{10u};
+
     uint8_t m_level{1u};
+
     unsigned short m_maxLife{0u};
     unsigned short m_currentLife{0u};
+
     Weapon m_naturalWeapon;
 
 public:
@@ -69,6 +73,7 @@ public:
 
     friend std::ostream &operator<<
         (std::ostream &t_stream, const Sheet &t_sheet);
+    std::string getIdAsString() const;
 };
 
 #endif //TORMENTA_SHEET_HPP

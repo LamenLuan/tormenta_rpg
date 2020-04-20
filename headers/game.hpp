@@ -1,4 +1,3 @@
-#include "../source/hero-classes/mage.hpp"
 #include "../source/hero-classes/ranger.hpp"
 #include "../source/hero-classes/warrior.hpp"
 

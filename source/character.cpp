@@ -3,7 +3,7 @@
 Character::Character()
     :
     Sheet(),
-    m_inventory( strength() )
+    m_inventory(m_strength)
 {
 }
 
@@ -14,7 +14,7 @@ Character::Character(std::string t_name, uint8_t t_strength,
     :
     Sheet(t_name, t_strength, t_dexterity, t_constitution, t_inteligence,
         t_wisdom, t_charisma, t_level, t_maxLife), m_race(t_race),
-        m_inventory(10.0f * strength() ), m_coins(t_coins)
+        m_inventory(m_strength), m_coins(t_coins)
 {
     m_inventory.set_currentWeight
         (m_inventory.get_currentWeight() + (m_coins * 0.01f) );
@@ -22,6 +22,7 @@ Character::Character(std::string t_name, uint8_t t_strength,
 
 Character::~Character()
 {
+    m_equipedWeapon.release();
 }
 
 Race Character::get_race() const { return m_race; }
@@ -31,7 +32,7 @@ Inventory& Character::get_inventory() { return m_inventory; }
 Weapon& Character::get_equipedWeapon()
 {
     if(m_equipedWeapon) return *m_equipedWeapon;
-    else throw  NullObject();
+    else throw NullObject();
 }
 
 Armor Character::get_equipedArmor()
@@ -193,11 +194,11 @@ std::string Character::getIdAsString() const
 {
     std::stringstream stream;
 
-    stream << m_name << get_strength() << " "
+    stream << m_name << " " << get_strength() << " "
         << get_dexterity() << " " << get_constitution() << " "
         << get_inteligence() << " " << get_wisdom() << " "
-        << get_charisma() << " " << get_level() << " " << m_maxLife << " "
-        << m_currentLife << " " << m_naturalWeapon.getIdAsString() << " "
+        << get_charisma() << " " << get_level() << " "
+        << m_currentLife <<  " "
         << equipedWeaponIndex() << " " << raceName();
 
     return stream.str();

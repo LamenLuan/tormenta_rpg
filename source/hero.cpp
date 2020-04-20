@@ -7,7 +7,8 @@ void Hero::util_manageExp(uint8_t t_level)
 
     for (i = 1; i < t_level - 1; i++)
         m_currentExp += i * 1000u;
-    addExp((i - 1) * 1000u);
+
+    addExp(i * 1000u);
 }
 
 Hero::Hero(uint8_t t_level) : Character()
@@ -16,14 +17,20 @@ Hero::Hero(uint8_t t_level) : Character()
 }
 
 Hero::Hero(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
-    uint8_t t_constitution, uint8_t t_inteligence, uint8_t t_wisdom,
-    uint8_t t_charisma, uint8_t t_level, unsigned short t_maxLife,
-    Race t_race, int t_coins)
+        uint8_t t_constitution, uint8_t t_inteligence, uint8_t t_wisdom,
+        uint8_t t_charisma, uint8_t t_level, uint8_t t_lifePerLevel,
+        Race t_race, int t_coins, unsigned int t_currentExp)
     :
     Character(t_name, t_strength, t_dexterity, t_constitution, t_inteligence,
-        t_wisdom, t_charisma, 1, t_maxLife, t_race, t_coins)
+        t_wisdom, t_charisma, 1,
+        (4 * t_lifePerLevel) + modifier(t_constitution),
+        t_race, t_coins),
+    m_lifePerLevel(t_lifePerLevel)
 {
     util_manageExp(t_level);
+    m_currentLife = m_maxLife;
+
+    if(t_currentExp) m_currentExp = t_currentExp;
 }
 
 Hero::~Hero()
@@ -43,7 +50,17 @@ void Hero::addExp(int t_exp)
         while (m_currentExp >= m_nextLevelExp)
         {
             m_level++;
+            m_maxLife += m_lifePerLevel + modifier(m_constitution);
             m_nextLevelExp += m_level * 1000u;
         }
     }
+}
+
+std::string Hero::getIdAsString() const
+{
+    std::stringstream stream;
+
+    stream << Character::getIdAsString() << " " << m_currentExp;
+
+    return stream.str();
 }

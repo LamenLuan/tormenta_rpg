@@ -33,6 +33,7 @@ public:
 
     // Overriding to update inventory capacity.
     void set_strength(short t_strength);
+    
     void set_race(Race t_race);
     void set_inventory(Inventory& t_inventory);
     void set_equipedWeapon(Weapon& t_equipedWeapon);
