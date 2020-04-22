@@ -1,9 +1,16 @@
 #include "../headers/game.hpp"
 
 int main(int, char**) {
-    Hero char1("Fernando", 11, 14, 12, 15, 9, 15, 5, 5, Race::HUMAN, 0);
+    Warrior hero("Perseu", 17, 14, 18, 16, 12, 16, 6, Race::HUMAN, 150);
 
-    std::cout << char1.getIdAsString() << '\n';
+    hero.get_inventory().addItem(
+        Weapon("Spear", 5, 2.5f, 1u, Dice::D6, 20u, 3u, DamageType::PIERCE)
+    );
+
+    hero.set_equipedWeapon(*dynamic_cast<Weapon*>
+    (
+        hero.get_inventory().get_items().at(0)
+    ));
 
     return 0;
 }

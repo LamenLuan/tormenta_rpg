@@ -5,6 +5,7 @@ Character::Character()
     Sheet(),
     m_inventory(m_strength)
 {
+    naturalWeapon();
 }
 
 Character::Character(std::string t_name, uint8_t t_strength,
@@ -16,6 +17,7 @@ Character::Character(std::string t_name, uint8_t t_strength,
         t_wisdom, t_charisma, t_level, t_maxLife), m_race(t_race),
         m_inventory(m_strength), m_coins(t_coins)
 {
+    naturalWeapon();
     m_inventory.set_currentWeight
         (m_inventory.get_currentWeight() + (m_coins * 0.01f) );
 }
@@ -65,19 +67,31 @@ void Character::set_inventory(Inventory& t_inventory)
     m_inventory = t_inventory;
 }
 
-void Character::set_equipedWeapon(Weapon& t_equipedWeapon)
+void Character::set_equipedWeapon(Weapon& t_weapon)
 {
-    m_equipedWeapon.reset(&t_equipedWeapon);
+    if(m_equipedWeapon.get() != &m_naturalWeapon)
+    {
+        m_inventory.addItem(*m_equipedWeapon);
+    }
+    m_equipedWeapon.reset(&t_weapon);
 }
 
 void Character::set_equipedArmor(Armor& t_armor)
 {
-    m_equipedArmor = &t_armor;
+    if(m_equipedArmor.get() != nullptr)
+    {
+        m_inventory.addItem(*m_equipedArmor);
+    }
+    m_equipedArmor.reset(&t_armor);
 }
 
 void Character::set_equipedShield(Shield& t_shield)
 {
-    m_equipedShield = &t_shield;
+    if(m_equipedShield.get() != nullptr)
+    {
+        m_inventory.addItem(*m_equipedShield);
+    }
+    m_equipedShield.reset(&t_shield);
 }
 
 void Character::set_coins(int t_coins)
@@ -177,19 +191,6 @@ const std::string Character::show() const
     return stream.str();
 }
 
-int Character::equipedWeaponIndex() const
-{
-    std::vector<Item*> vector = m_inventory.get_items();
-    Weapon* equipedWeapon = m_equipedWeapon.get();
-    if(m_equipedWeapon.get() == &m_naturalWeapon) return -1;
-    else
-    {
-        for (size_t i = 0; i < (vector.size()) ; i++)
-            if( vector[i] == m_equipedWeapon.get() ) return i;
-    }
-    return -1;
-}
-
 std::string Character::getIdAsString() const
 {
     std::stringstream stream;
@@ -198,8 +199,7 @@ std::string Character::getIdAsString() const
         << get_dexterity() << " " << get_constitution() << " "
         << get_inteligence() << " " << get_wisdom() << " "
         << get_charisma() << " " << get_level() << " "
-        << m_currentLife <<  " "
-        << equipedWeaponIndex() << " " << raceName();
+        << m_currentLife <<  " " << " " << raceName() << " " << get_coins();
 
     return stream.str();
 }

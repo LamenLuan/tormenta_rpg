@@ -11,8 +11,8 @@ protected:
     Race m_race{Race::HUMAN};
     Inventory m_inventory;
     std::unique_ptr<Weapon> m_equipedWeapon{&m_naturalWeapon};
-    Armor* m_equipedArmor{nullptr};
-    Shield* m_equipedShield{nullptr};
+    std::unique_ptr<Armor> m_equipedArmor{nullptr};
+    std::unique_ptr<Shield> m_equipedShield{nullptr};
     unsigned int m_coins{0};
 
 public:

@@ -10,8 +10,6 @@ private:
     unsigned int m_nextLevelExp{1000u};
     uint8_t m_lifePerLevel{1u};
 public:
-    
-    void util_manageExp(uint8_t t_level);
     Hero(uint8_t t_level = 1);
     Hero(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
         uint8_t t_constitution, uint8_t t_inteligence, uint8_t t_wisdom,
@@ -21,8 +19,10 @@ public:
 
     unsigned int get_currentExp() const;
 
+    void manageExp(uint8_t t_level);
     void addExp(int t_exp);
-    std::string getIdAsString() const;
+    
+    virtual std::string getIdAsString() const = 0;
 };
 
 #endif // TORMENTA_HERO_HPP

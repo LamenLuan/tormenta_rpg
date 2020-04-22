@@ -1,7 +1,7 @@
 #include "../headers/hero.hpp"
 
 // Used by constructors.
-void Hero::util_manageExp(uint8_t t_level)
+void Hero::manageExp(uint8_t t_level)
 {
     short i;
 
@@ -13,7 +13,7 @@ void Hero::util_manageExp(uint8_t t_level)
 
 Hero::Hero(uint8_t t_level) : Character()
 {
-    util_manageExp(t_level);
+    manageExp(t_level);
 }
 
 Hero::Hero(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
@@ -27,7 +27,7 @@ Hero::Hero(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
         t_race, t_coins),
     m_lifePerLevel(t_lifePerLevel)
 {
-    util_manageExp(t_level);
+    manageExp(t_level);
     m_currentLife = m_maxLife;
 
     if(t_currentExp) m_currentExp = t_currentExp;

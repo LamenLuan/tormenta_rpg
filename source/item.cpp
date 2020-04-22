@@ -9,7 +9,7 @@ Item::Item(std::string t_name, unsigned int t_price, float t_weight)
     :
     m_name(t_name), m_price(t_price), m_weight(t_weight)
 {
-    if (m_weight < 0.0f) m_weight = 0.0f;
+    if (m_weight < 0.0f) m_weight = 0.1f;
 }
 
 Item::~Item()
