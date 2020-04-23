@@ -3,7 +3,7 @@
 Character::Character()
     :
     Sheet(),
-    m_inventory(m_strength)
+    m_backpack(m_strength)
 {
     naturalWeapon();
 }
@@ -15,11 +15,11 @@ Character::Character(std::string t_name, uint8_t t_strength,
     :
     Sheet(t_name, t_strength, t_dexterity, t_constitution, t_inteligence,
         t_wisdom, t_charisma, t_level, t_maxLife), m_race(t_race),
-        m_inventory(m_strength), m_coins(t_coins)
+        m_backpack(m_strength), m_coins(t_coins)
 {
     naturalWeapon();
-    m_inventory.set_currentWeight
-        (m_inventory.get_currentWeight() + (m_coins * 0.01f) );
+    m_backpack.set_currentWeight
+        (m_backpack.get_currentWeight() + (m_coins * 0.01f) );
 }
 
 Character::~Character()
@@ -29,7 +29,7 @@ Character::~Character()
 
 Race Character::get_race() const { return m_race; }
 
-Inventory& Character::get_inventory() { return m_inventory; }
+Backpack& Character::get_backpack() { return m_backpack; }
 
 Weapon& Character::get_equipedWeapon()
 {
@@ -54,7 +54,7 @@ void Character::set_strength(short t_strength)
     if(t_strength > 0)
     {
         m_strength = t_strength;
-        m_inventory.set_capacity( strength() );
+        m_backpack.set_capacity( strength() );
     }
 }
 
@@ -62,36 +62,58 @@ unsigned int Character::get_coins() const { return m_coins; }
 
 void Character::set_race(Race t_race) { m_race = t_race; }
 
-void Character::set_inventory(Inventory& t_inventory)
+void Character::set_backpack(Backpack& t_backpack)
 {
-    m_inventory = t_inventory;
+    m_backpack = t_backpack;
 }
 
 void Character::set_equipedWeapon(Weapon& t_weapon)
 {
-    if(m_equipedWeapon.get() != &m_naturalWeapon)
+    if(m_equipedWeapon.get() != nullptr)
     {
-        m_inventory.addItem(*m_equipedWeapon);
+        m_backpack.addItem(*m_equipedWeapon);
+        m_backpack.set_currentWeight(
+            m_backpack.get_currentWeight() - m_equipedWeapon->get_weight()
+        );
     }
-    m_equipedWeapon.reset(&t_weapon);
+    m_equipedWeapon.reset( new Weapon(t_weapon) );
+    m_backpack.set_currentWeight(
+        m_backpack.get_currentWeight() + m_equipedWeapon->get_weight()
+    );
 }
 
 void Character::set_equipedArmor(Armor& t_armor)
 {
     if(m_equipedArmor.get() != nullptr)
     {
-        m_inventory.addItem(*m_equipedArmor);
+        m_backpack.addItem(*m_equipedArmor);
+        m_backpack.set_currentWeight
+        (
+            m_backpack.get_currentWeight() - m_equipedArmor->get_weight()
+        );
     }
-    m_equipedArmor.reset(&t_armor);
+    m_equipedArmor.reset( new Armor(t_armor) );
+    m_backpack.set_currentWeight
+    (
+        m_backpack.get_currentWeight() + m_equipedArmor->get_weight()
+    );
 }
 
 void Character::set_equipedShield(Shield& t_shield)
 {
     if(m_equipedShield.get() != nullptr)
     {
-        m_inventory.addItem(*m_equipedShield);
+        m_backpack.addItem(*m_equipedShield);
+        m_backpack.set_currentWeight
+        (
+            m_backpack.get_currentWeight() - m_equipedShield->get_weight()
+        );
     }
-    m_equipedShield.reset(&t_shield);
+    m_equipedShield.reset( new Shield(t_shield) );
+    m_backpack.set_currentWeight
+    (
+        m_backpack.get_currentWeight() + m_equipedShield->get_weight()
+    );
 }
 
 void Character::set_coins(int t_coins)
@@ -99,12 +121,12 @@ void Character::set_coins(int t_coins)
     if(t_coins != static_cast<int>(m_coins) && t_coins >= 0)
     {
         // Subtracting the weight of the actual quantity.
-        m_inventory.set_currentWeight
-            (m_inventory.get_currentWeight() - (m_coins * 0.01f));
+        m_backpack.set_currentWeight
+            (m_backpack.get_currentWeight() - (m_coins * 0.01f));
         m_coins = t_coins;
         // Adding the weight of the new quantity.
-        m_inventory.set_currentWeight
-            (m_inventory.get_currentWeight() + (m_coins * 0.01f));
+        m_backpack.set_currentWeight
+            (m_backpack.get_currentWeight() + (m_coins * 0.01f));
     }
 }
 
@@ -180,9 +202,12 @@ const std::string Character::show() const
         << "Armor class: " << std::showpos << armorClass() << "\n\n"
         << showStats() << "\n\n"
         << "Inventory: " << std::fixed << std::setprecision(2) << std::noshowpos
-            << m_inventory.get_currentWeight() << "/"
-            << m_inventory.get_capacity() << "kg" << "\n\n"
-        << "Equiped weapon: " << m_equipedWeapon->showWeapon() << "\n\n"
+            << m_backpack.get_currentWeight() << "/"
+            << m_backpack.get_capacity() << "kg" << "\n\n"
+        << "Equiped weapon: " << ( m_equipedWeapon
+                ? m_equipedWeapon->showWeapon()
+                : m_naturalWeapon.showWeapon()
+            ) << "\n\n"
         << "Equiped armor: " <<
             (m_equipedArmor ? m_equipedArmor->showArmor() : " None") << "\n\n"
         << "Equiped shield: " <<

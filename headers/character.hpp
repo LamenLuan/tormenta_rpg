@@ -9,8 +9,8 @@ class Character : public Sheet
 {
 protected:
     Race m_race{Race::HUMAN};
-    Inventory m_inventory;
-    std::unique_ptr<Weapon> m_equipedWeapon{&m_naturalWeapon};
+    Backpack m_backpack;
+    std::unique_ptr<Weapon> m_equipedWeapon{nullptr};
     std::unique_ptr<Armor> m_equipedArmor{nullptr};
     std::unique_ptr<Shield> m_equipedShield{nullptr};
     unsigned int m_coins{0};
@@ -24,18 +24,18 @@ public:
     virtual ~Character();
 
     Race get_race() const;
-    Inventory& get_inventory();
+    Backpack& get_backpack();
     // The idea here is to return object, or return exception if null.
     Weapon& get_equipedWeapon();
     Armor get_equipedArmor();
     Shield get_equipedShield();
     unsigned int get_coins() const;
 
-    // Overriding to update inventory capacity.
+    // Overriding to update backpack capacity.
     void set_strength(short t_strength);
     
     void set_race(Race t_race);
-    void set_inventory(Inventory& t_inventory);
+    void set_backpack(Backpack& t_backpack);
     void set_equipedWeapon(Weapon& t_equipedWeapon);
     void set_equipedArmor(Armor& t_armor);
     void set_equipedShield(Shield& t_shield);

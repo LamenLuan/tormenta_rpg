@@ -5,10 +5,13 @@ void Hero::manageExp(uint8_t t_level)
 {
     short i;
 
-    for (i = 1; i < t_level - 1; i++)
-        m_currentExp += i * 1000u;
+    if(t_level > 1u)
+    {  
+        for (i = 1; i < t_level - 1; i++)
+            m_currentExp += i * 1000u;
 
-    addExp(i * 1000u);
+        addExp(i * 1000u);
+    }
 }
 
 Hero::Hero(uint8_t t_level) : Character()
