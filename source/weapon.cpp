@@ -94,7 +94,7 @@ std::string Weapon::weaponId() const
     stream << m_damage.get_quantity() << " "
         << static_cast<short>( m_damage.get_dice() ) << " "
         << get_minCriticalDice() << " " << get_criticalMultiplier() << " "
-        << showWeaponType();
+        << static_cast<short>(m_damageType);
 
     return stream.str();
 }

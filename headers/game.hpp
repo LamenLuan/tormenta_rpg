@@ -1,4 +1,4 @@
-#include "../source/hero-classes/warrior.hpp"
+#include "./fileLoader.hpp"
 
 #include <fstream>
 
@@ -8,10 +8,13 @@
 class Game
 {
 private:
+
     bool m_gameStarted;
     Hero* m_heroes[4];
+    FileLoader fileLoader;
 
 public:
+
     Game();
     ~Game();
 

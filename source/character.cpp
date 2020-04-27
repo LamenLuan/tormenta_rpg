@@ -67,7 +67,7 @@ void Character::set_backpack(Backpack& t_backpack)
     m_backpack = t_backpack;
 }
 
-void Character::set_equipedWeapon(Weapon& t_weapon)
+void Character::set_equipedWeapon(const Weapon& t_weapon)
 {
     if(m_equipedWeapon.get() != nullptr)
     {
@@ -82,7 +82,7 @@ void Character::set_equipedWeapon(Weapon& t_weapon)
     );
 }
 
-void Character::set_equipedArmor(Armor& t_armor)
+void Character::set_equipedArmor(const Armor& t_armor)
 {
     if(m_equipedArmor.get() != nullptr)
     {
@@ -99,7 +99,7 @@ void Character::set_equipedArmor(Armor& t_armor)
     );
 }
 
-void Character::set_equipedShield(Shield& t_shield)
+void Character::set_equipedShield(const Shield& t_shield)
 {
     if(m_equipedShield.get() != nullptr)
     {
@@ -224,7 +224,8 @@ std::string Character::getIdAsString() const
         << get_dexterity() << " " << get_constitution() << " "
         << get_inteligence() << " " << get_wisdom() << " "
         << get_charisma() << " " << get_level() << " "
-        << m_currentLife <<  " " << " " << raceName() << " " << get_coins();
+        << static_cast<int>(m_race) << " "  << get_coins() << " "
+        << m_currentLife;
 
     return stream.str();
 }

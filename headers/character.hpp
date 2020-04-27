@@ -36,9 +36,9 @@ public:
     
     void set_race(Race t_race);
     void set_backpack(Backpack& t_backpack);
-    void set_equipedWeapon(Weapon& t_equipedWeapon);
-    void set_equipedArmor(Armor& t_armor);
-    void set_equipedShield(Shield& t_shield);
+    void set_equipedWeapon(const Weapon& t_equipedWeapon);
+    void set_equipedArmor(const Armor& t_armor);
+    void set_equipedShield(const Shield& t_shield);
     void set_coins(int t_coins);
     
     short dexterity() const;
@@ -47,7 +47,6 @@ public:
     void naturalWeapon();
     const std::string raceName() const;
     const std::string show() const;
-    int equipedWeaponIndex() const;
     std::string getIdAsString() const;
 };
 

@@ -48,7 +48,7 @@ std::string Item::itemId() const
 {
     std::stringstream stream;
 
-    stream << m_name << "\n" << m_price << " " << m_weight;
+    stream << m_name << " " << m_price << " " << m_weight;
     
     return stream.str();
 }

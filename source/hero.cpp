@@ -22,7 +22,8 @@ Hero::Hero(uint8_t t_level) : Character()
 Hero::Hero(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
         uint8_t t_constitution, uint8_t t_inteligence, uint8_t t_wisdom,
         uint8_t t_charisma, uint8_t t_level, uint8_t t_lifePerLevel,
-        Race t_race, int t_coins, unsigned int t_currentExp)
+        Race t_race, int t_coins, unsigned short t_currentLife,
+        unsigned int t_currentExp)
     :
     Character(t_name, t_strength, t_dexterity, t_constitution, t_inteligence,
         t_wisdom, t_charisma, 1,
@@ -31,8 +32,7 @@ Hero::Hero(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
     m_lifePerLevel(t_lifePerLevel)
 {
     manageExp(t_level);
-    m_currentLife = m_maxLife;
-
+    m_currentLife = (t_currentLife ?  t_currentLife : m_maxLife);
     if(t_currentExp) m_currentExp = t_currentExp;
 }
 
@@ -64,6 +64,10 @@ std::string Hero::getIdAsString() const
     std::stringstream stream;
 
     stream << Character::getIdAsString() << " " << m_currentExp;
+
+    if(m_equipedWeapon) stream << " " << m_equipedWeapon->getIdAsString();
+    if(m_equipedShield) stream << " " << m_equipedShield->getIdAsString();
+    if(m_equipedArmor) stream << " " << m_equipedShield->getIdAsString();
 
     return stream.str();
 }

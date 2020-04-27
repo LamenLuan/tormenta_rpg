@@ -14,7 +14,8 @@ public:
     Hero(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
         uint8_t t_constitution, uint8_t t_inteligence, uint8_t t_wisdom,
         uint8_t t_charisma, uint8_t t_level, uint8_t t_lifePerLevel,
-        Race t_race, int t_coins, unsigned int t_currentExp = 0u);
+        Race t_race, int t_coins, unsigned short t_currentLife = 0u,
+        unsigned int t_currentExp = 0u);
     virtual ~Hero();
 
     unsigned int get_currentExp() const;

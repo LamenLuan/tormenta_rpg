@@ -2,5 +2,11 @@
 
 int main(int, char**) {
 
+    Game game;
+
+    game.loadHeroes();
+
+    game.saveHeroes();
+
     return 0;
 }
