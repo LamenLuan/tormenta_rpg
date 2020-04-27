@@ -6,7 +6,5 @@ int main(int, char**) {
 
     game.loadHeroes();
 
-    game.saveHeroes();
-
     return 0;
 }

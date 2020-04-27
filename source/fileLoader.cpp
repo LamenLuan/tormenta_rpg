@@ -20,6 +20,17 @@ template<typename T> T* FileLoader::loadHero(std::istringstream& input)
 }
 template Warrior* FileLoader::loadHero<Warrior>(std::istringstream& input);
 
+Item FileLoader::loadItem(std::istringstream& input, char itemClass)
+{
+    switch (itemClass)
+    {
+        case 'I' : return loadItem(input);  
+        case 'W' : return loadWeapon(input);
+        case 'A' : return loadArmor(input);
+        default : return loadShield(input);
+    }
+}
+
 Item FileLoader::loadItem(std::istringstream& input)
 {
     int price;

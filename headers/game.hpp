@@ -19,6 +19,8 @@ public:
     ~Game();
 
     void saveHeroes();
+    void loadEquipedItens(std::istringstream& input, uint8_t index);
+    void loadInventory(uint8_t index);
     void loadHeroes();
 };
  
