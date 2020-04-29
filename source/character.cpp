@@ -37,13 +37,13 @@ Weapon& Character::get_equipedWeapon()
     else throw NullObject();
 }
 
-Armor Character::get_equipedArmor()
+Armor& Character::get_equipedArmor()
 {
     if(m_equipedArmor) return *m_equipedArmor;
     else throw NullObject();
 }
 
-Shield Character::get_equipedShield()
+Shield& Character::get_equipedShield()
 {
     if(m_equipedShield) return *m_equipedShield;
     else throw NullObject();
@@ -178,15 +178,25 @@ void Character::naturalWeapon()
     {
         case Race::GNOLL:
         {
-            m_naturalWeapon = 
-                Weapon("Bite", 0, 0.f, 1, Dice::D6, 20, 2, DamageType::PIERCE);
+            m_naturalWeapon.reset
+            (
+                new Weapon
+                (
+                    "Bite", 0, 0.f, 1, Dice::D6, 20, 2, DamageType::PIERCE
+                )
+            );
         } break;
         default:
         {
-            m_naturalWeapon =
-                Weapon("Unarmed attack", 0, 0.f, 1, Dice::D3, 20, 2,
-                    DamageType::BLUDGEON);
-        } 
+            m_naturalWeapon.reset
+            (
+                new Weapon
+                (
+                    "Unarmed attack", 0, 0.f, 1, Dice::D3, 20, 2, 
+                    DamageType::BLUDGEON
+                )
+            );
+        } break;
     }
 }
 
@@ -206,7 +216,7 @@ const std::string Character::show() const
             << m_backpack.get_capacity() << "kg" << "\n\n"
         << "Equiped weapon: " << ( m_equipedWeapon
                 ? m_equipedWeapon->showWeapon()
-                : m_naturalWeapon.showWeapon()
+                : m_naturalWeapon->showWeapon()
             ) << "\n\n"
         << "Equiped armor: " <<
             (m_equipedArmor ? m_equipedArmor->showArmor() : " None") << "\n\n"

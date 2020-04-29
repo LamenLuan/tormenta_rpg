@@ -22,7 +22,7 @@ protected:
     unsigned short m_maxLife{0u};
     unsigned short m_currentLife{0u};
 
-    Weapon m_naturalWeapon;
+    std::unique_ptr<Weapon> m_naturalWeapon{nullptr};
 
 public:
     Sheet();
@@ -41,10 +41,9 @@ public:
     unsigned short get_charisma() const;
     unsigned short get_maxLife() const;
     unsigned short get_currentLife() const;
-    short get_armorClass() const;
-    Weapon& get_naturalWeapon();
+    Weapon& get_naturalWeapon() const;
 
-    void set_name(std::string t_name);
+    void set_name(const std::string& t_name);
     void set_level(short t_level);
     void set_strength(short t_strength);
     void set_dexterity(short t_dexterity);
@@ -54,8 +53,7 @@ public:
     void set_charisma(short t_charisma);
     void set_maxLife(short t_maxLife);
     void set_currentLife(short t_currentLife);
-    void set_armorClass(short t_armorClass);
-    void set_naturalWeapon(Weapon& t_naturalWeapon);
+    void set_naturalWeapon(const Weapon& t_naturalWeapon);
 
     virtual short strength() const;
     virtual short dexterity() const;
@@ -63,7 +61,6 @@ public:
     virtual short inteligence() const;
     virtual short wisdom() const;
     virtual short charisma() const;
-    virtual short armorClass() const = 0;
 
     short modifier(uint8_t t_atribute) const;
     virtual short initiativeBonus() const = 0;

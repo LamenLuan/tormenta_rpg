@@ -25,10 +25,9 @@ public:
 
     Race get_race() const;
     Backpack& get_backpack();
-    // The idea here is to return object, or return exception if null.
     Weapon& get_equipedWeapon();
-    Armor get_equipedArmor();
-    Shield get_equipedShield();
+    Armor& get_equipedArmor();
+    Shield& get_equipedShield();
     unsigned int get_coins() const;
 
     // Overriding to update backpack capacity.

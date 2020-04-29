@@ -21,8 +21,8 @@ public:
     virtual ~Creature();
 
     CreatureType get_type() const;
-    int8_t get_armorClass() const;
-    int8_t get_initiative() const;
+    short get_armorClass() const;
+    short get_initiative() const;
     TreasureType get_treasure() const;
 
     void set_type(CreatureType t_type);

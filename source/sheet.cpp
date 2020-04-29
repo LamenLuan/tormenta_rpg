@@ -1,5 +1,7 @@
 #include "../headers/sheet.hpp"
 
+#include <memory>
+
 Sheet::Sheet()
 {
 }
@@ -40,11 +42,11 @@ unsigned short Sheet::get_maxLife() const { return m_maxLife; }
 
 unsigned short Sheet::get_currentLife() const { return m_currentLife; }
 
-Weapon& Sheet::get_naturalWeapon() { return m_naturalWeapon; }
+Weapon& Sheet::get_naturalWeapon() const { return *m_naturalWeapon; }
 
-void Sheet::set_name(std::string t_name)
+void Sheet::set_name(const std::string& t_name)
 {
-    if (!t_name.empty()) m_name = t_name;
+    if ( !t_name.empty() ) m_name = t_name;
 }
 
 void Sheet::set_level(short t_level)
@@ -83,16 +85,13 @@ void Sheet::set_charisma(short t_charisma)
 }
 
 // Correct possible negative values to acept negative values that could come
-// from magic debufs;
+// from magic debufs.
 void Sheet::set_maxLife(short t_maxLife)
 {
-    if (t_maxLife <= 0)
-        m_maxLife = 1;
-    else
-        m_maxLife = t_maxLife;
+    if (t_maxLife <= 0) m_maxLife = 1u;
+    else m_maxLife = t_maxLife;
 
-    if (m_currentLife > m_maxLife)
-        m_currentLife = m_maxLife;
+    if (m_currentLife > m_maxLife) m_currentLife = m_maxLife;
 }
 
 // Correct possible negative values to acept negative values that will come
@@ -109,9 +108,9 @@ void Sheet::set_currentLife(short t_currentLife)
     }
 }
 
-void Sheet::set_naturalWeapon(Weapon &t_naturalWeapon)
+void Sheet::set_naturalWeapon(const Weapon& t_naturalWeapon)
 {
-    m_naturalWeapon = t_naturalWeapon;
+    m_naturalWeapon = std::make_unique<Weapon>( t_naturalWeapon );
 }
 
 short Sheet::strength() const

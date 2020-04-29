@@ -21,9 +21,9 @@ Creature::~Creature()
 
 CreatureType Creature::get_type() const { return m_type; }
 
-int8_t Creature::get_armorClass() const { return m_armorClass; }
+short Creature::get_armorClass() const { return m_armorClass; }
 
-int8_t Creature::get_initiative() const { return m_initiative; }
+short Creature::get_initiative() const { return m_initiative; }
 
 TreasureType Creature::get_treasure() const { return m_treasure; }
 
