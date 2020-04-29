@@ -31,7 +31,7 @@ void Game::saveHeroes()
             }
 
             inventoryFile.close();
-        }
+        } // if
         else break;
     }
 
@@ -62,7 +62,7 @@ void Game::loadEquipedItens(std::istringstream& input, uint8_t index)
                 fileLoader.loadArmor(input)
             );
             break;  
-        }
+        } // switch
     }
 }
 
@@ -112,14 +112,15 @@ void Game::loadHeroes()
 
             switch (heroClass)
             {
-            case 'G': m_heroes[i] = fileLoader.loadHero<Warrior>(input); break;
-            }
+                case 'G': m_heroes[i] = fileLoader.loadHero<Warrior>(input);
+                break;
+            } // switch
 
             loadEquipedItens(input, i);
 
             loadInventory(i);
 
-        }
+        } // if
         else break;
     }
 

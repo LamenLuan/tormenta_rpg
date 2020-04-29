@@ -1,6 +1,6 @@
 #include "../headers/game.hpp"
 
-int main(int, char**) {
+int main() {
 
     Game game;
 
