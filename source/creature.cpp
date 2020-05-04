@@ -1,6 +1,6 @@
 #include "../headers/creature.hpp"
 
-Creature::Creature() : Sheet()
+Creature::Creature()
 {
 }
 
@@ -21,9 +21,9 @@ Creature::~Creature()
 
 CreatureType Creature::get_type() const { return m_type; }
 
-short Creature::get_armorClass() const { return m_armorClass; }
+uint8_t Creature::get_armorClass() const { return m_armorClass; }
 
-short Creature::get_initiative() const { return m_initiative; }
+uint8_t Creature::get_initiative() const { return m_initiative; }
 
 TreasureType Creature::get_treasure() const { return m_treasure; }
 
@@ -47,12 +47,12 @@ void Creature::set_treasure(TreasureType t_treasure)
     m_treasure = t_treasure;
 }
 
-short Creature::initiativeBonus() const
+int Creature::initiativeBonus() const
 {
     return m_initiative;
 }
 
-short Creature::armorClass() const
+int Creature::armorClass() const
 {
     return m_armorClass;
 }

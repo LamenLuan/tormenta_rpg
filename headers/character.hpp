@@ -20,7 +20,7 @@ public:
     Character(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
         uint8_t t_constitution, uint8_t t_inteligence, uint8_t t_wisdom,
         uint8_t t_charisma, uint8_t t_level, unsigned short t_maxLife,
-        Race t_race, int t_coins);
+        Race t_race, unsigned int t_coins);
     virtual ~Character();
 
     Race get_race() const;
@@ -34,15 +34,15 @@ public:
     void set_strength(short t_strength);
     
     void set_race(Race t_race);
-    void set_backpack(Backpack& t_backpack);
+    void set_backpack(const Backpack& t_backpack);
     void set_equipedWeapon(const Weapon& t_equipedWeapon);
     void set_equipedArmor(const Armor& t_armor);
     void set_equipedShield(const Shield& t_shield);
-    void set_coins(int t_coins);
+    void set_coins(unsigned int t_coins);
     
-    short dexterity() const;
-    short armorClass() const;
-    short initiativeBonus() const;
+    int dexterity() const;
+    int armorClass() const;
+    int initiativeBonus() const;
     void naturalWeapon();
     const std::string raceName() const;
     const std::string show() const;

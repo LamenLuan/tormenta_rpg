@@ -21,8 +21,8 @@ public:
     virtual ~Creature();
 
     CreatureType get_type() const;
-    short get_armorClass() const;
-    short get_initiative() const;
+    uint8_t get_armorClass() const;
+    uint8_t get_initiative() const;
     TreasureType get_treasure() const;
 
     void set_type(CreatureType t_type);
@@ -30,8 +30,8 @@ public:
     void set_initiative(int8_t t_initiative);
     void set_treasure(TreasureType t_treasure);
 
-    short initiativeBonus() const;
-    short armorClass() const;
+    int initiativeBonus() const;
+    int armorClass() const;
     const std::string typeName() const;
     const std::string show() const;
 };

@@ -6,7 +6,6 @@
 // Basic data that characters and creatures will inherit.
 class Sheet
 {
-
 protected:
     std::string m_name{""};
 
@@ -31,46 +30,45 @@ public:
         uint8_t t_charisma, uint8_t t_level, unsigned short t_maxLife);
     virtual ~Sheet();
 
-    const std::string &get_name() const;
-    unsigned short get_level() const;
-    unsigned short get_strength() const;
-    unsigned short get_dexterity() const;
-    unsigned short get_constitution() const;
-    unsigned short get_inteligence() const;
-    unsigned short get_wisdom() const;
-    unsigned short get_charisma() const;
+    const std::string& get_name() const;
+    uint8_t get_level() const;
+    uint8_t get_strength() const;
+    uint8_t get_dexterity() const;
+    uint8_t get_constitution() const;
+    uint8_t get_inteligence() const;
+    uint8_t get_wisdom() const;
+    uint8_t get_charisma() const;
     unsigned short get_maxLife() const;
     unsigned short get_currentLife() const;
     Weapon& get_naturalWeapon() const;
 
     void set_name(const std::string& t_name);
-    void set_level(short t_level);
-    void set_strength(short t_strength);
-    void set_dexterity(short t_dexterity);
-    void set_constitution(short t_constitution);
-    void set_inteligence(short t_inteligence);
-    void set_wisdom(short t_wisdom);
-    void set_charisma(short t_charisma);
-    void set_maxLife(short t_maxLife);
-    void set_currentLife(short t_currentLife);
+    void set_level(uint8_t t_level);
+    void set_strength(uint8_t t_strength);
+    void set_dexterity(uint8_t t_dexterity);
+    void set_constitution(uint8_t t_constitution);
+    void set_inteligence(uint8_t t_inteligence);
+    void set_wisdom(uint8_t t_wisdom);
+    void set_charisma(uint8_t t_charisma);
+    void set_maxLife(unsigned short t_maxLife);
+    void set_currentLife(unsigned short t_currentLife);
     void set_naturalWeapon(const Weapon& t_naturalWeapon);
 
-    virtual short strength() const;
-    virtual short dexterity() const;
-    virtual short constitution() const;
-    virtual short inteligence() const;
-    virtual short wisdom() const;
-    virtual short charisma() const;
+    virtual int strength() const;
+    virtual int dexterity() const;
+    virtual int constitution() const;
+    virtual int inteligence() const;
+    virtual int wisdom() const;
+    virtual int charisma() const;
 
-    short modifier(uint8_t t_atribute) const;
-    virtual short initiativeBonus() const = 0;
+    static int modifier(int t_atribute);
+    virtual int initiativeBonus() const = 0;
 
-    const std::string showStats() const;
+    std::string showStats() const;
     virtual const std::string show() const = 0;
 
     friend std::ostream &operator<<
         (std::ostream &t_stream, const Sheet &t_sheet);
-    std::string getIdAsString() const;
 };
 
 #endif //TORMENTA_SHEET_HPP

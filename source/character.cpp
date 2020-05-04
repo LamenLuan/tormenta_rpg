@@ -11,7 +11,7 @@ Character::Character()
 Character::Character(std::string t_name, uint8_t t_strength,
         uint8_t t_dexterity, uint8_t t_constitution, uint8_t t_inteligence,
         uint8_t t_wisdom, uint8_t t_charisma, uint8_t t_level,
-        unsigned short t_maxLife, Race t_race, int t_coins)
+        unsigned short t_maxLife, Race t_race, unsigned int t_coins)
     :
     Sheet(t_name, t_strength, t_dexterity, t_constitution, t_inteligence,
         t_wisdom, t_charisma, t_level, t_maxLife), m_race(t_race),
@@ -62,7 +62,7 @@ unsigned int Character::get_coins() const { return m_coins; }
 
 void Character::set_race(Race t_race) { m_race = t_race; }
 
-void Character::set_backpack(Backpack& t_backpack)
+void Character::set_backpack(const Backpack& t_backpack)
 {
     m_backpack = t_backpack;
 }
@@ -116,7 +116,7 @@ void Character::set_equipedShield(const Shield& t_shield)
     );
 }
 
-void Character::set_coins(int t_coins)
+void Character::set_coins(unsigned int t_coins)
 {
     if(t_coins != static_cast<int>(m_coins) && t_coins >= 0)
     {
@@ -144,9 +144,9 @@ const std::string Character::raceName() const
     return "";
 }
 
-short Character::dexterity() const
+int Character::dexterity() const
 {
-    register short dexterity = m_dexterity;
+    register int dexterity = m_dexterity;
 
     if(m_equipedShield) dexterity += m_equipedShield->get_armorPenalty();
     if(m_equipedArmor)
@@ -159,7 +159,7 @@ short Character::dexterity() const
     return dexterity;
 }
 
-short Character::armorClass() const
+int Character::armorClass() const
 {
     return 10 + (m_level / 2)
         + modifier(dexterity() )
@@ -167,7 +167,7 @@ short Character::armorClass() const
         + (m_equipedShield ? m_equipedShield->get_armorClassBonus() : 0);
 }
 
-short Character::initiativeBonus() const
+int Character::initiativeBonus() const
 {
     return (m_level / 2) + dexterity();
 }
@@ -209,7 +209,7 @@ const std::string Character::show() const
         << "Race: " << raceName() << '\n'
         << "Level: " << static_cast<int>(m_level) << '\n'
         << "Life: " << m_currentLife << '/' << m_maxLife << '\n'
-        << "Armor class: " << std::showpos << armorClass() << "\n\n"
+        << "Armor class: " << armorClass() << "\n\n"
         << showStats() << "\n\n"
         << "Inventory: " << std::fixed << std::setprecision(2) << std::noshowpos
             << m_backpack.get_currentWeight() << "/"

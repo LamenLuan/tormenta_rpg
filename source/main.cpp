@@ -2,9 +2,11 @@
 
 int main() {
 
-    Game game;
+    Character chara;
 
-    game.loadHeroes();
+    chara.set_inteligence(1);
+
+    std::cout << chara << '\n';
 
     return 0;
 }
