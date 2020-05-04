@@ -1,8 +1,5 @@
 #include "../headers/sheet.hpp"
 
-#include <memory>
-#include <functional>
-
 Sheet::Sheet() = default;
 
 Sheet::Sheet(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
@@ -145,33 +142,6 @@ int Sheet::modifier(int t_atribute)
     if (t_atribute % 2 != 0) t_atribute -= 1;
 
     return (t_atribute - 10) / 2;
-}
-
-std::string Sheet::showStats() const
-{
-    std::stringstream stream;
-
-    // Avoiding code repetition with lambda function.
-    std::function<std::string (std::string, int)> showStat = 
-        [] (const std::string& statName, int value)
-    {
-        std::stringstream stream;
-
-        stream << statName << ": " << value << std::showpos << " ("
-        << modifier(value) << ")\n";
-
-        return stream.str();
-    };
-
-    stream
-        << showStat( "Strength", strength() )
-        << showStat( "Dexterity", dexterity() )
-        << showStat( "Constitution", constitution() )
-        << showStat( "Inteligence", inteligence() )
-        << showStat( "Wisdom", wisdom() )
-        << showStat( "Charisma", charisma() );
-
-    return stream.str();
 }
 
 std::ostream &operator<<(std::ostream &t_stream, const Sheet &t_sheet)

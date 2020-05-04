@@ -23,6 +23,8 @@ public:
     void manageExp(uint8_t t_level);
     void addExp(int t_exp);
     
+    std::string showStats() const;
+    const std::string show() const;
     virtual std::string getIdAsString() const = 0;
 };
 

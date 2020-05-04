@@ -204,24 +204,7 @@ const std::string Character::show() const
 {
     std::stringstream stream;
 
-    stream
-        << "Name: " << m_name << '\n'
-        << "Race: " << raceName() << '\n'
-        << "Level: " << static_cast<int>(m_level) << '\n'
-        << "Life: " << m_currentLife << '/' << m_maxLife << '\n'
-        << "Armor class: " << armorClass() << "\n\n"
-        << showStats() << "\n\n"
-        << "Inventory: " << std::fixed << std::setprecision(2) << std::noshowpos
-            << m_backpack.get_currentWeight() << "/"
-            << m_backpack.get_capacity() << "kg" << "\n\n"
-        << "Equiped weapon: " << ( m_equipedWeapon
-                ? m_equipedWeapon->showWeapon()
-                : m_naturalWeapon->showWeapon()
-            ) << "\n\n"
-        << "Equiped armor: " <<
-            (m_equipedArmor ? m_equipedArmor->showArmor() : " None") << "\n\n"
-        << "Equiped shield: " <<
-             (m_equipedShield ? m_equipedShield->showShield() : "None");
+    stream << m_name;
 
     return stream.str();
 }

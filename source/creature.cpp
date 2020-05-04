@@ -80,8 +80,7 @@ const std::string Creature::show() const
         << "Type: " << typeName() << '\n'
         << "Level: " << static_cast<short>(m_level) << '\n'
         << "Life: " << m_currentLife << '/' << m_maxLife << '\n'
-        << "Armor class: " << std::showpos << armorClass() << "\n\n"
-        << showStats();
+        << "Armor class: " << std::showpos << armorClass() << '\n';
 
     return stream.str();
 }

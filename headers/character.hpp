@@ -1,3 +1,5 @@
+#include <functional>
+
 #include "sheet.hpp"
 #include "./enum-types/race.hpp"
 #include "./exception-types/nullObject.hpp"
@@ -44,6 +46,7 @@ public:
     int armorClass() const;
     int initiativeBonus() const;
     void naturalWeapon();
+
     const std::string raceName() const;
     const std::string show() const;
     std::string getIdAsString() const;

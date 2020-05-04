@@ -2,8 +2,9 @@
 
 int main() {
 
-    Character chara;
+    Warrior chara;
 
+    chara.set_name("Char");
     chara.set_inteligence(1);
 
     std::cout << chara << '\n';

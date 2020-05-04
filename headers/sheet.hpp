@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "backpack.hpp"
 
 #ifndef TORMENTA_SHEET_HPP
@@ -64,7 +66,6 @@ public:
     static int modifier(int t_atribute);
     virtual int initiativeBonus() const = 0;
 
-    std::string showStats() const;
     virtual const std::string show() const = 0;
 
     friend std::ostream &operator<<
