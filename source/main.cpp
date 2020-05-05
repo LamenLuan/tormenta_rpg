@@ -2,12 +2,11 @@
 
 int main() {
 
-    Warrior chara;
+    Game game;
 
-    chara.set_name("Char");
-    chara.set_inteligence(1);
+    game.loadHeroes();
 
-    std::cout << chara << '\n';
-
+    game.test();
+    
     return 0;
 }

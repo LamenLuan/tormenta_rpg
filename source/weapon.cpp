@@ -24,7 +24,10 @@ DamageType Weapon::get_damageType() const { return m_damageType; }
 
 unsigned short Weapon::get_minCriticalDice() const { return m_minCriticalDice; }
 
-unsigned short Weapon::get_criticalMultiplier() const { return m_criticalMultiplier; }
+unsigned short Weapon::get_criticalMultiplier() const
+{
+    return m_criticalMultiplier;
+}
 
 void Weapon::set_damage(RollSet t_damage) { m_damage = t_damage; }
 

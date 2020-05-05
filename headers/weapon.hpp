@@ -21,7 +21,7 @@ public:
         uint8_t t_criticalMultiplier, DamageType t_type);
     virtual ~Weapon();
 
-    RollSet &get_damage();
+    RollSet& get_damage();
     DamageType get_damageType() const;
     unsigned short get_minCriticalDice() const;
     unsigned short get_criticalMultiplier() const;

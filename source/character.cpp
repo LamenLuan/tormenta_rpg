@@ -1,5 +1,7 @@
 #include "../headers/character.hpp"
 
+#include <memory>
+
 Character::Character()
     :
     Sheet(),
@@ -13,19 +15,16 @@ Character::Character(std::string t_name, uint8_t t_strength,
         uint8_t t_wisdom, uint8_t t_charisma, uint8_t t_level,
         unsigned short t_maxLife, Race t_race, unsigned int t_coins)
     :
-    Sheet(t_name, t_strength, t_dexterity, t_constitution, t_inteligence,
+    Sheet(std::move(t_name), t_strength, t_dexterity, t_constitution, t_inteligence,
         t_wisdom, t_charisma, t_level, t_maxLife), m_race(t_race),
         m_backpack(m_strength), m_coins(t_coins)
 {
     naturalWeapon();
     m_backpack.set_currentWeight
-        (m_backpack.get_currentWeight() + (m_coins * 0.01f) );
+        (m_backpack.get_currentWeight() + (0.01f * m_coins) );
 }
 
-Character::~Character()
-{
-    m_equipedWeapon.release();
-}
+Character::~Character() = default;
 
 Race Character::get_race() const { return m_race; }
 
@@ -69,14 +68,14 @@ void Character::set_backpack(const Backpack& t_backpack)
 
 void Character::set_equipedWeapon(const Weapon& t_weapon)
 {
-    if(m_equipedWeapon.get() != nullptr)
+    if(m_equipedWeapon != nullptr)
     {
         m_backpack.addItem(*m_equipedWeapon);
         m_backpack.set_currentWeight(
             m_backpack.get_currentWeight() - m_equipedWeapon->get_weight()
         );
     }
-    m_equipedWeapon.reset( new Weapon(t_weapon) );
+    m_equipedWeapon = std::make_unique<Weapon>( t_weapon );
     m_backpack.set_currentWeight(
         m_backpack.get_currentWeight() + m_equipedWeapon->get_weight()
     );
