@@ -8,7 +8,10 @@ class FileLoader
 public:
     template<typename T> T* loadHero(std::istringstream& input);
 
-    Item loadItem(std::istringstream& input, char itemClass);
+    void loadItem
+    (
+        Backpack& backpack, std::istringstream& input, char itemClass
+    );
     Item loadItem(std::istringstream& input);
     Weapon loadWeapon(std::istringstream& input);
     Armor loadArmor(std::istringstream& input);

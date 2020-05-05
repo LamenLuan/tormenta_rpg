@@ -80,14 +80,11 @@ void Game::loadInventory(uint8_t index)
     // Loading the inventory itens line by line.
     while( std::getline(inventoryFile, itemString) )
     {
-        std::istringstream inventory(itemString);
+        std::istringstream input(itemString);
 
-        inventory >> itemClass;
+        input >> itemClass;
 
-        m_heroes[index]->get_backpack().addItem
-        (
-            fileLoader.loadItem(inventory, itemClass)
-        );
+        fileLoader.loadItem(m_heroes[index]->get_backpack(), input, itemClass);
     }
 
     inventoryFile.close();
@@ -125,4 +122,17 @@ void Game::loadHeroes()
     }
 
     heroFile.close();
+}
+
+void Game::test()
+{
+    m_heroes[0]->set_equipedWeapon
+    (
+        *dynamic_cast<Weapon*>
+        (
+            m_heroes[0]->get_backpack().get_items().at(2)
+        )
+    );
+
+    m_heroes[0]->get_backpack().removeItem(2);
 }
