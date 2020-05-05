@@ -64,24 +64,19 @@ std::string Hero::showStats() const
     std::stringstream stream;
 
     // Avoiding code repetition with lambda function.
-    std::function<std::string (std::string, int)> showStat = 
-        [] (const std::string& statName, int value)
+    std::function<void (std::stringstream&, std::string, int)> showStat = 
+        [] (std::stringstream& stream, const std::string& statName, int value)
     {
-        std::stringstream stream;
-
-        stream << statName << ": " << value << std::showpos << " ("
-        << modifier(value) << ")\n";
-
-        return stream.str();
+        stream << statName << ": " << std::noshowpos << value
+            << std::showpos << " (" << modifier(value) << ")\n";
     };
 
-    stream
-        << showStat( "Strength", strength() )
-        << showStat( "Dexterity", dexterity() )
-        << showStat( "Constitution", constitution() )
-        << showStat( "Inteligence", inteligence() )
-        << showStat( "Wisdom", wisdom() )
-        << showStat( "Charisma", charisma() );
+    showStat(stream, "Strength", strength() );
+    showStat(stream, "Dexterity", dexterity() );
+    showStat(stream, "Constitution", constitution() );
+    showStat(stream, "Inteligence", inteligence() );
+    showStat(stream, "Wisdom", wisdom() );
+    showStat(stream, "Charisma", charisma() );
 
     return stream.str();
 }
@@ -96,14 +91,14 @@ const std::string Hero::show() const
         << "Level: " << static_cast<int>(m_level) << '\n'
         << "Life: " << m_currentLife << '/' << m_maxLife << '\n'
         << "Armor class: " << armorClass() << "\n\n"
-        << showStats() << "\n\n"
+        << showStats() << '\n'
         << "Inventory: " << std::fixed << std::setprecision(2) << std::noshowpos
             << m_backpack.get_currentWeight() << "/"
             << m_backpack.get_capacity() << "kg" << "\n\n"
         << "Equiped weapon: " << ( m_equipedWeapon
                 ? m_equipedWeapon->showWeapon()
                 : m_naturalWeapon->showWeapon()
-            ) << "\n\n"
+            ) << '\n'
         << "Equiped armor: " <<
             (m_equipedArmor ? m_equipedArmor->showArmor() : " None") << "\n\n"
         << "Equiped shield: " <<
