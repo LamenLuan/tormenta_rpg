@@ -68,14 +68,14 @@ void Character::set_backpack(const Backpack& t_backpack)
 
 void Character::set_equipedWeapon(const Weapon& t_weapon)
 {
-    if(m_equipedWeapon != nullptr)
+    if(m_equipedWeapon)
     {
         m_backpack.addItem(*m_equipedWeapon);
         m_backpack.set_currentWeight(
             m_backpack.get_currentWeight() - m_equipedWeapon->get_weight()
         );
     }
-    m_equipedWeapon = std::make_unique<Weapon>( t_weapon );
+    m_equipedWeapon = std::make_unique<Weapon>(t_weapon);
     m_backpack.set_currentWeight(
         m_backpack.get_currentWeight() + m_equipedWeapon->get_weight()
     );
@@ -83,7 +83,7 @@ void Character::set_equipedWeapon(const Weapon& t_weapon)
 
 void Character::set_equipedArmor(const Armor& t_armor)
 {
-    if(m_equipedArmor.get() != nullptr)
+    if(m_equipedArmor)
     {
         m_backpack.addItem(*m_equipedArmor);
         m_backpack.set_currentWeight
@@ -91,7 +91,7 @@ void Character::set_equipedArmor(const Armor& t_armor)
             m_backpack.get_currentWeight() - m_equipedArmor->get_weight()
         );
     }
-    m_equipedArmor.reset( new Armor(t_armor) );
+    m_equipedArmor = std::make_unique<Armor>(t_armor);
     m_backpack.set_currentWeight
     (
         m_backpack.get_currentWeight() + m_equipedArmor->get_weight()
@@ -100,7 +100,7 @@ void Character::set_equipedArmor(const Armor& t_armor)
 
 void Character::set_equipedShield(const Shield& t_shield)
 {
-    if(m_equipedShield.get() != nullptr)
+    if(m_equipedShield)
     {
         m_backpack.addItem(*m_equipedShield);
         m_backpack.set_currentWeight
@@ -108,7 +108,7 @@ void Character::set_equipedShield(const Shield& t_shield)
             m_backpack.get_currentWeight() - m_equipedShield->get_weight()
         );
     }
-    m_equipedShield.reset( new Shield(t_shield) );
+    m_equipedShield = std::make_unique<Shield>(t_shield);
     m_backpack.set_currentWeight
     (
         m_backpack.get_currentWeight() + m_equipedShield->get_weight()
@@ -129,7 +129,7 @@ void Character::set_coins(unsigned int t_coins)
     }
 }
 
-const std::string Character::raceName() const
+std::string Character::raceName() const
 {
     switch (m_race)
     {
@@ -145,7 +145,7 @@ const std::string Character::raceName() const
 
 int Character::dexterity() const
 {
-    register int dexterity = m_dexterity;
+    int dexterity = m_dexterity;
 
     if(m_equipedShield) dexterity += m_equipedShield->get_armorPenalty();
     if(m_equipedArmor)
@@ -177,29 +177,23 @@ void Character::naturalWeapon()
     {
         case Race::GNOLL:
         {
-            m_naturalWeapon.reset
+            m_naturalWeapon = std::make_unique<Weapon>
             (
-                new Weapon
-                (
-                    "Bite", 0, 0.f, 1, Dice::D6, 20, 2, DamageType::PIERCE
-                )
+                "Bite", 0, 0.f, 1, Dice::D6, 20, 2, DamageType::PIERCE
             );
         } break;
         default:
         {
-            m_naturalWeapon.reset
+            m_naturalWeapon = std::make_unique<Weapon>
             (
-                new Weapon
-                (
-                    "Unarmed attack", 0, 0.f, 1, Dice::D3, 20, 2, 
-                    DamageType::BLUDGEON
-                )
+                "Unarmed attack", 0, 0.f, 1, Dice::D3, 20, 2,
+                DamageType::BLUDGEON
             );
         } break;
     }
 }
 
-const std::string Character::show() const
+std::string Character::show() const
 {
     std::stringstream stream;
 

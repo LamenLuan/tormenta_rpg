@@ -10,7 +10,7 @@ class Game
 private:
 
     bool m_gameStarted;
-    Hero* m_heroes[4];
+    std::array<Hero*, 4> m_heroes;
     FileLoader fileLoader;
 
 public:

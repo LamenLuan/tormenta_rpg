@@ -25,7 +25,7 @@ Hero::Hero(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
         Race t_race, int t_coins, unsigned short t_currentLife,
         unsigned int t_currentExp)
     :
-    Character(t_name, t_strength, t_dexterity, t_constitution, t_inteligence,
+    Character(std::move(t_name), t_strength, t_dexterity, t_constitution, t_inteligence,
         t_wisdom, t_charisma, 1,
         (4 * t_lifePerLevel) + modifier(t_constitution),
         t_race, t_coins),
@@ -36,9 +36,7 @@ Hero::Hero(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
     if(t_currentExp) m_currentExp = t_currentExp;
 }
 
-Hero::~Hero()
-{
-}
+Hero::~Hero() = default;
 
 unsigned int Hero::get_currentExp() const { return m_currentExp; }
 
@@ -81,7 +79,7 @@ std::string Hero::showStats() const
     return stream.str();
 }
 
-const std::string Hero::show() const
+std::string Hero::show() const
 {
     std::stringstream stream;
 

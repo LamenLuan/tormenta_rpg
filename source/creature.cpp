@@ -71,7 +71,7 @@ const std::string Creature::typeName() const
     return "";
 }
 
-const std::string Creature::show() const
+std::string Creature::show() const
 {
     std::stringstream stream;
 

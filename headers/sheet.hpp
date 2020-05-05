@@ -66,7 +66,7 @@ public:
     static int modifier(int t_atribute);
     virtual int initiativeBonus() const = 0;
 
-    virtual const std::string show() const = 0;
+    virtual std::string show() const = 0;
 
     friend std::ostream &operator<<
         (std::ostream &t_stream, const Sheet &t_sheet);

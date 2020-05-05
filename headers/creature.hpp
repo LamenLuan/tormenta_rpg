@@ -33,7 +33,7 @@ public:
     int initiativeBonus() const;
     int armorClass() const;
     const std::string typeName() const;
-    const std::string show() const;
+    std::string show() const;
 };
 
 #endif // TORMENTA_MONSTER_HPP

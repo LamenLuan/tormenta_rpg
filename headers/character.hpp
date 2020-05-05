@@ -47,9 +47,10 @@ public:
     int initiativeBonus() const;
     void naturalWeapon();
 
-    const std::string raceName() const;
-    const std::string show() const;
-    std::string getIdAsString() const;
+    std::string raceName() const;
+    std::string show() const;
+
+    virtual std::string getIdAsString() const;
 };
 
 #endif // TORMENTA_CHARACTER_HPP

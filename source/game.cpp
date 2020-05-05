@@ -2,7 +2,7 @@
 
 Game::Game()
     :
-    m_gameStarted(false), m_heroes{nullptr, nullptr, nullptr, nullptr}
+    m_gameStarted(false), m_heroes{}
 {
 }
 
