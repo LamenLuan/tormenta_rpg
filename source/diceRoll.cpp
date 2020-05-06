@@ -4,9 +4,7 @@ DiceRoll::DiceRoll() : m_gen(std::random_device{}() )
 {
 }
 
-DiceRoll::~DiceRoll()
-{
-}
+DiceRoll::~DiceRoll() = default;
 
 unsigned short DiceRoll::operator()(Dice t_max)
 {

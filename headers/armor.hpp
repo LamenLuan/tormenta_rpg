@@ -25,9 +25,9 @@ public:
     void set_armorPenalty(int8_t t_armorPenalty);
     void set_maximumDexterity(int8_t t_maximumDexterity);
 
-    const std::string armorInfo() const;
-    const std::string showArmor() const;
-    const std::string show() const;
+    std::string armorInfo() const;
+    std::string showArmor() const;
+    std::string show() const;
     std::string armorId() const;
     std::string getIdAsString() const;
 };

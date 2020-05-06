@@ -1,23 +1,19 @@
 #include "../headers/creature.hpp"
 
-Creature::Creature()
-{
-}
+#include <utility>
 
 Creature::Creature(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
     uint8_t t_constitution, uint8_t t_inteligence, uint8_t t_wisdom,
     uint8_t t_charisma, uint8_t t_level, unsigned short t_maxLife,
     CreatureType t_type, int8_t t_armorClass, TreasureType t_treasure)
     :
-    Sheet(t_name, t_strength, t_dexterity, t_constitution, t_inteligence,
+    Sheet(std::move(t_name), t_strength, t_dexterity, t_constitution, t_inteligence,
     t_wisdom, t_charisma, t_level, t_maxLife),
     m_type(t_type), m_armorClass(t_armorClass), m_treasure(t_treasure)
 {
 }
 
-Creature::~Creature()
-{
-}
+Creature::~Creature() = default;
 
 CreatureType Creature::get_type() const { return m_type; }
 
@@ -57,18 +53,17 @@ int Creature::armorClass() const
     return m_armorClass;
 }
 
-const std::string Creature::typeName() const
+std::string Creature::typeName() const
 {
     switch (m_type)
     {
-        case CreatureType::ANIMAL : return "Animal"; break;
-        case CreatureType::CONSTRUCT : return "Construct"; break;
-        case CreatureType::HUMANOID : return "Humanoid"; break;
-        case CreatureType::MONSTER : return "Monster"; break;
-        case CreatureType::SPIRT : return "Spirit"; break;
-        case CreatureType::UNDEAD : return "Undead"; break;
+        case CreatureType::ANIMAL : return "Animal";
+        case CreatureType::CONSTRUCT : return "Construct";
+        case CreatureType::HUMANOID : return "Humanoid";
+        case CreatureType::MONSTER : return "Monster";
+        case CreatureType::SPIRT : return "Spirit";
+        default: return "Undead";
     }
-    return "";
 }
 
 std::string Creature::show() const

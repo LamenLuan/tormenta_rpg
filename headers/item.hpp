@@ -27,7 +27,7 @@ public:
     void set_price(unsigned int t_price);
     void set_weight(float t_weight);
 
-    virtual const std::string show() const;
+    virtual std::string show() const;
     std::string itemId() const;
     virtual std::string getIdAsString() const;
     friend std::ostream &operator<<(std::ostream &t_stream, const Item &t_item);

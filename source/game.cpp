@@ -6,9 +6,7 @@ Game::Game()
 {
 }
 
-Game::~Game()
-{
-}
+Game::~Game() = default;
 
 bool Game::get_gameStarted() const { return m_gameStarted; }
 
@@ -45,26 +43,26 @@ void Game::saveHeroes()
     heroesFile.close();
 }
 
-void Game::loadEquipedItens(std::istringstream& input, uint8_t index)
+void Game::loadEquippedItems(std::istringstream& input, uint8_t index)
 {
     char itemClass = '0';
 
-    // Loading the equiped items saved with the hero.
+    // Loading the equipped items saved with the hero.
     while(input >> itemClass)
     {
         switch (itemClass)
         {
-            case 'W': m_heroes[index]->set_equipedWeapon
+            case 'W': m_heroes[index]->set_equippedWeapon
             (
                 FileLoader::loadWeapon(input)
             );
             break;
-            case 'S': m_heroes[index]->set_equipedShield
+            case 'S': m_heroes[index]->set_equippedShield
             (
                 FileLoader::loadShield(input)
             );
             break;
-            case 'A': m_heroes[index]->set_equipedArmor
+            case 'A': m_heroes[index]->set_equippedArmor
             (
                 FileLoader::loadArmor(input)
             );
@@ -84,7 +82,7 @@ void Game::loadInventory(uint8_t index)
         "./data/inventory" + std::to_string(index) + ".dat", std::ios::in
     );
     
-    // Loading the inventory itens line by line.
+    // Loading the inventory items line by line.
     while( std::getline(inventoryFile, itemString) )
     {
         std::istringstream input(itemString);
@@ -126,7 +124,7 @@ bool Game::loadHeroes()
                 break;
             } // switch
 
-            loadEquipedItens(input, i);
+            loadEquippedItems(input, i);
 
             loadInventory(i);
 
@@ -147,7 +145,7 @@ void Game::init()
 
     m_gameStarted = true;
 
-    // Load option removed if theres no data saved in files.
+    // Load option removed if there's no data saved in files.
     if( !loadHeroes() ) options.erase(options.begin() + 1);
 
     while (m_gameStarted)
@@ -176,7 +174,7 @@ void Game::init()
 
 void Game::test()
 {
-    m_heroes[0]->set_equipedShield
+    m_heroes[0]->set_equippedShield
     (
         *dynamic_cast<Shield*>
         (

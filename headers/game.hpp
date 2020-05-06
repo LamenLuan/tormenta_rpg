@@ -24,7 +24,7 @@ public:
     void set_gameStarted(bool t_gameStarted);
 
     void saveHeroes();
-    void loadEquipedItens(std::istringstream& input, uint8_t index);
+    void loadEquippedItems(std::istringstream& input, uint8_t index);
     void loadInventory(uint8_t index);
     bool loadHeroes();
 

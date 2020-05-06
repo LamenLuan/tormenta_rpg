@@ -2,9 +2,7 @@
 
 DiceRoll RollSet::m_random;
 
-RollSet::RollSet()
-{
-}
+RollSet::RollSet() = default;
 
 RollSet::RollSet(uint8_t t_quantity, Dice t_dice)
     :
@@ -12,9 +10,7 @@ RollSet::RollSet(uint8_t t_quantity, Dice t_dice)
 {
 }
 
-RollSet::~RollSet()
-{
-}
+RollSet::~RollSet() = default;
 
 short RollSet::get_quantity() const { return m_quantity; }
 
@@ -34,7 +30,7 @@ std::vector<unsigned short> RollSet::roll()
     return rollSet;
 }
 
-const std::string RollSet::show() const
+std::string RollSet::show() const
 {
     return std::to_string(m_quantity) + "d" +
            std::to_string(static_cast<int>(m_dice));

@@ -26,7 +26,7 @@ public:
     void set_dice(Dice t_dice);
 
     std::vector<unsigned short> roll();
-    const std::string show() const;
+    std::string show() const;
 };
 
 #endif // TORMENTA_ROLLSET_HPP

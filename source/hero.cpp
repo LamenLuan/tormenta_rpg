@@ -95,14 +95,14 @@ std::string Hero::show() const
         << "Inventory: " << std::fixed << std::setprecision(2) << std::noshowpos
             << m_backpack.get_currentWeight() << "/"
             << m_backpack.get_capacity() << "kg" << "\n\n"
-        << "Equiped weapon: " << ( m_equipedWeapon
-                ? m_equipedWeapon->showWeapon()
+        << "Equipped weapon: " << ( m_equippedWeapon
+                ? m_equippedWeapon->showWeapon()
                 : m_naturalWeapon->showWeapon()
             ) << '\n'
-        << "Equiped armor: " <<
-            (m_equipedArmor ? m_equipedArmor->showArmor() : " None") << "\n\n"
-        << "Equiped shield: " <<
-             (m_equipedShield ? m_equipedShield->showShield() : "None");
+        << "Equipped armor: " <<
+            (m_equippedArmor ? m_equippedArmor->showArmor() : " None") << "\n\n"
+        << "Equipped shield: " <<
+             (m_equippedShield ? m_equippedShield->showShield() : "None");
 
     return stream.str();
 }
@@ -113,9 +113,9 @@ std::string Hero::getIdAsString() const
 
     stream << Character::getIdAsString() << " " << m_currentExp;
 
-    if(m_equipedWeapon) stream << " " << m_equipedWeapon->getIdAsString();
-    if(m_equipedShield) stream << " " << m_equipedShield->getIdAsString();
-    if(m_equipedArmor) stream << " " << m_equipedShield->getIdAsString();
+    if(m_equippedWeapon) stream << " " << m_equippedWeapon->getIdAsString();
+    if(m_equippedShield) stream << " " << m_equippedShield->getIdAsString();
+    if(m_equippedArmor) stream << " " << m_equippedShield->getIdAsString();
 
     return stream.str();
 }

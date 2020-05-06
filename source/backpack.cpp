@@ -4,9 +4,7 @@ Backpack::Backpack(float t_capacity) : m_capacity(10.f * t_capacity)
 {
 }
 
-Backpack::~Backpack()
-{
-}
+Backpack::~Backpack() = default;
 
 std::vector<Item*> Backpack::get_items() const { return m_items; }
 float Backpack::get_capacity() const { return m_capacity; }
@@ -30,7 +28,7 @@ template<typename T> void Backpack::addItem(const T& t_item)
         m_items.push_back(new T(t_item));
         m_currentWeight += itemWeight;
     }
-    else throw new FullBackpack;
+    else throw FullBackpack();
 }
 template void Backpack::addItem<Item>(const Item& item);
 template void Backpack::addItem<Armor>(const Armor& item);
@@ -45,5 +43,5 @@ void Backpack::removeItem(size_t index)
         delete m_items[index];
         m_items.erase(m_items.begin() + index);
     }
-    else throw new NullObject;
+    else throw NullObject();
 }

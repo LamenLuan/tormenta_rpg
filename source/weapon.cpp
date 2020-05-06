@@ -8,15 +8,13 @@ Weapon::Weapon(std::string t_name, unsigned int t_price, float t_weight,
     unsigned short t_quantity, Dice t_dice, uint8_t t_minimumCriticalDice,
     uint8_t t_criticalMultiplier, DamageType t_weaponType)
     : 
-    Item(t_name, t_price, t_weight),
+    Item(std::move(t_name), t_price, t_weight),
     m_damage(t_quantity, t_dice), m_minCriticalDice(t_minimumCriticalDice),
     m_criticalMultiplier(t_criticalMultiplier), m_damageType(t_weaponType)
 {
 }
 
-Weapon::~Weapon()
-{ 
-}
+Weapon::~Weapon() = default;
 
 RollSet &Weapon::get_damage() { return m_damage; }
 
@@ -29,7 +27,7 @@ int Weapon::get_criticalMultiplier() const
     return m_criticalMultiplier;
 }
 
-void Weapon::set_damage(RollSet t_damage) { m_damage = t_damage; }
+void Weapon::set_damage(const RollSet& t_damage) { m_damage = t_damage; }
 
 void Weapon::set_damageType(DamageType t_type) { m_damageType = t_type; }
 
@@ -43,7 +41,7 @@ void Weapon::set_criticalMultiplier(uint8_t t_criticalMultiplier)
     m_criticalMultiplier = t_criticalMultiplier;
 }
 
-const std::string Weapon::showWeaponType() const
+std::string Weapon::showWeaponType() const
 {
     switch (m_damageType)
     {
@@ -52,13 +50,11 @@ const std::string Weapon::showWeaponType() const
     case DamageType::FIRE : return "Fire"; break;
     case DamageType::PIERCE : return "Pierce"; break;
     case DamageType::SLASH : return "Slash"; break;
-    case DamageType::SPECIAL : return "Special"; break;
-    
-    default: return nullptr;
+    default : return "Special"; break;
     }
 }
 
-const std::string Weapon::weaponInfo() const
+std::string Weapon::weaponInfo() const
 {
     std::stringstream stream;
 
@@ -72,7 +68,7 @@ const std::string Weapon::weaponInfo() const
     return stream.str();
 }
 
-const std::string Weapon::showWeapon() const
+std::string Weapon::showWeapon() const
 {
     std::stringstream stream;
 
@@ -81,7 +77,7 @@ const std::string Weapon::showWeapon() const
     return stream.str();
 }
 
-const std::string Weapon::show() const
+std::string Weapon::show() const
 {
     std::stringstream stream;
 

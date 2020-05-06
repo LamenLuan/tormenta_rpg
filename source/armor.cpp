@@ -1,19 +1,19 @@
 #include "../headers/armor.hpp"
 
+#include <utility>
+
 Armor::Armor() : Item() {}
 
 Armor::Armor(std::string t_name, unsigned int t_price, float t_weight,
     int8_t t_armorClassBonus, int8_t t_armorPenalty, int8_t t_maximumDexterity)
     :
-    Item(t_name, t_price, t_weight),
+    Item(std::move(t_name), t_price, t_weight),
     m_armorClassBonus(t_armorClassBonus), m_armorPenalty(t_armorPenalty),
     m_maximumDexterity(t_maximumDexterity)
 {
 }
 
-Armor::~Armor()
-{
-}
+Armor::~Armor() = default;
 
 int Armor::get_armorClassBonus() const
 {
@@ -45,7 +45,7 @@ void Armor::set_armorPenalty(int8_t t_armorPenalty)
     m_armorPenalty = t_armorPenalty;
 }
 
-const std::string Armor::armorInfo() const
+std::string Armor::armorInfo() const
 {
     std::stringstream stream;
 
@@ -57,7 +57,7 @@ const std::string Armor::armorInfo() const
     return stream.str();
 }
 
-const std::string Armor::showArmor() const
+std::string Armor::showArmor() const
 {
     std::stringstream stream;
 
@@ -66,7 +66,7 @@ const std::string Armor::showArmor() const
     return stream.str();
 }
 
-const std::string Armor::show() const
+std::string Armor::show() const
 {
     std::stringstream stream;
     

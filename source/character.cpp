@@ -30,21 +30,21 @@ Race Character::get_race() const { return m_race; }
 
 Backpack& Character::get_backpack() { return m_backpack; }
 
-Weapon& Character::get_equipedWeapon()
+Weapon& Character::get_equippedWeapon()
 {
-    if(m_equipedWeapon) return *m_equipedWeapon;
+    if(m_equippedWeapon) return *m_equippedWeapon;
     else throw NullObject();
 }
 
-Armor& Character::get_equipedArmor()
+Armor& Character::get_equippedArmor()
 {
-    if(m_equipedArmor) return *m_equipedArmor;
+    if(m_equippedArmor) return *m_equippedArmor;
     else throw NullObject();
 }
 
-Shield& Character::get_equipedShield()
+Shield& Character::get_equippedShield()
 {
-    if(m_equipedShield) return *m_equipedShield;
+    if(m_equippedShield) return *m_equippedShield;
     else throw NullObject();
 }
 
@@ -55,7 +55,7 @@ void Character::set_strength(short t_strength)
     if(t_strength > 0 && m_strength != t_strength)
     {
         m_strength = t_strength;
-        m_backpack.set_capacity( strength() );
+        m_backpack.set_capacity( strength() * 10.f );
     }
 }
 
@@ -75,52 +75,52 @@ void Character::set_backpack(const Backpack& t_backpack)
     m_backpack = t_backpack;
 }
 
-void Character::set_equipedWeapon(const Weapon& t_weapon)
+void Character::set_equippedWeapon(const Weapon& t_weapon)
 {
-    if(m_equipedWeapon)
+    if(m_equippedWeapon)
     {
-        m_backpack.addItem(*m_equipedWeapon);
+        m_backpack.addItem(*m_equippedWeapon);
         m_backpack.set_currentWeight(
-            m_backpack.get_currentWeight() - m_equipedWeapon->get_weight()
+            m_backpack.get_currentWeight() - m_equippedWeapon->get_weight()
         );
     }
-    m_equipedWeapon = std::make_unique<Weapon>(t_weapon);
+    m_equippedWeapon = std::make_unique<Weapon>(t_weapon);
     m_backpack.set_currentWeight(
-        m_backpack.get_currentWeight() + m_equipedWeapon->get_weight()
+        m_backpack.get_currentWeight() + m_equippedWeapon->get_weight()
     );
 }
 
-void Character::set_equipedArmor(const Armor& t_armor)
+void Character::set_equippedArmor(const Armor& t_armor)
 {
-    if(m_equipedArmor)
+    if(m_equippedArmor)
     {
-        m_backpack.addItem(*m_equipedArmor);
+        m_backpack.addItem(*m_equippedArmor);
         m_backpack.set_currentWeight
         (
-            m_backpack.get_currentWeight() - m_equipedArmor->get_weight()
+            m_backpack.get_currentWeight() - m_equippedArmor->get_weight()
         );
     }
-    m_equipedArmor = std::make_unique<Armor>(t_armor);
+    m_equippedArmor = std::make_unique<Armor>(t_armor);
     m_backpack.set_currentWeight
     (
-        m_backpack.get_currentWeight() + m_equipedArmor->get_weight()
+        m_backpack.get_currentWeight() + m_equippedArmor->get_weight()
     );
 }
 
-void Character::set_equipedShield(const Shield& t_shield)
+void Character::set_equippedShield(const Shield& t_shield)
 {
-    if(m_equipedShield)
+    if(m_equippedShield)
     {
-        m_backpack.addItem(*m_equipedShield);
+        m_backpack.addItem(*m_equippedShield);
         m_backpack.set_currentWeight
         (
-            m_backpack.get_currentWeight() - m_equipedShield->get_weight()
+            m_backpack.get_currentWeight() - m_equippedShield->get_weight()
         );
     }
-    m_equipedShield = std::make_unique<Shield>(t_shield);
+    m_equippedShield = std::make_unique<Shield>(t_shield);
     m_backpack.set_currentWeight
     (
-        m_backpack.get_currentWeight() + m_equipedShield->get_weight()
+        m_backpack.get_currentWeight() + m_equippedShield->get_weight()
     );
 }
 
@@ -156,12 +156,12 @@ int Character::dexterity() const
 {
     int dexterity = m_dexterity;
 
-    if(m_equipedShield) dexterity += m_equipedShield->get_armorPenalty();
-    if(m_equipedArmor)
+    if(m_equippedShield) dexterity += m_equippedShield->get_armorPenalty();
+    if(m_equippedArmor)
     {
-        dexterity += m_equipedArmor->get_armorPenalty();
-        if(modifier(dexterity) >  m_equipedArmor->get_maximumDexterity() )
-            dexterity = m_equipedArmor->get_maximumDexterity();
+        dexterity += m_equippedArmor->get_armorPenalty();
+        if(modifier(dexterity) >  m_equippedArmor->get_maximumDexterity() )
+            dexterity = m_equippedArmor->get_maximumDexterity();
     }
 
     return dexterity;
@@ -171,8 +171,8 @@ int Character::armorClass() const
 {
     return 10 + (m_level / 2)
         + modifier(dexterity() )
-        + (m_equipedArmor ? m_equipedArmor->get_armorClassBonus() : 0)
-        + (m_equipedShield ? m_equipedShield->get_armorClassBonus() : 0);
+        + (m_equippedArmor ? m_equippedArmor->get_armorClassBonus() : 0)
+        + (m_equippedShield ? m_equippedShield->get_armorClassBonus() : 0);
 }
 
 int Character::initiativeBonus() const

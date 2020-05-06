@@ -13,9 +13,9 @@ class Character : public Sheet
 protected:
     Race m_race{Race::HUMAN};
     Backpack m_backpack;
-    std::unique_ptr<Weapon> m_equipedWeapon{nullptr};
-    std::unique_ptr<Armor> m_equipedArmor{nullptr};
-    std::unique_ptr<Shield> m_equipedShield{nullptr};
+    std::unique_ptr<Weapon> m_equippedWeapon{nullptr};
+    std::unique_ptr<Armor> m_equippedArmor{nullptr};
+    std::unique_ptr<Shield> m_equippedShield{nullptr};
     unsigned int m_coins{0};
 
 public:
@@ -28,9 +28,9 @@ public:
 
     Race get_race() const;
     Backpack& get_backpack();
-    Weapon& get_equipedWeapon();
-    Armor& get_equipedArmor();
-    Shield& get_equipedShield();
+    Weapon& get_equippedWeapon();
+    Armor& get_equippedArmor();
+    Shield& get_equippedShield();
     unsigned int get_coins() const;
 
     // Overriding to update backpack capacity.
@@ -38,9 +38,9 @@ public:
     
     void set_race(Race t_race);
     void set_backpack(const Backpack& t_backpack);
-    void set_equipedWeapon(const Weapon& t_equipedWeapon);
-    void set_equipedArmor(const Armor& t_armor);
-    void set_equipedShield(const Shield& t_shield);
+    void set_equippedWeapon(const Weapon& t_equippedWeapon);
+    void set_equippedArmor(const Armor& t_armor);
+    void set_equippedShield(const Shield& t_shield);
     void set_coins(unsigned int t_coins);
     
     int dexterity() const;
