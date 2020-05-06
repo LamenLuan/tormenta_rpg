@@ -87,6 +87,8 @@ std::string Hero::show() const
         << "Name: " << m_name << '\n'
         << "Race: " << raceName() << '\n'
         << "Level: " << static_cast<int>(m_level) << '\n'
+        << "Experience: " << m_currentExp << "/"
+            << m_nextLevelExp << '\n'
         << "Life: " << m_currentLife << '/' << m_maxLife << '\n'
         << "Armor class: " << armorClass() << "\n\n"
         << showStats() << '\n'
