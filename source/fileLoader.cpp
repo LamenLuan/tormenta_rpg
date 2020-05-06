@@ -12,6 +12,8 @@ template<typename T> T* FileLoader::loadHero(std::istringstream& input)
             >> inteligence >> wisdom >> charisma >> level >> race >> coins
             >> currentLife >> currentExp;
 
+    Utils::ununderscoreSpaces(name);
+
     return new T
     (
         name, strength, dexterity, constitution, inteligence, wisdom, charisma,
@@ -42,6 +44,8 @@ Item FileLoader::loadItem(std::istringstream& input)
 
     input >> name >> price >> weight;
 
+    Utils::ununderscoreSpaces(name);
+
     return Item(name, price, weight);
 }
 
@@ -55,6 +59,8 @@ Weapon FileLoader::loadWeapon(std::istringstream& input)
 
     input >> name >> price >> weight >> diceQuantity >> diceNumber
         >> minCriticalDice >> criticalMultiplier >> damageType;
+
+    Utils::ununderscoreSpaces(name);
 
     return Weapon
     (
@@ -73,6 +79,8 @@ Armor FileLoader::loadArmor(std::istringstream& input)
     input >> name >> price >> weight >> armorClassBonus >> armorPenalty
         >> maximumDexterity;
 
+    Utils::ununderscoreSpaces(name);
+
     return Armor
     (
         name, price, weight, armorClassBonus, armorPenalty, maximumDexterity
@@ -90,6 +98,8 @@ Shield FileLoader::loadShield(std::istringstream& input)
     input >> name >> price >> weight >> diceQuantity >> diceNumber
         >> minCriticalDice >> criticalMultiplier >> damageType
         >> armorClassBonus >> armorPenalty;
+
+    Utils::ununderscoreSpaces(name);
 
     return Shield
     (

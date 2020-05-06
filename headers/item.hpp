@@ -1,6 +1,8 @@
 #include <iostream>
 #include <iomanip>
 
+#include "utils.hpp"
+
 #ifndef TORMENTA_ITEM_HPP
 #define TORMENTA_ITEM_HPP
 

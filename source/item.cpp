@@ -47,8 +47,11 @@ const std::string Item::show() const
 std::string Item::itemId() const
 {
     std::stringstream stream;
+    std::string name(m_name);
 
-    stream << m_name << " " << m_price << " " << m_weight;
+    Utils::underscoreSpaces(name);
+
+    stream << name << " " << m_price << " " << m_weight;
     
     return stream.str();
 }

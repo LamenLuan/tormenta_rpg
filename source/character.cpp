@@ -214,8 +214,11 @@ std::string Character::show() const
 std::string Character::getIdAsString() const
 {
     std::stringstream stream;
+    std::string name(m_name);
 
-    stream << m_name << " " << get_strength() << " "
+    Utils::underscoreSpaces(name);
+
+    stream << name << " " << get_strength() << " "
         << get_dexterity() << " " << get_constitution() << " "
         << get_inteligence() << " " << get_wisdom() << " "
         << get_charisma() << " " << get_level() << " "

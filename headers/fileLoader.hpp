@@ -1,4 +1,5 @@
 #include "../source/hero-classes/warrior.hpp"
+#include "utils.hpp"
 
 #ifndef TORMENTA_FILE_LOADER_HPP
 #define TORMENTA_FILE_LOADER_HPP
