@@ -50,7 +50,9 @@ Shield& Character::get_equipedShield()
 
 void Character::set_strength(short t_strength)
 {
-    if(t_strength > 0)
+    // Validating the attribution of a different number is worth because
+    // another method is called.
+    if(t_strength > 0 && m_strength != t_strength)
     {
         m_strength = t_strength;
         m_backpack.set_capacity( strength() );
@@ -59,7 +61,14 @@ void Character::set_strength(short t_strength)
 
 unsigned int Character::get_coins() const { return m_coins; }
 
-void Character::set_race(Race t_race) { m_race = t_race; }
+void Character::set_race(Race t_race)
+{
+    if(m_race != t_race)
+    {
+        m_race = t_race;
+        naturalWeapon();
+    }
+}
 
 void Character::set_backpack(const Backpack& t_backpack)
 {
