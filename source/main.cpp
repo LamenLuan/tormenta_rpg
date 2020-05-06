@@ -6,7 +6,7 @@ int main() {
 
     game.loadHeroes();
 
-    game.test();
+    game.saveHeroes();
     
     return 0;
 }

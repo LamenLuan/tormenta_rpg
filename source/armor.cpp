@@ -15,17 +15,17 @@ Armor::~Armor()
 {
 }
 
-short Armor::get_armorClassBonus() const
+int Armor::get_armorClassBonus() const
 {
     return m_armorClassBonus;
 }
 
-short Armor::get_maximumDexterity() const
+int Armor::get_maximumDexterity() const
 {
     return m_maximumDexterity;
 }
 
-short Armor::get_armorPenalty() const
+int Armor::get_armorPenalty() const
 {
     return m_armorPenalty;
 }

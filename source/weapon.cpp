@@ -22,9 +22,9 @@ RollSet &Weapon::get_damage() { return m_damage; }
 
 DamageType Weapon::get_damageType() const { return m_damageType; }
 
-unsigned short Weapon::get_minCriticalDice() const { return m_minCriticalDice; }
+int Weapon::get_minCriticalDice() const { return m_minCriticalDice; }
 
-unsigned short Weapon::get_criticalMultiplier() const
+int Weapon::get_criticalMultiplier() const
 {
     return m_criticalMultiplier;
 }

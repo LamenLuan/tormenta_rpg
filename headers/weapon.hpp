@@ -23,8 +23,8 @@ public:
 
     RollSet& get_damage();
     DamageType get_damageType() const;
-    unsigned short get_minCriticalDice() const;
-    unsigned short get_criticalMultiplier() const;
+    int get_minCriticalDice() const;
+    int get_criticalMultiplier() const;
 
     void set_damage(RollSet t_damage);
     void set_damageType(DamageType t_type);

@@ -33,15 +33,16 @@ public:
     virtual ~Sheet();
 
     const std::string& get_name() const;
-    uint8_t get_level() const;
-    uint8_t get_strength() const;
-    uint8_t get_dexterity() const;
-    uint8_t get_constitution() const;
-    uint8_t get_inteligence() const;
-    uint8_t get_wisdom() const;
-    uint8_t get_charisma() const;
-    unsigned short get_maxLife() const;
-    unsigned short get_currentLife() const;
+    // Returning ints to suport Character::getIdAsString()
+    int get_level() const;
+    int get_strength() const;
+    int get_dexterity() const;
+    int get_constitution() const;
+    int get_inteligence() const;
+    int get_wisdom() const;
+    int get_charisma() const;
+    int get_maxLife() const;
+    int get_currentLife() const;
     Weapon& get_naturalWeapon() const;
 
     void set_name(const std::string& t_name);

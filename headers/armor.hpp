@@ -17,9 +17,9 @@ public:
         int8_t t_maximumDexterity);
     ~Armor();
 
-    short get_armorClassBonus() const;
-    short get_armorPenalty() const;
-    short get_maximumDexterity() const;
+    int get_armorClassBonus() const;
+    int get_armorPenalty() const;
+    int get_maximumDexterity() const;
 
     void set_armorClassBonus(int8_t t_armorClassBonus);
     void set_armorPenalty(int8_t t_armorPenalty);
