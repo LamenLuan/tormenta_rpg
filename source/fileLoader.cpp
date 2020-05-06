@@ -30,7 +30,7 @@ void FileLoader::loadItem
         case 'I' : backpack.addItem( loadItem(input) ); break;
         case 'W' : backpack.addItem( loadWeapon(input) ); break;
         case 'A' : backpack.addItem( loadArmor(input) ); break;
-        default : backpack.addItem( loadShield(input) ); break;
+        case 'S' : backpack.addItem( loadShield(input) ); break;
     }
 }
 

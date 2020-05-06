@@ -10,6 +10,13 @@ Game::~Game()
 {
 }
 
+bool Game::get_gameStarted() const { return m_gameStarted; }
+
+void Game::set_gameStarted(bool t_gameStarted)
+{
+    m_gameStarted = t_gameStarted;
+}
+
 void Game::saveHeroes()
 {
     std::ofstream heroesFile, inventoryFile;
@@ -49,17 +56,17 @@ void Game::loadEquipedItens(std::istringstream& input, uint8_t index)
         {
             case 'W': m_heroes[index]->set_equipedWeapon
             (
-                fileLoader.loadWeapon(input)
+                FileLoader::loadWeapon(input)
             );
             break;
             case 'S': m_heroes[index]->set_equipedShield
             (
-                fileLoader.loadShield(input)
+                FileLoader::loadShield(input)
             );
             break;
             case 'A': m_heroes[index]->set_equipedArmor
             (
-                fileLoader.loadArmor(input)
+                FileLoader::loadArmor(input)
             );
             break;  
         } // switch
@@ -84,14 +91,18 @@ void Game::loadInventory(uint8_t index)
 
         input >> itemClass;
 
-        fileLoader.loadItem(m_heroes[index]->get_backpack(), input, itemClass);
+        FileLoader::loadItem
+        (
+            m_heroes[index]->get_backpack(), input, itemClass
+        );
     }
 
     inventoryFile.close();
 }
 
-void Game::loadHeroes()
+bool Game::loadHeroes()
 {
+    bool anyHero = false;
     char heroClass;
     std::string hero;
     std::ifstream heroFile;
@@ -103,13 +114,15 @@ void Game::loadHeroes()
         if( std::getline(heroFile, hero) )
         {
             if( hero.empty() ) continue;
+            anyHero = true;
+
             std::istringstream input(hero);
 
             input >> heroClass;
 
             switch (heroClass)
             {
-                case 'G': m_heroes[i] = fileLoader.loadHero<Warrior>(input);
+                case 'G': m_heroes[i] = FileLoader::loadHero<Warrior>(input);
                 break;
             } // switch
 
@@ -118,21 +131,60 @@ void Game::loadHeroes()
             loadInventory(i);
 
         } // if
-        else break;
+        else if (anyHero) break;
+        else return false;
     }
 
     heroFile.close();
+    return true;
+}
+
+void Game::init()
+{
+    std::vector<std::string> options =
+        {"New game", "Load game", "About"};
+    int choice = -1;
+
+    m_gameStarted = true;
+
+    // Load option removed if theres no data saved in files.
+    if( !loadHeroes() ) options.erase(options.begin() + 1);
+
+    while (m_gameStarted)
+    {
+        system("CLS");
+
+        std::cout << "TORMENTA RPG" << "\n\n";
+
+        for (size_t i = 0; i < options.size(); ++i)
+        {
+            std::cout << '(' << i + 1 << ") " << options[i] << '\n';
+        }
+
+        std::cout << "(0) Quit" << '\n';
+
+        choice = Utils::getIntChoice();
+
+        if(choice < 0) continue;
+        if(choice == 0)
+        {
+            m_gameStarted = false;
+            continue;
+        }
+    }
 }
 
 void Game::test()
 {
-    m_heroes[0]->set_equipedWeapon
+    m_heroes[0]->set_equipedShield
     (
-        *dynamic_cast<Weapon*>
+        *dynamic_cast<Shield*>
         (
             m_heroes[0]->get_backpack().get_items().at(2)
         )
     );
 
     m_heroes[0]->get_backpack().removeItem(2);
+
+    std::cout << *m_heroes[0];
 }

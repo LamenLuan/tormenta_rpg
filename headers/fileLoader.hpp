@@ -6,16 +6,16 @@
 class FileLoader
 {
 public:
-    template<typename T> T* loadHero(std::istringstream& input);
+    template<typename T> static T* loadHero(std::istringstream& input);
 
-    void loadItem
+    static void loadItem
     (
         Backpack& backpack, std::istringstream& input, char itemClass
     );
-    Item loadItem(std::istringstream& input);
-    Weapon loadWeapon(std::istringstream& input);
-    Armor loadArmor(std::istringstream& input);
-    Shield loadShield(std::istringstream& input);
+    static Item loadItem(std::istringstream& input);
+    static Weapon loadWeapon(std::istringstream& input);
+    static Armor loadArmor(std::istringstream& input);
+    static Shield loadShield(std::istringstream& input);
 };
 
 #endif // TORMENTA_FILE_LOADER_HPP
