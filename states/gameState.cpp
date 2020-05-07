@@ -1,6 +1,6 @@
 #include "./headers/gameState.hpp"
 
-GameState::GameState(std::array<Hero*, 4>& t_heroes)
+GameState::GameState(std::array<std::unique_ptr<Hero>, 4>& t_heroes)
 :
 State(),
 m_heroes(t_heroes)
@@ -42,4 +42,6 @@ void GameState::update()
             continue;
         }
     }
+
+    system("CLS");
 }

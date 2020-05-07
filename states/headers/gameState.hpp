@@ -7,9 +7,9 @@
 class GameState : public State
 {
 private:
-    std::array<Hero*, 4>& m_heroes;
+    std::array<std::unique_ptr<Hero>, 4>& m_heroes;
 public:
-    GameState(std::array<Hero*, 4>& t_heroes);
+    GameState(std::array<std::unique_ptr<Hero>, 4>& t_heroes);
     virtual ~GameState();
 
     void update();

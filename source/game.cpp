@@ -4,7 +4,7 @@ Game::Game()
     :
     m_gameStarted(false), m_heroes{}
 {
-    m_states.push( new GameState(m_heroes) );
+    m_states.push( std::make_unique<GameState>( GameState(m_heroes) ) );
 }
 
 Game::~Game() = default;
@@ -121,7 +121,10 @@ bool Game::loadHeroes()
 
             switch (heroClass)
             {
-                case 'G': m_heroes[i] = FileLoader::loadHero<Warrior>(input);
+                case 'G': m_heroes[i].reset
+                (
+                    FileLoader::loadHero<Warrior>(input)
+                );
                 break;
             } // switch
 
