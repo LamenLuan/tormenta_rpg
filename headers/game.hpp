@@ -1,8 +1,8 @@
-#include "./fileLoader.hpp"
-
 #include <fstream>
+#include <stack>
 
-#include "utils.hpp"
+#include "./fileLoader.hpp"
+#include "../states/headers/gameState.hpp"
 
 #ifndef TORMENTA_GAME_HPP
 #define TORMENTA_GAME_HPP
@@ -13,6 +13,7 @@ private:
 
     bool m_gameStarted{false};
     std::array<Hero*, 4> m_heroes;
+    std::stack<State*> m_states;
 
 public:
 
@@ -28,9 +29,7 @@ public:
     void loadInventory(uint8_t index);
     bool loadHeroes();
 
-    void init();
-
-    void test();
+    void start();
 };
  
 #endif

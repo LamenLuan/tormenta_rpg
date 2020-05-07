@@ -4,6 +4,7 @@ Game::Game()
     :
     m_gameStarted(false), m_heroes{}
 {
+    m_states.push( new GameState(m_heroes) );
 }
 
 Game::~Game() = default;
@@ -137,54 +138,9 @@ bool Game::loadHeroes()
     return true;
 }
 
-void Game::init()
+void Game::start()
 {
-    std::vector<std::string> options =
-        {"New game", "Load game", "About"};
-    int choice = -1;
+    loadHeroes();
 
-    m_gameStarted = true;
-
-    // Load option removed if there's no data saved in files.
-    if( !loadHeroes() ) options.erase(options.begin() + 1);
-
-    while (m_gameStarted)
-    {
-        system("CLS");
-
-        std::cout << "TORMENTA RPG" << "\n\n";
-
-        for (size_t i = 0; i < options.size(); ++i)
-        {
-            std::cout << '(' << i + 1 << ") " << options[i] << '\n';
-        }
-
-        std::cout << "(0) Quit" << '\n';
-
-        choice = Utils::getIntChoice();
-
-        if(choice < 0) continue;
-        if(choice == 0)
-        {
-            m_gameStarted = false;
-            continue;
-        }
-    }
-}
-
-void Game::test()
-{
-    std::cout << *m_heroes[0];
-
-    m_heroes[0]->set_equippedShield
-    (
-        *dynamic_cast<Shield*>
-        (
-            m_heroes[0]->get_backpack().get_items().at(2)
-        )
-    );
-
-    m_heroes[0]->get_backpack().removeItem(2);
-
-    std::cout << *m_heroes[0];
+    m_states.top()->update();
 }

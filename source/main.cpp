@@ -4,9 +4,7 @@ int main() {
 
     Game game;
 
-    game.loadHeroes();
-
-    game.test();
+    game.start();
     
     return 0;
 }

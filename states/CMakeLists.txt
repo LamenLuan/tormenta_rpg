@@ -1,0 +1,1 @@
+add_library(TormentaStates gameState.cpp state.cpp)
