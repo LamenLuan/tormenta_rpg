@@ -4,21 +4,24 @@ Weapon::Weapon() : Item()
 {
 }
 
-Weapon::Weapon(std::string t_name, unsigned int t_price, float t_weight,
-    unsigned short t_quantity, Dice t_dice, uint8_t t_minimumCriticalDice,
-    uint8_t t_criticalMultiplier, DamageType t_weaponType)
+Weapon::Weapon
+(
+        std::string t_name, unsigned int t_price, float t_weight,
+        unsigned short t_quantity, Dice t_dice, uint8_t t_minimumCriticalDice,
+        uint8_t t_criticalMultiplier, DamageType t_Damagetype,
+        WeaponType t_weaponType
+)
     : 
     Item(std::move(t_name), t_price, t_weight),
     m_damage(t_quantity, t_dice), m_minCriticalDice(t_minimumCriticalDice),
-    m_criticalMultiplier(t_criticalMultiplier), m_damageType(t_weaponType)
+    m_criticalMultiplier(t_criticalMultiplier), m_damageType(t_Damagetype),
+    m_weaponType(t_weaponType)
 {
 }
 
 Weapon::~Weapon() = default;
 
 RollSet &Weapon::get_damage() { return m_damage; }
-
-DamageType Weapon::get_damageType() const { return m_damageType; }
 
 int Weapon::get_minCriticalDice() const { return m_minCriticalDice; }
 
@@ -27,9 +30,11 @@ int Weapon::get_criticalMultiplier() const
     return m_criticalMultiplier;
 }
 
-void Weapon::set_damage(const RollSet& t_damage) { m_damage = t_damage; }
+DamageType Weapon::get_damageType() const { return m_damageType; }
 
-void Weapon::set_damageType(DamageType t_type) { m_damageType = t_type; }
+WeaponType Weapon::get_weaponType() const { return m_weaponType; }
+
+void Weapon::set_damage(const RollSet& t_damage) { m_damage = t_damage; }
 
 void Weapon::set_minCriticalDice(uint8_t t_minCriticalDice)
 {
@@ -41,7 +46,17 @@ void Weapon::set_criticalMultiplier(uint8_t t_criticalMultiplier)
     m_criticalMultiplier = t_criticalMultiplier;
 }
 
-std::string Weapon::showWeaponType() const
+void Weapon::set_damageType(DamageType t_damageType)
+{
+    m_damageType = t_damageType;
+}
+
+void Weapon::set_weaponType(WeaponType t_weaponType)
+{
+    m_weaponType = t_weaponType;
+}
+
+std::string Weapon::showDamageType() const
 {
     switch (m_damageType)
     {
@@ -54,16 +69,29 @@ std::string Weapon::showWeaponType() const
     }
 }
 
+std::string Weapon::showWeaponType() const
+{
+    switch(m_weaponType)
+    {
+        case WeaponType::LIGHT : return "Light"; break;
+        case WeaponType::ONE_HANDED : return "One-Handed"; break;
+        case WeaponType::TWO_HANDED : return "Two-Handed"; break;
+        case WeaponType::POLE_ARM_1H : return "Pole arm / One-Handed"; break;
+        default : return "Pole arm / Two-handed"; break;
+    }
+}
+
 std::string Weapon::weaponInfo() const
 {
     std::stringstream stream;
 
     stream
+        << "Weapon Type: " << showWeaponType() << '\n'
         << "Damage: " << m_damage.show() << '\n'
         << "Critical: " << get_minCriticalDice() <<
             (m_minCriticalDice < 20u ? "-20" : "") << '/' <<
             get_criticalMultiplier() << "x\n"
-        << "Damage Type: " << showWeaponType();
+        << "Damage Type: " << showDamageType() << '\n';
 
     return stream.str();
 }
@@ -93,7 +121,8 @@ std::string Weapon::weaponId() const
     stream << m_damage.get_quantity() << " "
         << static_cast<short>( m_damage.get_dice() ) << " "
         << get_minCriticalDice() << " " << get_criticalMultiplier() << " "
-        << static_cast<short>(m_damageType);
+        << static_cast<short>(m_damageType) << " "
+        << static_cast<short>(m_weaponType);
 
     return stream.str();
 }

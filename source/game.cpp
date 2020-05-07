@@ -174,6 +174,8 @@ void Game::init()
 
 void Game::test()
 {
+    std::cout << *m_heroes[0];
+
     m_heroes[0]->set_equippedShield
     (
         *dynamic_cast<Shield*>

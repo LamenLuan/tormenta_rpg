@@ -77,6 +77,21 @@ void Character::set_backpack(const Backpack& t_backpack)
 
 void Character::set_equippedWeapon(const Weapon& t_weapon)
 {
+    if
+    (
+        m_equippedShield &&
+        (
+            t_weapon.get_weaponType() == WeaponType::TWO_HANDED ||
+            t_weapon.get_weaponType() == WeaponType::POLE_ARM_2H
+        ) 
+    )
+    {
+        m_backpack.addItem(*m_equippedShield);
+        m_backpack.set_currentWeight(
+            m_backpack.get_currentWeight() - m_equippedShield->get_weight()
+        );
+        m_equippedShield.reset();
+    }
     if(m_equippedWeapon)
     {
         m_backpack.addItem(*m_equippedWeapon);
@@ -109,6 +124,23 @@ void Character::set_equippedArmor(const Armor& t_armor)
 
 void Character::set_equippedShield(const Shield& t_shield)
 {
+    if(m_equippedWeapon)
+    {
+        // Two ifs to avoid problems if m_equippedWeapon is null.
+        if
+        (
+            m_equippedWeapon->get_weaponType() == WeaponType::TWO_HANDED ||
+            m_equippedWeapon->get_weaponType() == WeaponType::POLE_ARM_2H
+        )
+        {
+            m_backpack.addItem(*m_equippedWeapon);
+            m_backpack.set_currentWeight
+            (
+                m_backpack.get_currentWeight() - m_equippedWeapon->get_weight()
+            );
+            m_equippedWeapon.reset();
+        } // if
+    } // if
     if(m_equippedShield)
     {
         m_backpack.addItem(*m_equippedShield);
@@ -188,7 +220,8 @@ void Character::naturalWeapon()
         {
             m_naturalWeapon = std::make_unique<Weapon>
             (
-                "Bite", 0, 0.f, 1, Dice::D6, 20, 2, DamageType::PIERCE
+                "Bite", 0, 0.f, 1, Dice::D6, 20, 2, DamageType::PIERCE,
+                WeaponType::ONE_HANDED
             );
         } break;
         default:
@@ -196,7 +229,7 @@ void Character::naturalWeapon()
             m_naturalWeapon = std::make_unique<Weapon>
             (
                 "Unarmed attack", 0, 0.f, 1, Dice::D3, 20, 2,
-                DamageType::BLUDGEON
+                DamageType::BLUDGEON, WeaponType::ONE_HANDED
             );
         } break;
     }

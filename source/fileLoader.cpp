@@ -52,13 +52,13 @@ Item FileLoader::loadItem(std::istringstream& input)
 Weapon FileLoader::loadWeapon(std::istringstream& input)
 {
     unsigned short minCriticalDice, criticalMultiplier;
-    short diceQuantity, diceNumber, damageType;
+    short diceQuantity, diceNumber, damageType, weaponType;
     int price;
     float weight;
     std::string name;
 
     input >> name >> price >> weight >> diceQuantity >> diceNumber
-        >> minCriticalDice >> criticalMultiplier >> damageType;
+        >> minCriticalDice >> criticalMultiplier >> damageType >> weaponType;
 
     Utils::ununderscoreSpaces(name);
 
@@ -66,7 +66,7 @@ Weapon FileLoader::loadWeapon(std::istringstream& input)
     (
         name, price, weight, diceQuantity, static_cast<Dice>(diceNumber),
         minCriticalDice, criticalMultiplier,
-        static_cast<DamageType>(damageType)
+        static_cast<DamageType>(damageType), static_cast<WeaponType>(weaponType)
     );
 }
 
@@ -90,13 +90,15 @@ Armor FileLoader::loadArmor(std::istringstream& input)
 Shield FileLoader::loadShield(std::istringstream& input)
 {
     unsigned short minCriticalDice, criticalMultiplier;
-    short diceQuantity, diceNumber, damageType;
+    // Creating dummy variable to read the unecessary WeaponType, shield's
+    // weapon type are aways one-handed (rule in the constructor).
+    short diceQuantity, diceNumber, damageType, dummy;
     int price, armorClassBonus, armorPenalty;
     float weight;
     std::string name;
 
     input >> name >> price >> weight >> diceQuantity >> diceNumber
-        >> minCriticalDice >> criticalMultiplier >> damageType
+        >> minCriticalDice >> criticalMultiplier >> damageType >> dummy
         >> armorClassBonus >> armorPenalty;
 
     Utils::ununderscoreSpaces(name);
