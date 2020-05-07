@@ -2,18 +2,19 @@
 
 Game::Game()
     :
-    m_gameStarted(false), m_heroes{}
+    m_quit(false), m_heroes{}
 {
     m_states.push( std::make_unique<GameState>( GameState(m_heroes) ) );
+    loadHeroes();
 }
 
 Game::~Game() = default;
 
-bool Game::get_gameStarted() const { return m_gameStarted; }
+bool Game::get_quit() const { return m_quit; }
 
-void Game::set_gameStarted(bool t_gameStarted)
+void Game::set_quit(bool t_quit)
 {
-    m_gameStarted = t_gameStarted;
+    m_quit = t_quit;
 }
 
 void Game::saveHeroes()
@@ -141,9 +142,14 @@ bool Game::loadHeroes()
     return true;
 }
 
-void Game::start()
+void Game::update()
 {
-    loadHeroes();
-
     m_states.top()->update();
+    
+    if( m_states.top()->get_quit() )
+    {
+        m_states.pop();
+
+        if( m_states.empty() ) m_quit = true;
+    }
 }

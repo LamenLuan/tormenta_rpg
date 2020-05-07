@@ -4,7 +4,10 @@ int main() {
 
     Game game;
 
-    game.start();
+    while ( !game.get_quit() )
+    {
+        game.update();
+    }
     
     return 0;
 }
