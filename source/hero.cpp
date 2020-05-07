@@ -40,6 +40,25 @@ Hero::~Hero() = default;
 
 unsigned int Hero::get_currentExp() const { return m_currentExp; }
 
+unsigned int Hero::get_nextLevelExp() const { return m_nextLevelExp; }
+
+int Hero::get_lifePerLevel() const { return m_lifePerLevel; }
+
+void Hero::set_currentExp(unsigned int t_currentExp)
+{
+    t_currentExp = m_currentExp;
+}
+
+void Hero::set_nextLevelExp(unsigned int t_nextLevelExp)
+{
+    t_nextLevelExp = m_nextLevelExp;
+}
+
+void Hero::set_lifePerLevel(uint8_t t_lifePerLevel)
+{
+    t_lifePerLevel = m_lifePerLevel;
+}
+
 void Hero::addExp(int t_exp)
 {
     if(t_exp > 0)

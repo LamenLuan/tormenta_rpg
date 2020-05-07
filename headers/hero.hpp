@@ -19,6 +19,12 @@ public:
     virtual ~Hero();
 
     unsigned int get_currentExp() const;
+    unsigned int get_nextLevelExp() const;
+    int get_lifePerLevel() const;
+
+    void set_currentExp(unsigned int t_currentExp);
+    void set_nextLevelExp(unsigned int t_nextLevelExp);
+    void set_lifePerLevel(uint8_t t_lifePerLevel);
 
     void manageExp(uint8_t t_level);
     void addExp(int t_exp);
