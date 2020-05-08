@@ -1,8 +1,7 @@
 #include <fstream>
-#include <stack>
 
 #include "./fileLoader.hpp"
-#include "../states/headers/gameState.hpp"
+#include "../states/headers/mainMenuState.hpp"
 
 #ifndef TORMENTA_GAME_HPP
 #define TORMENTA_GAME_HPP

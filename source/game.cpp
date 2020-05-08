@@ -4,7 +4,10 @@ Game::Game()
     :
     m_quit(false), m_heroes{}
 {
-    m_states.push( std::make_unique<GameState>( GameState(m_heroes) ) );
+    m_states.push
+    (
+        std::make_unique<MainMenuState>( MainMenuState(m_heroes, m_states) )
+    );
     loadHeroes();
 }
 
