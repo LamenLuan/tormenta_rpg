@@ -20,18 +20,18 @@ public:
     static Armor loadArmor(std::istringstream& input);
     static Shield loadShield(std::istringstream& input);
 
-    void loadEquippedItems
+    static void loadEquippedItems
     (
         std::array<std::unique_ptr<Hero>, 4>& t_heroes,
         std::istringstream& input, uint8_t index
     );
-    void loadInventory
+    static void loadInventory
     (
         std::array<std::unique_ptr<Hero>, 4>& t_heroes, uint8_t index
     );
 
-    void saveHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes);
-    bool loadHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes);
+    static void saveHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes);
+    static bool loadHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes);
 };
 
 #endif // TORMENTA_FILEDEALER_HPP

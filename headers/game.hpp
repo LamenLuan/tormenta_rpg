@@ -21,8 +21,6 @@ public:
 
     void set_quit(bool t_quit);
 
-    bool loadHeroes();
-
     void update();
 };
  
