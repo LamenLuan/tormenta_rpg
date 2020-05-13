@@ -1,4 +1,3 @@
-#include "playableState.hpp"
 #include "newGameState.hpp"
 
 #ifndef TORMENTA_MAINMENUSTATE_HPP

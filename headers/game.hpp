@@ -1,6 +1,4 @@
-#include <fstream>
-
-#include "./fileLoader.hpp"
+#include "./fileDealer.hpp"
 #include "../states/headers/mainMenuState.hpp"
 
 #ifndef TORMENTA_GAME_HPP
@@ -23,9 +21,6 @@ public:
 
     void set_quit(bool t_quit);
 
-    void saveHeroes();
-    void loadEquippedItems(std::istringstream& input, uint8_t index);
-    void loadInventory(uint8_t index);
     bool loadHeroes();
 
     void update();
