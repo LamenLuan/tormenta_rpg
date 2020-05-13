@@ -2,8 +2,6 @@
 
 #include "sheet.hpp"
 #include "./enum-types/race.hpp"
-#include "./exception-types/nullObject.hpp"
-#include "utils.hpp"
 
 #ifndef TORMENTA_CHARACTER_HPP
 #define TORMENTA_CHARACTER_HPP

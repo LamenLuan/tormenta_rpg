@@ -147,12 +147,14 @@ bool Game::loadHeroes()
 
 void Game::update()
 {
-    m_states.top()->update();
-    
     if( m_states.top()->get_quit() )
     {
         m_states.pop();
 
         if( m_states.empty() ) m_quit = true;
+    }
+    else
+    {
+        m_states.top()->update();
     }
 }

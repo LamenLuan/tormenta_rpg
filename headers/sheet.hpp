@@ -1,5 +1,3 @@
-#include <memory>
-
 #include "backpack.hpp"
 
 #ifndef TORMENTA_SHEET_HPP

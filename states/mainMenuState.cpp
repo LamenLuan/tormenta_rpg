@@ -39,9 +39,16 @@ void MainMenuState::update()
         case 0: set_quit(true); break;
         case 1: get_states().push
         (
-            std::make_unique<CharacterCreationState>
+            std::make_unique<NewGameState>
             (
-                CharacterCreationState( get_heroes(), get_states() )
+                NewGameState( get_heroes(), get_states() )
+            )
+        ); break;
+        case 2: get_states().push
+        (
+            std::make_unique<GameState>
+            (
+                GameState( get_heroes(), get_states() )
             )
         ); break;
         default: break;

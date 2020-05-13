@@ -1,2 +1,2 @@
 add_library(TormentaStates mainMenuState.cpp characterCreationState.cpp 
-playableState.cpp state.cpp)
+newGameState.cpp gameState.cpp playableState.cpp state.cpp)

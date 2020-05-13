@@ -25,7 +25,7 @@ void CharacterCreationState::classSelection(std::unique_ptr<Hero>& hero)
 
     ++m_phaseCount;
 
-    std::cout << "First of all, what do he/she do for living?" << '\n'
+    std::cout << "First of all, what do he/she do for living?" << "\n\n"
         << "Stats Order: (STR, DEX, CON, INT, WIS, CHA)" << '\n'
         << "(1) Warrior (17, 13, 15, 8, 12, 10)" << '\n';
     printCancelOption();
@@ -59,7 +59,7 @@ void CharacterCreationState::humanBonusSelection(std::unique_ptr<Hero>& hero)
         {
             characterCreationLogo();
 
-            std::cout << "Choose 2 habilities to gain a +2 bonus:" << '\n';
+            std::cout << "Choose 2 habilities to gain a +2 bonus:" << "\n\n";
 
             if(selected[0] > -1)
                 std::cout << habilities[ selected[0] ] << " chosen." << '\n';
@@ -128,7 +128,7 @@ void CharacterCreationState::raceSelection(std::unique_ptr<Hero>& hero)
 
     ++m_phaseCount;
 
-    std::cout << "And do he/she looks like?" << '\n';
+    std::cout << "And do he/she looks like?" << "\n\n";
     for (size_t i = 0, j = races.size(); i < j; ++i)
     {
         std::cout << '(' << i + 1 << ')' << races[i] << '\n';
@@ -202,7 +202,7 @@ void CharacterCreationState::nameSelection(std::unique_ptr<Hero>& hero)
             characterCreationLogo();
             std::cout << error << '\n';
         }
-        std::cout << "What is his/her name?" << '\n' << ": ";
+        std::cout << "What is his/her name?" << "\n\n" << ": ";
 
         std::getline(std::cin, name);
 
