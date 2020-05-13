@@ -20,6 +20,7 @@ public:
     void classSelection(std::unique_ptr<Hero>& hero);
     void humanBonusSelection(std::unique_ptr<Hero>& hero);
     void raceSelection(std::unique_ptr<Hero>& hero);
+    void nameSelection(std::unique_ptr<Hero>& hero);
 
     void update();
 };

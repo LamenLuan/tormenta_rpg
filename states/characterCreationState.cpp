@@ -25,7 +25,7 @@ void CharacterCreationState::classSelection(std::unique_ptr<Hero>& hero)
 
     ++m_phaseCount;
 
-    std::cout << "Define your hero's class:" << '\n'
+    std::cout << "First of all, what do he/she do for living?" << '\n'
         << "Stats Order: (STR, DEX, CON, INT, WIS, CHA)" << '\n'
         << "(1) Warrior (17, 13, 15, 8, 12, 10)" << '\n';
     printCancelOption();
@@ -128,7 +128,7 @@ void CharacterCreationState::raceSelection(std::unique_ptr<Hero>& hero)
 
     ++m_phaseCount;
 
-    std::cout << "Now, choose the hero's race:" << '\n';
+    std::cout << "And do he/she looks like?" << '\n';
     for (size_t i = 0, j = races.size(); i < j; i++)
     {
         std::cout << '(' << i + 1 << ')' << races[i] << '\n';
@@ -187,6 +187,33 @@ void CharacterCreationState::raceSelection(std::unique_ptr<Hero>& hero)
     else --m_phaseCount;
 }
 
+void CharacterCreationState::nameSelection(std::unique_ptr<Hero>& hero)
+{
+    bool validName = false;
+    int choice = -1;
+    std::string name, error;
+
+    ++m_phaseCount;
+
+    while (!validName)
+    {
+        if( !error.empty() )
+        {
+            characterCreationLogo();
+            std::cout << error << '\n';
+        }
+        std::cout << "What is his/her name?" << '\n' << ": ";
+
+        std::getline(std::cin, name);
+
+        if(name.size() > 30)
+        {
+            error = "Hero's name cannot exceed 30 characters!";
+            continue;
+        }   
+    }
+}
+
 void CharacterCreationState::update()
 {
     std::unique_ptr<Hero> hero(nullptr);
@@ -200,6 +227,7 @@ void CharacterCreationState::update()
             {
                 case 0: classSelection(hero); break;
                 case 1: raceSelection(hero); break;
+                case 2: nameSelection(hero); break;
                 
                 default: break;
             }
