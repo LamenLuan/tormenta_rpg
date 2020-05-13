@@ -2,7 +2,9 @@
 
 #include <utility>
 
-Warrior::Warrior() : Hero()
+Warrior::Warrior()
+:
+Hero("", 17u, 13u, 15u, 8u, 12u, 10u, 1u, 5u, Race::HUMAN, 0)
 {
 }
 
