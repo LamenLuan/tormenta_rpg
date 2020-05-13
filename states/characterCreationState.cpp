@@ -52,7 +52,7 @@ void CharacterCreationState::humanBonusSelection(std::unique_ptr<Hero>& hero)
 
     while(!confirmed)
     {
-        for (size_t i = 0; i < 2; i++)
+        for (size_t i = 0; i < 2; ++i)
             selected[i] = -1;
 
         for (size_t i = 0; i < 2;)
@@ -129,7 +129,7 @@ void CharacterCreationState::raceSelection(std::unique_ptr<Hero>& hero)
     ++m_phaseCount;
 
     std::cout << "And do he/she looks like?" << '\n';
-    for (size_t i = 0, j = races.size(); i < j; i++)
+    for (size_t i = 0, j = races.size(); i < j; ++i)
     {
         std::cout << '(' << i + 1 << ')' << races[i] << '\n';
     }
@@ -210,15 +210,19 @@ void CharacterCreationState::nameSelection(std::unique_ptr<Hero>& hero)
         {
             error = "Hero's name cannot exceed 30 characters!";
             continue;
-        }   
+        }
+
+        validName = true;
     }
+
+    hero->set_name(name);
 }
 
 void CharacterCreationState::update()
 {
     std::unique_ptr<Hero> hero(nullptr);
 
-    while ( m_phaseCount >= 0 )
+    while ( m_phaseCount < 3 )
     {
         characterCreationLogo();
         try
@@ -242,4 +246,15 @@ void CharacterCreationState::update()
             }
         }
     }
+
+    for ( auto &&i : get_heroes() )
+    {
+        if(!i)
+        {
+            i.swap(hero);
+            break;
+        }
+    }
+
+    set_quit(true);
 }
