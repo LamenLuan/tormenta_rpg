@@ -23,9 +23,15 @@ void GameState::update()
     std::cout << *get_heroes()[0] << "\n\n";
 
     std::cout << "Options:" << '\n'
-        << "(0) Quit" << '\n';
+        << "(0) Quit" << '\n'
+        << "(1) Save game" << '\n';
 
     choice = getIntChoice();
 
-    if(choice == 0) set_quit(true);
+    switch (choice)
+    {
+        case 0: set_quit(true); break;
+        case 1: FileDealer::saveHeroes( get_heroes() ); break;
+        default: break;
+    }
 }

@@ -2,7 +2,7 @@
 
 #include "state.hpp"
 #include "../../headers/exception-types/cancelException.hpp"
-#include "../../source/hero-classes/warrior.hpp"
+#include "../../headers/fileDealer.hpp"
 
 #ifndef TORMENTA_PLAYABLESTATE_HPP
 #define TORMENTA_PLAYABLESTATE_HPP
