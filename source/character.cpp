@@ -2,26 +2,22 @@
 
 #include <memory>
 
-Character::Character()
-    :
-    Sheet(),
-    m_backpack(m_strength)
+Character::Character
+(
+    std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
+    uint8_t t_constitution, uint8_t t_inteligence, uint8_t t_wisdom,
+    uint8_t t_charisma, uint8_t t_level, unsigned short t_maxLife,
+    Race t_race, unsigned int t_coins, unsigned short t_currentLife
+)
+:
+    Sheet
+    (
+        std::move(t_name), t_strength, t_dexterity, t_constitution,
+        t_inteligence, t_wisdom, t_charisma, t_level, t_maxLife, t_currentLife
+    ),
+    m_race(t_race), m_backpack(m_strength, t_coins), m_coins(t_coins)
 {
     naturalWeapon();
-}
-
-Character::Character(std::string t_name, uint8_t t_strength,
-        uint8_t t_dexterity, uint8_t t_constitution, uint8_t t_inteligence,
-        uint8_t t_wisdom, uint8_t t_charisma, uint8_t t_level,
-        unsigned short t_maxLife, Race t_race, unsigned int t_coins)
-    :
-    Sheet(std::move(t_name), t_strength, t_dexterity, t_constitution, t_inteligence,
-        t_wisdom, t_charisma, t_level, t_maxLife), m_race(t_race),
-        m_backpack(m_strength), m_coins(t_coins)
-{
-    naturalWeapon();
-    m_backpack.set_currentWeight
-        (m_backpack.get_currentWeight() + (0.01f * m_coins) );
 }
 
 Character::~Character() = default;
@@ -254,9 +250,8 @@ std::string Character::getIdAsString() const
     stream << name << " " << get_strength() << " "
         << get_dexterity() << " " << get_constitution() << " "
         << get_inteligence() << " " << get_wisdom() << " "
-        << get_charisma() << " " << get_level() << " "
-        << static_cast<int>(m_race) << " "  << get_coins() << " "
-        << m_currentLife;
+        << get_charisma() << " " << static_cast<int>(m_race) << " "
+        << get_coins() << " " << m_maxLife << " " << m_currentLife;
 
     return stream.str();
 }

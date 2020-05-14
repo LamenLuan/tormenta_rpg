@@ -17,10 +17,23 @@ public:
 
     void characterCreationLogo();
 
-    void classSelection(std::unique_ptr<Hero>& hero);
-    void humanBonusSelection(std::unique_ptr<Hero>& hero);
-    void raceSelection(std::unique_ptr<Hero>& hero);
-    void nameSelection(std::unique_ptr<Hero>& hero);
+    void classSelection
+    (
+        uint8_t& strength, uint8_t& dexterity, uint8_t& constitution,
+        uint8_t& inteligence, uint8_t& wisdom, uint8_t& charisma,
+        uint8_t& heroClass
+    );
+    void humanBonusSelection
+    (
+        uint8_t& strength, uint8_t& dexterity, uint8_t& constitution,
+        uint8_t& inteligence, uint8_t& wisdom, uint8_t& charisma
+    );
+    void raceSelection
+    (
+        uint8_t& strength, uint8_t& dexterity, uint8_t& constitution,
+        uint8_t& inteligence, uint8_t& wisdom, uint8_t& charisma, Race& race
+    );
+    void nameSelection(std::string& heroName);
 
     void update();
 };

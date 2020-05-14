@@ -19,9 +19,15 @@ void CharacterCreationState::characterCreationLogo()
     std::cout << "CHARACTER CREATION" << "\n\n";
 }
 
-void CharacterCreationState::classSelection(std::unique_ptr<Hero>& hero)
+void CharacterCreationState::classSelection
+(
+    uint8_t& strength, uint8_t& dexterity, uint8_t& constitution,
+    uint8_t& inteligence, uint8_t& wisdom, uint8_t& charisma,
+    uint8_t& heroClass
+)
 {
     int choice = -1;
+    std::array<uint8_t, 7> habilitesAndClass;
 
     ++m_phaseCount;
 
@@ -35,12 +41,24 @@ void CharacterCreationState::classSelection(std::unique_ptr<Hero>& hero)
     if(choice == 0) throw CancelException();
     switch (choice)
     {
-        case 1: hero = std::make_unique<Warrior>(); break;
+        case 1: habilitesAndClass = {17u, 13u, 15u, 8u, 12u, 10u, 0u}; break;
         default: --m_phaseCount; break;
     }
+
+    strength = habilitesAndClass[0];
+    dexterity = habilitesAndClass[1];
+    constitution = habilitesAndClass[2];
+    inteligence = habilitesAndClass[3];
+    wisdom = habilitesAndClass[4];
+    charisma = habilitesAndClass[5];
+    heroClass = habilitesAndClass[6];
 }
 
-void CharacterCreationState::humanBonusSelection(std::unique_ptr<Hero>& hero)
+void CharacterCreationState::humanBonusSelection
+(
+    uint8_t& strength, uint8_t& dexterity, uint8_t& constitution,
+    uint8_t& inteligence, uint8_t& wisdom, uint8_t& charisma
+)
 {
     bool confirmed = false;
     int selected[2], choice;
@@ -104,17 +122,21 @@ void CharacterCreationState::humanBonusSelection(std::unique_ptr<Hero>& hero)
     {
         switch (selected[i])
         {
-            case 0: hero->set_strength(hero->get_strength() + 2); break;
-            case 2: hero->set_dexterity(hero->get_dexterity() + 2); break;
-            case 1: hero->set_constitution(hero->get_constitution() + 2); break;
-            case 3: hero->set_inteligence(hero->get_inteligence() + 2); break;
-            case 4: hero->set_wisdom(hero->get_wisdom() + 2); break;
-            case 5: hero->set_wisdom(hero->get_wisdom() + 2); break;
+            case 0: strength += 2; break;
+            case 2: dexterity += 2; break;
+            case 1: constitution += 2; break;
+            case 3: inteligence += 2; break;
+            case 4: wisdom += 2; break;
+            case 5: charisma += 2; break;
         }
     }
 }
 
-void CharacterCreationState::raceSelection(std::unique_ptr<Hero>& hero)
+void CharacterCreationState::raceSelection
+(
+    uint8_t& strength, uint8_t& dexterity, uint8_t& constitution,
+    uint8_t& inteligence, uint8_t& wisdom, uint8_t& charisma, Race& race
+)
 {
     int choice = -1;
     std::vector<std::string> races =
@@ -141,39 +163,43 @@ void CharacterCreationState::raceSelection(std::unique_ptr<Hero>& hero)
 
     if( choice > 0 && choice <= races.size() )
     {
-        hero->set_race( static_cast<Race>(choice - 1) );
+        race = static_cast<Race>(choice - 1);
 
-        switch ( hero->get_race() )
+        switch (race)
         {
             case Race::DWARF :
             {
-                hero->set_constitution( hero->get_constitution() + 4 );
-                hero->set_wisdom( hero->get_wisdom() + 2 );
-                hero->set_dexterity( hero->get_dexterity() - 2 );
+                constitution += + 4;
+                wisdom += 2;
+                dexterity +=  2;
             } break;
             case Race::ELF :
             {
-                hero->set_dexterity( hero->get_dexterity() + 4 );
-                hero->set_inteligence( hero->get_inteligence() + 2 );
-                hero->set_constitution( hero->get_constitution() - 2 );
+                dexterity += 4;
+                inteligence += 2;
+                constitution += 2;
             } break;
             case Race::GNOLL :
             {
-                hero->set_constitution( hero->get_constitution() + 4 );
-                hero->set_wisdom( hero->get_wisdom() + 2 );
-                hero->set_inteligence( hero->get_inteligence() - 2 );
+                constitution += 4;
+                wisdom += 2;
+                inteligence += 2;
             } break;
             case Race::GOBLIN :
             {
-                hero->set_dexterity( hero->get_dexterity() + 4 );
-                hero->set_constitution( hero->get_constitution() + 2 );
-                hero->set_charisma( hero->get_charisma() - 2 );
+                dexterity += 4;
+                constitution += 2;
+                charisma += 2;
             } break;
             case Race::HUMAN :
             {
                 try
                 {
-                    humanBonusSelection(hero);
+                    humanBonusSelection
+                    (
+                        strength, dexterity, constitution, inteligence, wisdom,
+                        charisma
+                    );
                 }
                 catch(const CancelException& e)
                 {
@@ -187,7 +213,7 @@ void CharacterCreationState::raceSelection(std::unique_ptr<Hero>& hero)
     else --m_phaseCount;
 }
 
-void CharacterCreationState::nameSelection(std::unique_ptr<Hero>& hero)
+void CharacterCreationState::nameSelection(std::string& heroName)
 {
     bool validName = false;
     int choice = -1;
@@ -215,12 +241,15 @@ void CharacterCreationState::nameSelection(std::unique_ptr<Hero>& hero)
         validName = true;
     }
 
-    hero->set_name(name);
+    heroName = name;
 }
 
 void CharacterCreationState::update()
 {
-    std::unique_ptr<Hero> hero(nullptr);
+    uint8_t strength = 10u, dexterity = 10u, constitution = 10u,
+    inteligence = 10u, wisdom = 10u, charisma = 10u, heroClass = 0u;
+    std::string name;
+    Race race;
 
     while ( m_phaseCount < 3 )
     {
@@ -229,9 +258,17 @@ void CharacterCreationState::update()
         {
             switch (m_phaseCount)
             {
-                case 0: classSelection(hero); break;
-                case 1: raceSelection(hero); break;
-                case 2: nameSelection(hero); break;
+                case 0: classSelection
+                (
+                    strength, dexterity, constitution, inteligence, wisdom,
+                    charisma, heroClass
+                ); break;
+                case 1: raceSelection
+                (
+                    strength, dexterity, constitution, inteligence, wisdom,
+                    charisma, race
+                ); break;
+                case 2: nameSelection(name); break;
                 
                 default: break;
             }
@@ -251,7 +288,17 @@ void CharacterCreationState::update()
     {
         if(!i)
         {
-            i.swap(hero);
+            switch (heroClass)
+            {
+                case 0: i = std::make_unique<Warrior>
+                (
+                    name, strength, dexterity, constitution, inteligence,
+                    wisdom, charisma, race
+                ); break;
+
+            default:
+                break;
+            }
             break;
         }
     }

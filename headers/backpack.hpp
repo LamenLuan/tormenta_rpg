@@ -17,7 +17,7 @@ private:
     float m_currentWeight{0};
 
 public:
-    explicit Backpack(float t_limit);
+    explicit Backpack(float t_capacity, int t_coins);
     virtual ~Backpack();
 
     std::vector<Item*> get_items() const;

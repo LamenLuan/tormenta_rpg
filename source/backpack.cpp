@@ -1,6 +1,8 @@
 #include "../headers/backpack.hpp"
 
-Backpack::Backpack(float t_capacity) : m_capacity(10.f * t_capacity)
+Backpack::Backpack(float t_capacity, int t_coins)
+:
+    m_capacity(10.f * t_capacity), m_currentWeight(t_coins * 0.01f)
 {
 }
 

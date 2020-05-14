@@ -3,21 +3,21 @@
 template<typename T> T* FileDealer::loadHero(std::istringstream& input)
 {
     unsigned short strength, dexterity, constitution, inteligence, wisdom, 
-        charisma, level, currentLife, race;
+        charisma, race, maxLife, currentLife;
     int coins;
     unsigned int currentExp;
     std::string name;
 
     input >> name >> strength >> dexterity >> constitution
-            >> inteligence >> wisdom >> charisma >> level >> race >> coins
-            >> currentLife >> currentExp;
+            >> inteligence >> wisdom >> charisma >> race >> coins
+            >> maxLife >> currentLife >> currentExp;
 
     Utils::ununderscoreSpaces(name);
 
     return new T
     (
         name, strength, dexterity, constitution, inteligence, wisdom, charisma,
-        level, static_cast<Race>(race), coins, currentLife, currentExp
+        static_cast<Race>(race), coins, maxLife, currentLife, currentExp
     );
 }
 template Warrior* FileDealer::loadHero<Warrior>(std::istringstream& input);

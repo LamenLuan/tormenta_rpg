@@ -1,17 +1,19 @@
 #include "../headers/sheet.hpp"
 
-Sheet::Sheet() = default;
-
-Sheet::Sheet(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
-    uint8_t t_constitution, uint8_t t_inteligence,
-    uint8_t t_wisdom, uint8_t t_charisma, uint8_t t_level,
-    unsigned short t_maxLife)
-    :
+Sheet::Sheet
+(
+    std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
+    uint8_t t_constitution, uint8_t t_inteligence, uint8_t t_wisdom,
+    uint8_t t_charisma, uint8_t t_level, unsigned short t_maxLife,
+    unsigned short t_currentLife
+)
+:
     m_name( std::move(t_name) ), m_strength(t_strength),
     m_dexterity(t_dexterity),  m_constitution(t_constitution),
     m_inteligence(t_inteligence), m_wisdom(t_wisdom), m_charisma(t_charisma),
-    m_level(t_level),m_maxLife(t_maxLife), m_currentLife(t_maxLife)
+    m_level(t_level), m_maxLife(t_maxLife)
 {
+    m_currentLife = m_currentLife ? m_currentLife : t_maxLife;
 }
 
 Sheet::~Sheet() = default;

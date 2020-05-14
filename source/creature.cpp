@@ -7,8 +7,11 @@ Creature::Creature(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
     uint8_t t_charisma, uint8_t t_level, unsigned short t_maxLife,
     CreatureType t_type, int8_t t_armorClass, TreasureType t_treasure)
     :
-    Sheet(std::move(t_name), t_strength, t_dexterity, t_constitution, t_inteligence,
-    t_wisdom, t_charisma, t_level, t_maxLife),
+    Sheet
+    (
+        std::move(t_name), t_strength, t_dexterity, t_constitution,
+        t_inteligence, t_wisdom, t_charisma, t_level, t_maxLife
+    ),
     m_type(t_type), m_armorClass(t_armorClass), m_treasure(t_treasure)
 {
 }

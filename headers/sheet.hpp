@@ -24,10 +24,12 @@ protected:
     std::unique_ptr<Weapon> m_naturalWeapon{nullptr};
 
 public:
-    Sheet();
-    Sheet(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
+    Sheet(
+        std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
         uint8_t t_constitution, uint8_t t_inteligence, uint8_t t_wisdom,
-        uint8_t t_charisma, uint8_t t_level, unsigned short t_maxLife);
+        uint8_t t_charisma, uint8_t t_level, unsigned short t_maxLife,
+        unsigned short t_currentLife = 0u
+    );
     virtual ~Sheet();
 
     const std::string& get_name() const;

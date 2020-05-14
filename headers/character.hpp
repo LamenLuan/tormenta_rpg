@@ -17,11 +17,14 @@ protected:
     unsigned int m_coins{0};
 
 public:
-    Character();
-    Character(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
+
+    Character
+    (
+        std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
         uint8_t t_constitution, uint8_t t_inteligence, uint8_t t_wisdom,
         uint8_t t_charisma, uint8_t t_level, unsigned short t_maxLife,
-        Race t_race, unsigned int t_coins);
+        Race t_race, unsigned int t_coins, unsigned short t_currentLife = 0u
+    );
     virtual ~Character();
 
     Race get_race() const;
