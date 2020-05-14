@@ -16,6 +16,7 @@ public:
     
     virtual ~Warrior();
 
+    std::string show() const;
     std::string getIdAsString() const;
 };
 

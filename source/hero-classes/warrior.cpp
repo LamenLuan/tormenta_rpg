@@ -21,6 +21,19 @@ Warrior::Warrior(std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
 
 Warrior::~Warrior() = default;
 
+std::string Warrior::show() const
+{
+    std::stringstream stream;
+
+    stream
+        << "Name: " << m_name << '\n'
+        << "Race: " << raceName() << '\n'
+        << "Class: Warrior" << "\n\n"
+        << Hero::show();
+
+    return stream.str();
+}
+
 std::string Warrior::getIdAsString() const
 {
     std::stringstream stream;

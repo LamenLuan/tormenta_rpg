@@ -8,6 +8,8 @@ int main() {
     {
         game.update();
     }
+
+    system("CLS");
     
     return 0;
 }
