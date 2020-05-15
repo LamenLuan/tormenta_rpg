@@ -1,15 +1,10 @@
-#include <vector>
+#include "./exception-types/fullInventory.hpp"
+#include "../source/hero-classes/warrior.hpp"
 
-#include "weapon.hpp"
-#include "armor.hpp"
-#include "shield.hpp"
-#include "./exception-types/fulllBackpack.hpp"
-#include "./exception-types/nullObject.hpp"
+#ifndef TORMENTA_INVENTORY_HPP
+#define TORMENTA_INVENTORY_HPP
 
-#ifndef TORMENTA_BACKPACK_HPP
-#define TORMENTA_BACKPACK_HPP
-
-class Backpack
+class Inventory
 {
 private:
     std::vector<Item*> m_items;
@@ -17,8 +12,8 @@ private:
     float m_currentWeight{0};
 
 public:
-    explicit Backpack(float t_capacity, int t_coins);
-    virtual ~Backpack();
+    explicit Inventory(float t_capacity, int t_coins);
+    virtual ~Inventory();
 
     std::vector<Item*> get_items() const;
     float get_capacity() const;
@@ -31,4 +26,4 @@ public:
     void removeItem(size_t index);
 };
 
-#endif // TORMENTA_BACKPACK_HPP
+#endif // TORMENTA_INVENTORY_HPP

@@ -22,7 +22,7 @@ Hero::Hero
 (
     std::string t_name, uint8_t t_strength, uint8_t t_dexterity,
     uint8_t t_constitution, uint8_t t_inteligence, uint8_t t_wisdom,
-    uint8_t t_charisma, uint8_t t_lifePerLevel, Race t_race, int t_coins,
+    uint8_t t_charisma, uint8_t t_lifePerLevel, Race t_race,
     unsigned short t_maxLife, unsigned short t_currentLife,
     unsigned int t_currentExp
 )
@@ -30,7 +30,7 @@ Hero::Hero
     Character
     (
         std::move(t_name), t_strength, t_dexterity, t_constitution,
-        t_inteligence, t_wisdom, t_charisma, 1u, t_maxLife, t_race, t_coins,
+        t_inteligence, t_wisdom, t_charisma, 1u, t_maxLife, t_race,
         t_currentExp
     ),
     m_currentExp(t_currentExp), m_lifePerLevel(t_lifePerLevel)
@@ -117,9 +117,6 @@ std::string Hero::show() const
         << "Life: " << m_currentLife << '/' << m_maxLife << '\n'
         << "Armor class: " << armorClass() << "\n\n"
         << showStats() << '\n'
-        << "Inventory: " << std::fixed << std::setprecision(2) << std::noshowpos
-            << m_backpack.get_currentWeight() << "/"
-            << m_backpack.get_capacity() << "kg" << "\n\n"
         << "Equipped weapon: " << ( m_equippedWeapon
                 ? m_equippedWeapon->showWeapon()
                 : m_naturalWeapon->showWeapon()

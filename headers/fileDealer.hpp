@@ -1,6 +1,6 @@
 #include <fstream>
 
-#include "../source/hero-classes/warrior.hpp"
+#include "./party.hpp"
 
 #ifndef TORMENTA_FILEDEALER_HPP
 #define TORMENTA_FILEDEALER_HPP
@@ -13,7 +13,7 @@ public:
 
     static void loadItem
     (
-        Backpack& backpack, std::istringstream& input, char itemClass
+        Inventory& inventory, std::istringstream& input, char itemClass
     );
     static Item loadItem(std::istringstream& input);
     static Weapon loadWeapon(std::istringstream& input);

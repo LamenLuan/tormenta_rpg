@@ -1,4 +1,5 @@
-#include "backpack.hpp"
+#include "armor.hpp"
+#include "shield.hpp"
 
 #ifndef TORMENTA_SHEET_HPP
 #define TORMENTA_SHEET_HPP

@@ -4,35 +4,34 @@ template<typename T> T* FileDealer::loadHero(std::istringstream& input)
 {
     unsigned short strength, dexterity, constitution, inteligence, wisdom, 
         charisma, race, maxLife, currentLife;
-    int coins;
     unsigned int currentExp;
     std::string name;
 
     input >> name >> strength >> dexterity >> constitution
-            >> inteligence >> wisdom >> charisma >> race >> coins
-            >> maxLife >> currentLife >> currentExp;
+            >> inteligence >> wisdom >> charisma >> race >> maxLife
+            >> currentLife >> currentExp;
 
     Utils::ununderscoreSpaces(name);
 
     return new T
     (
         name, strength, dexterity, constitution, inteligence, wisdom, charisma,
-        static_cast<Race>(race), coins, maxLife, currentLife, currentExp
+        static_cast<Race>(race), maxLife, currentLife, currentExp
     );
 }
 template Warrior* FileDealer::loadHero<Warrior>(std::istringstream& input);
 
 void FileDealer::loadItem
 (
-    Backpack& backpack, std::istringstream& input, char itemClass
+    Inventory& inventory, std::istringstream& input, char itemClass
 )
 {
     switch (itemClass)
     {
-        case 'I' : backpack.addItem( loadItem(input) ); break;
-        case 'W' : backpack.addItem( loadWeapon(input) ); break;
-        case 'A' : backpack.addItem( loadArmor(input) ); break;
-        case 'S' : backpack.addItem( loadShield(input) ); break;
+        case 'I' : inventory.addItem( loadItem(input) ); break;
+        case 'W' : inventory.addItem( loadWeapon(input) ); break;
+        case 'A' : inventory.addItem( loadArmor(input) ); break;
+        case 'S' : inventory.addItem( loadShield(input) ); break;
     }
 }
 
@@ -152,6 +151,7 @@ void FileDealer::loadInventory
     std::string itemString;
     std::ifstream inventoryFile;
 
+    /*
     inventoryFile.open
     (
         "./data/inventory" + std::to_string(index) + ".dat", std::ios::in
@@ -166,11 +166,12 @@ void FileDealer::loadInventory
 
         FileDealer::loadItem
         (
-            t_heroes[index]->get_backpack(), input, itemClass
+            t_heroes[index]->get_inventory(), input, itemClass
         );
     }
 
     inventoryFile.close();
+    */
 }
 
 void FileDealer::saveHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes)
@@ -180,21 +181,7 @@ void FileDealer::saveHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes)
 
     for(size_t i = 0; i < 4; i++)
     {
-        if(t_heroes[i]) 
-        {
-            heroesFile << t_heroes[i]->getIdAsString() << '\n';
-            inventoryFile.open
-            (
-                "./data/inventory" + std::to_string(i) + ".dat", std::ios::out
-            );
-            
-            for (auto &i : t_heroes[i]->get_backpack().get_items() )
-            {
-                inventoryFile << i->getIdAsString() << '\n';
-            }
-
-            inventoryFile.close();
-        } // if
+        if(t_heroes[i]) heroesFile << t_heroes[i]->getIdAsString() << '\n';
         else break;
     }
 
@@ -232,7 +219,7 @@ bool FileDealer::loadHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes)
 
             loadEquippedItems(t_heroes, input, i);
 
-            loadInventory(t_heroes, i);
+            // loadInventory(t_heroes, i);
 
         } // if
         else if (anyHero) break;
