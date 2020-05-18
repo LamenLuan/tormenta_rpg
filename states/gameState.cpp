@@ -18,20 +18,24 @@ void GameState::update()
 
     system("CLS");
 
-    std::cout << "HERO SHEET" << "\n\n";
-
-    std::cout << *heroes[0] << "\n\n";
-
     std::cout << "Options:" << '\n'
         << "(0) Quit" << '\n'
-        << "(1) Save game" << '\n';
+        << "(1) Heroes Sheet" << '\n'
+        << "(2) Save game" << '\n';
 
     choice = getIntChoice();
 
     switch (choice)
     {
         case 0: set_quit(true); break;
-        case 1: FileDealer::saveHeroes(heroes); break;
+        case 1: get_states().push
+        (
+            std::make_unique<PartyOverall>
+            (
+                get_party(), get_states()
+            )
+        );
+        case 2: FileDealer::saveHeroes(heroes); break;
         default: break;
     }
 }

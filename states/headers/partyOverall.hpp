@@ -1,19 +1,18 @@
 #include "playableState.hpp"
-#include "partyOverall.hpp"
 
-#ifndef TORMENTA_GAMESTATE_HPP
-#define TORMENTA_GAMESTATE_HPP
+#ifndef TORMENTA_PARTYOVERALL_HPP
+#define TORMENTA_PARTYOVERALL_HPP
 
-class GameState : public PlayableState
+class PartyOverall : public PlayableState
 {
 private:
     
 public:
-    GameState
+    PartyOverall
     (
         Party& t_party, std::stack< std::unique_ptr<State> >& t_states
     );
-    ~GameState();
+    virtual ~PartyOverall();
 
     void update();
 };
