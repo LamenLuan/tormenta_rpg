@@ -25,10 +25,7 @@ public:
         std::array<std::unique_ptr<Hero>, 4>& t_heroes,
         std::istringstream& input, uint8_t index
     );
-    static void loadInventory
-    (
-        std::array<std::unique_ptr<Hero>, 4>& t_heroes, uint8_t index
-    );
+    static void loadInventory(Inventory& t_inventory);
 
     static void saveHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes);
     static bool loadHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes);

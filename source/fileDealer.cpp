@@ -142,20 +142,13 @@ void FileDealer::loadEquippedItems
     }
 }
 
-void FileDealer::loadInventory
-(
-    std::array<std::unique_ptr<Hero>, 4>& t_heroes, uint8_t index
-)
+void FileDealer::loadInventory(Inventory& t_inventory)
 {
     char itemClass;
     std::string itemString;
     std::ifstream inventoryFile;
 
-    /*
-    inventoryFile.open
-    (
-        "./data/inventory" + std::to_string(index) + ".dat", std::ios::in
-    );
+    inventoryFile.open("./data/inventory.dat", std::ios::in);
     
     // Loading the inventory items line by line.
     while( std::getline(inventoryFile, itemString) )
@@ -164,14 +157,10 @@ void FileDealer::loadInventory
 
         input >> itemClass;
 
-        FileDealer::loadItem
-        (
-            t_heroes[index]->get_inventory(), input, itemClass
-        );
+        FileDealer::loadItem(t_inventory, input, itemClass);
     }
 
     inventoryFile.close();
-    */
 }
 
 void FileDealer::saveHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes)
