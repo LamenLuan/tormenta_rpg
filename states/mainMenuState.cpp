@@ -2,11 +2,10 @@
 
 MainMenuState::MainMenuState
 (
-    std::array<std::unique_ptr<Hero>, 4>& t_heroes,
-    std::stack< std::unique_ptr<State> >& t_states
+    Party& t_party, std::stack< std::unique_ptr<State> >& t_states
 )
 :
-PlayableState(t_heroes, t_states)
+PlayableState(t_party, t_states)
 {
 }
 
@@ -19,7 +18,7 @@ void MainMenuState::update()
     int choice = -1;
 
     // Load option removed if there's no data saved in files.
-    if( !get_heroes()[0] ) options.erase(options.begin() + 1);
+    if( !get_party().get_heroes()[0] ) options.erase(options.begin() + 1);
 
     system("CLS");
 
@@ -41,14 +40,14 @@ void MainMenuState::update()
         (
             std::make_unique<NewGameState>
             (
-                NewGameState( get_heroes(), get_states() )
+                NewGameState( get_party(), get_states() )
             )
         ); break;
         case 2: get_states().push
         (
             std::make_unique<GameState>
             (
-                GameState( get_heroes(), get_states() )
+                GameState( get_party(), get_states() )
             )
         ); break;
         default: break;

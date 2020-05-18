@@ -2,11 +2,10 @@
 
 CharacterCreationState::CharacterCreationState
 (
-    std::array<std::unique_ptr<Hero>, 4>& t_heroes,
-    std::stack< std::unique_ptr<State> >& t_states
+    Party& t_party, std::stack< std::unique_ptr<State> >& t_states
 )
 :
-PlayableState(t_heroes, t_states)
+PlayableState(t_party, t_states)
 {
 }
 
@@ -284,7 +283,7 @@ void CharacterCreationState::update()
         }
     }
 
-    for ( auto &&i : get_heroes() )
+    for ( auto &&i : get_party().get_heroes() )
     {
         if(!i)
         {
@@ -299,9 +298,17 @@ void CharacterCreationState::update()
             default:
                 break;
             }
+
+            if(i)
+            {
+                get_party().get_inventory().set_capacity
+                (
+                    i->get_strength() * 10.f
+                );
+            }
+
             break;
         }
     }
-
     set_quit(true);
 }

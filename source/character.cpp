@@ -146,21 +146,7 @@ void Character::set_equippedShield(const Shield& t_shield)
     */
 }
 
-/*
-void Character::set_coins(unsigned int t_coins)
-{
-    if(t_coins != static_cast<int>(m_coins) && t_coins >= 0)
-    {
-        // Subtracting the weight of the actual quantity.
-        m_inventory.set_currentWeight
-            (m_inventory.get_currentWeight() - (m_coins * 0.01f));
-        m_coins = t_coins;
-        // Adding the weight of the new quantity.
-        m_inventory.set_currentWeight
-            (m_inventory.get_currentWeight() + (m_coins * 0.01f));
-    }
-}
-*/
+
 
 std::string Character::raceName() const
 {

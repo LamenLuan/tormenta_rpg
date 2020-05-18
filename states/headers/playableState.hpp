@@ -10,17 +10,16 @@
 class PlayableState : public State
 {
 private:
-    std::array<std::unique_ptr<Hero>, 4>& m_heroes;
+    Party& m_party;
     std::stack< std::unique_ptr<State> >& m_states;
 public:
     PlayableState
     (
-        std::array<std::unique_ptr<Hero>, 4>& t_heroes,
-        std::stack< std::unique_ptr<State> >& t_states
+        Party& t_party, std::stack< std::unique_ptr<State> >& t_states
     );
     virtual ~PlayableState();
 
-    std::array<std::unique_ptr<Hero>, 4>& get_heroes();
+    Party& get_party();
     std::stack< std::unique_ptr<State> >& get_states();
 
     void printCancelOption();

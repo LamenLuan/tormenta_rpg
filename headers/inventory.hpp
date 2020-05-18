@@ -12,7 +12,7 @@ private:
     float m_currentWeight{0};
 
 public:
-    explicit Inventory(float t_capacity, int t_coins);
+    Inventory();
     virtual ~Inventory();
 
     std::vector<Item*> get_items() const;

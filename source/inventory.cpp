@@ -1,8 +1,8 @@
 #include "../headers/inventory.hpp"
 
-Inventory::Inventory(float t_capacity, int t_coins)
+Inventory::Inventory()
 :
-    m_capacity(10.f * t_capacity), m_currentWeight(t_coins * 0.01f)
+    m_items{}
 {
 }
 

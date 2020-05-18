@@ -9,7 +9,7 @@ class Game
 private:
 
     bool m_quit{false};
-    std::array<std::unique_ptr<Hero>, 4> m_heroes;
+    Party m_party;
     std::stack< std::unique_ptr<State> > m_states;
 
 public:

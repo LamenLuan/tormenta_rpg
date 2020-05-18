@@ -2,13 +2,13 @@
 
 Game::Game()
     :
-    m_quit(false), m_heroes{}
+    m_quit(false), m_party()
 {
     m_states.push
     (
-        std::make_unique<MainMenuState>( MainMenuState(m_heroes, m_states) )
+        std::make_unique<MainMenuState>( MainMenuState(m_party, m_states) )
     );
-    FileDealer::loadHeroes(m_heroes);
+    FileDealer::loadHeroes( m_party.get_heroes() );
 }
 
 Game::~Game() = default;

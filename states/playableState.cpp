@@ -2,19 +2,18 @@
 
 PlayableState::PlayableState
 (
-    std::array<std::unique_ptr<Hero>, 4>& t_heroes,
-    std::stack< std::unique_ptr<State> >& t_states
+    Party& t_party, std::stack< std::unique_ptr<State> >& t_states
 )
 :
-m_heroes(t_heroes), m_states(t_states)
+m_party(t_party), m_states(t_states)
 {
 }
 
 PlayableState::~PlayableState() = default;
 
-std::array<std::unique_ptr<Hero>, 4>& PlayableState::get_heroes()
+Party& PlayableState::get_party()
 {
-    return m_heroes;
+    return m_party;
 }
 
 std::stack< std::unique_ptr<State> >& PlayableState::get_states()
