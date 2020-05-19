@@ -24,19 +24,19 @@ Character::~Character() = default;
 
 Race Character::get_race() const { return m_race; }
 
-Weapon& Character::get_equippedWeapon()
+std::unique_ptr<Weapon>& Character::get_equippedWeapon()
 {
-    return *m_equippedWeapon;
+   return m_equippedWeapon;
 }
 
-Armor& Character::get_equippedArmor()
+std::unique_ptr<Armor>& Character::get_equippedArmor()
 {
-   return *m_equippedArmor;
+   return m_equippedArmor;
 }
 
-Shield& Character::get_equippedShield()
+std::unique_ptr<Shield>& Character::get_equippedShield()
 {
-    return *m_equippedShield;
+    return m_equippedShield;
 }
 
 void Character::set_strength(short t_strength)
@@ -55,57 +55,12 @@ void Character::set_race(Race t_race)
 
 void Character::set_equippedWeapon(const Weapon& t_weapon)
 {
-    /*
-    if
-    (
-        m_equippedShield &&
-        (
-            t_weapon.get_weaponType() == WeaponType::TWO_HANDED ||
-            t_weapon.get_weaponType() == WeaponType::POLE_ARM_2H
-        ) 
-    )
-    {
-        m_inventory.addItem(*m_equippedShield);
-        m_inventory.set_currentWeight(
-            m_inventory.get_currentWeight() - m_equippedShield->get_weight()
-        );
-        m_equippedShield.reset();
-    }
-    if(m_equippedWeapon)
-    {
-        m_inventory.addItem(*m_equippedWeapon);
-        m_inventory.set_currentWeight(
-            m_inventory.get_currentWeight() - m_equippedWeapon->get_weight()
-        );
-    }
-    */
     m_equippedWeapon = std::make_unique<Weapon>(t_weapon);
-    /*
-    m_inventory.set_currentWeight(
-        m_inventory.get_currentWeight() + m_equippedWeapon->get_weight()
-    );
-    */
 }
 
 void Character::set_equippedArmor(const Armor& t_armor)
 {
-    /*
-    if(m_equippedArmor)
-    {
-        m_inventory.addItem(*m_equippedArmor);
-        m_inventory.set_currentWeight
-        (
-            m_inventory.get_currentWeight() - m_equippedArmor->get_weight()
-        );
-    }
-    */
     m_equippedArmor = std::make_unique<Armor>(t_armor);
-    /*
-    m_inventory.set_currentWeight
-    (
-        m_inventory.get_currentWeight() + m_equippedArmor->get_weight()
-    );
-    */
 }
 
 void Character::set_equippedShield(const Shield& t_shield)

@@ -18,6 +18,10 @@ public:
     unsigned int get_coins();
     Inventory& get_inventory();
     std::array<std::unique_ptr<Hero>, 4>& get_heroes();
+
+    void equipWeapon(Hero& t_hero, size_t t_index);
+    void equipArmor(Hero& t_hero, size_t t_index);
+    void equipShield(Hero& t_hero, size_t t_index);
 };
 
 #endif

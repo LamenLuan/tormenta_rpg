@@ -303,7 +303,8 @@ void CharacterCreationState::update()
             {
                 get_party().get_inventory().set_capacity
                 (
-                    i->get_strength() * 10.f
+                    get_party().get_inventory().get_capacity() +
+                        i->get_strength() * 10.f
                 );
             }
 

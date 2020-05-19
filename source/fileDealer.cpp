@@ -112,8 +112,7 @@ Shield FileDealer::loadShield(std::istringstream& input)
 
 void FileDealer::loadEquippedItems
 (
-    std::array<std::unique_ptr<Hero>, 4>& t_heroes,
-    std::istringstream& input, uint8_t index
+    std::unique_ptr<Hero>& t_hero, std::istringstream& input
 )
 {
     char itemClass = '0';
@@ -123,17 +122,17 @@ void FileDealer::loadEquippedItems
     {
         switch (itemClass)
         {
-            case 'W': t_heroes[index]->set_equippedWeapon
+            case 'W': t_hero->set_equippedWeapon
             (
                 FileDealer::loadWeapon(input)
             );
             break;
-            case 'S': t_heroes[index]->set_equippedShield
+            case 'S': t_hero->set_equippedShield
             (
                 FileDealer::loadShield(input)
             );
             break;
-            case 'A': t_heroes[index]->set_equippedArmor
+            case 'A': t_hero->set_equippedArmor
             (
                 FileDealer::loadArmor(input)
             );
@@ -177,12 +176,14 @@ void FileDealer::saveHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes)
     heroesFile.close();
 }
 
-bool FileDealer::loadHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes)
+void FileDealer::loadHeroes(Party& t_party)
 {
-    bool anyHero = false;
     char heroClass;
     std::string hero;
     std::ifstream heroFile;
+
+    std::array<std::unique_ptr<Hero>, 4>& heroes = t_party.get_heroes();
+    Inventory& inventory = t_party.get_inventory();
 
     heroFile.open("./data/heroes.dat", std::ios::in);
 
@@ -191,7 +192,6 @@ bool FileDealer::loadHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes)
         if( std::getline(heroFile, hero) )
         {
             if( hero.empty() ) continue;
-            anyHero = true;
 
             std::istringstream input(hero);
 
@@ -199,22 +199,33 @@ bool FileDealer::loadHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes)
 
             switch (heroClass)
             {
-                case 'G': t_heroes[i].reset
+                case 'G': heroes[i].reset
                 (
                     FileDealer::loadHero<Warrior>(input)
                 );
                 break;
             } // switch
 
-            loadEquippedItems(t_heroes, input, i);
-
-            // loadInventory(t_heroes, i);
+            if(heroes[i])
+            {
+                inventory.set_capacity
+                (
+                    inventory.get_capacity() + heroes[i]->get_strength() * 10.f
+                );
+                
+                loadEquippedItems(heroes[i], input);
+            } // if
 
         } // if
-        else if (anyHero) break;
-        else return false;
+        else break;
     }
 
     heroFile.close();
-    return true;
+}
+
+void FileDealer::loadGame(Party& t_party)
+{
+    loadHeroes(t_party);
+
+    loadInventory( t_party.get_inventory() );
 }

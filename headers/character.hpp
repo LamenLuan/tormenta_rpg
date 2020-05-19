@@ -26,9 +26,9 @@ public:
     virtual ~Character();
 
     Race get_race() const;
-    Weapon& get_equippedWeapon();
-    Armor& get_equippedArmor();
-    Shield& get_equippedShield();
+    std::unique_ptr<Weapon>& get_equippedWeapon();
+    std::unique_ptr<Armor>& get_equippedArmor();
+    std::unique_ptr<Shield>& get_equippedShield();
 
     // Overriding to update inventory capacity.
     void set_strength(short t_strength);

@@ -8,7 +8,7 @@ Game::Game()
     (
         std::make_unique<MainMenuState>( MainMenuState(m_party, m_states) )
     );
-    FileDealer::loadHeroes( m_party.get_heroes() );
+    FileDealer::loadGame(m_party);
 }
 
 Game::~Game() = default;

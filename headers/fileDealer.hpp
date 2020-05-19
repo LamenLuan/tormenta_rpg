@@ -22,13 +22,14 @@ public:
 
     static void loadEquippedItems
     (
-        std::array<std::unique_ptr<Hero>, 4>& t_heroes,
-        std::istringstream& input, uint8_t index
+        std::unique_ptr<Hero>& t_hero, std::istringstream& input
     );
     static void loadInventory(Inventory& t_inventory);
 
     static void saveHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes);
-    static bool loadHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes);
+    static void loadHeroes(Party& t_party);
+
+    static void loadGame(Party& t_party);
 };
 
 #endif // TORMENTA_FILEDEALER_HPP
