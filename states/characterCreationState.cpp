@@ -11,6 +11,11 @@ PlayableState(t_party, t_states)
 
 CharacterCreationState::~CharacterCreationState() = default;
 
+void CharacterCreationState::printCancelOption()
+{
+    std::cout << "(0) Cancel" << '\n';
+}
+
 void CharacterCreationState::characterCreationLogo()
 {
     system("CLS");

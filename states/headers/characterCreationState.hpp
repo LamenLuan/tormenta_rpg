@@ -14,6 +14,8 @@ public:
     );
     virtual ~CharacterCreationState();
 
+    void printCancelOption();
+    
     void characterCreationLogo();
 
     void classSelection

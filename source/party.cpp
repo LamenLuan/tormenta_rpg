@@ -102,7 +102,7 @@ void Party::equipShield(Hero& t_hero, size_t t_index)
             equippedWeapon->get_weaponType() == WeaponType::POLE_ARM_2H
         )
         {
-            m_inventory.addItem(equippedWeapon);
+            m_inventory.addItem(*equippedWeapon);
             equippedWeapon.reset();
         } // if
     } // if

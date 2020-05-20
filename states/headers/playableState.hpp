@@ -22,8 +22,6 @@ public:
     Party& get_party();
     std::stack< std::unique_ptr<State> >& get_states();
 
-    void printCancelOption();
-
     virtual void update() = 0;
 };
 

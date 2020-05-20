@@ -20,8 +20,3 @@ std::stack< std::unique_ptr<State> >& PlayableState::get_states()
 {
     return m_states;
 }
-
-void PlayableState::printCancelOption()
-{
-    std::cout << "(0) Cancel" << '\n';
-}

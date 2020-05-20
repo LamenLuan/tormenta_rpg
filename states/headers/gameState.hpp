@@ -1,5 +1,5 @@
 #include "playableState.hpp"
-#include "partyOverall.hpp"
+#include "partyOverallState.hpp"
 
 #ifndef TORMENTA_GAMESTATE_HPP
 #define TORMENTA_GAMESTATE_HPP

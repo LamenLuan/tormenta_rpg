@@ -30,7 +30,7 @@ void GameState::update()
         case 0: set_quit(true); break;
         case 1: get_states().push
         (
-            std::make_unique<PartyOverall>
+            std::make_unique<PartyOverallState>
             (
                 get_party(), get_states()
             )
