@@ -1,7 +1,7 @@
 #include "newGameState.hpp"
 
-#ifndef TORMENTA_MAINMENUSTATE_HPP
-#define TORMENTA_MAINMENUSTATE_HPP
+#ifndef TORMENTA_MAIN_MENU_STATE_HPP
+#define TORMENTA_MAIN_MENU_STATE_HPP
 
 class MainMenuState : public PlayableState
 {

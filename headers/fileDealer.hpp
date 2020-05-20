@@ -2,8 +2,8 @@
 
 #include "./party.hpp"
 
-#ifndef TORMENTA_FILEDEALER_HPP
-#define TORMENTA_FILEDEALER_HPP
+#ifndef TORMENTA_FILE_DEALER_HPP
+#define TORMENTA_FILE_DEALER_HPP
 
 class FileDealer
 {

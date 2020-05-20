@@ -4,8 +4,8 @@
 #include "../../headers/exception-types/cancelException.hpp"
 #include "../../headers/fileDealer.hpp"
 
-#ifndef TORMENTA_PLAYABLESTATE_HPP
-#define TORMENTA_PLAYABLESTATE_HPP
+#ifndef TORMENTA_PLAYABLE_STATE_HPP
+#define TORMENTA_PLAYABLE_STATE_HPP
 
 class PlayableState : public State
 {

@@ -3,8 +3,8 @@
 
 #include "./enum-types/dice.hpp"
 
-#ifndef TORMENTA_DICEROLL_HPP
-#define TORMENTA_DICEROLL_HPP
+#ifndef TORMENTA_DICE_ROLL_HPP
+#define TORMENTA_DICE_ROLL_HPP
 
 class DiceRoll {
 private:

@@ -2,8 +2,8 @@
 
 #include "diceRoll.hpp"
 
-#ifndef TORMENTA_ROLLSET_HPP
-#define TORMENTA_ROLLSET_HPP
+#ifndef TORMENTA_ROLL_SET_HPP
+#define TORMENTA_ROLL_SET_HPP
 
 class RollSet
 {

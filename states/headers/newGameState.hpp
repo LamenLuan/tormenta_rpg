@@ -1,8 +1,8 @@
 #include "characterCreationState.hpp"
 #include "gameState.hpp"
 
-#ifndef TORMENTA_NEWGAMESTATE_HPP
-#define TORMENTA_NEWGAMESTATE_HPP
+#ifndef TORMENTA_NEW_GAME_STATE_HPP
+#define TORMENTA_NEW_GAME_STATE_HPP
 
 class NewGameState : public PlayableState
 {

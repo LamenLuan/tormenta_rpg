@@ -1,7 +1,7 @@
 #include "playableState.hpp"
 
-#ifndef TORMENTA_CHARACTERCREATION_HPP
-#define TORMENTA_CHARACTERCREATION_HPP
+#ifndef TORMENTA_CHARACTER_CREATION_STATE_HPP
+#define TORMENTA_CHARACTER_CREATION_STATE_HPP
 
 class CharacterCreationState : public PlayableState
 {
