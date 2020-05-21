@@ -1,6 +1,6 @@
-#include "./headers/partyOverallState.hpp"
+#include "./headers/inventoryState.hpp"
 
-PartyOverallState::PartyOverallState
+InventoryState::InventoryState
 (
     Party& t_party, std::stack< std::unique_ptr<State> >& t_states
 )
@@ -9,23 +9,29 @@ PartyOverallState::PartyOverallState
 {
 }
 
-PartyOverallState::~PartyOverallState()
+InventoryState::~InventoryState()
 {
 }
 
-void PartyOverallState::update()
+void InventoryState::update()
 {
     bool previous = false, next = false;
-    int choice = -1;
-    std::array<std::unique_ptr<Hero>, 4>& heroes = get_party().get_heroes();
+    int choice;
+    const Inventory& inventory = get_party().get_inventory();
+    const std::vector<Item*>& items =
+        get_party().get_inventory().get_items();
 
     for (size_t i = 0; !get_quit();)
     {
         system("CLS");
 
-        std::cout << "HEROES SHEET" << "\n\n";
+        std::cout << "INVENTORY OVERALL" << "\n\n";
 
-        std::cout << *heroes[i] << "\n\n";
+        std::cout << "Items: " << i + 1 << "/" << items.size() << '\n'
+        << "Weight: " << inventory.get_currentWeight() << "/"
+        << inventory.get_capacity() << "\n\n";
+
+        std::cout << *items[i] << '\n';
 
         if(i > 0)
         {
@@ -33,13 +39,10 @@ void PartyOverallState::update()
             std::cout << "(1) Previous" << '\n';
         }
 
-        if(i < 4)
+        if( i + 1 < items.size() )
         {
-            if(heroes[i + 1])
-            {
-                next = true;
-                std::cout << "(2) Next" << '\n';
-            }
+            next = true;
+            std::cout << "(2) Next" << '\n';
         }
 
         std::cout << "(0) Quit" << '\n';

@@ -12,7 +12,7 @@ public:
     (
         Party& t_party, std::stack< std::unique_ptr<State> >& t_states
     );
-    virtual ~PartyOverallState();
+    virtual ~PartyOverallState(); 
 
     void update();
 };

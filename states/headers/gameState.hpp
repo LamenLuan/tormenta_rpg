@@ -1,5 +1,6 @@
 #include "playableState.hpp"
 #include "partyOverallState.hpp"
+#include "inventoryState.hpp"
 
 #ifndef TORMENTA_GAME_STATE_HPP
 #define TORMENTA_GAME_STATE_HPP
