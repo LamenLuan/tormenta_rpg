@@ -25,6 +25,8 @@ void PartyOverallState::update()
 
         std::cout << "HEROES SHEET" << "\n\n";
 
+        std::cout << "Hero " << i + 1 << '\n';
+
         std::cout << *heroes[i] << "\n\n";
 
         if(i > 0)

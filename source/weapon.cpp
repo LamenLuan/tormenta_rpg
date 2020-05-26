@@ -109,7 +109,7 @@ std::string Weapon::show() const
 {
     std::stringstream stream;
 
-    stream << Item::show() << weaponInfo() << '\n';
+    stream << Item::show() << weaponInfo();
 
     return stream.str();
 }

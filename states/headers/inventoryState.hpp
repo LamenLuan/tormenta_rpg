@@ -14,6 +14,8 @@ public:
     );
     virtual ~InventoryState();
 
+    void equipItem(size_t t_index);
+
     void update();
 };
 
