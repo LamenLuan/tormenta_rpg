@@ -15,7 +15,9 @@ void NewGameState::update()
 {
     std::array<std::unique_ptr<Hero>, 4>& heroes = get_party().get_heroes();
 
-    for (auto &&i : heroes)
+    get_party().get_inventory().reset();
+
+    for (auto &i : heroes)
     {
         i.reset();
     }
