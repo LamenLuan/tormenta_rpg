@@ -8,8 +8,8 @@ class Inventory
 {
 private:
     std::vector<Item*> m_items;
-    float m_capacity{0};
-    float m_currentWeight{0};
+    float m_capacity{0.f};
+    float m_currentWeight{0.f};
 
 public:
     Inventory();
@@ -24,6 +24,8 @@ public:
 
     template<typename T> void addItem(const T& t_item);
     void removeItem(size_t index);
+
+    void reset();
 };
 
 #endif // TORMENTA_INVENTORY_HPP

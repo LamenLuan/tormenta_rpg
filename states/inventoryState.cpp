@@ -20,7 +20,8 @@ void InventoryState::equipItem(size_t t_index)
 
     const std::vector<Item*>& items =
         get_party().get_inventory().get_items();
-    const std::array<std::unique_ptr<Hero>, 4>& heroes = get_party().get_heroes();
+    const std::array<std::unique_ptr<Hero>, 4>& heroes = 
+        get_party().get_heroes();
 
     while (!quit)
     {
@@ -69,7 +70,7 @@ void InventoryState::update()
 {
     bool previous = false, next = false, equippable = false;
     int choice;
-    
+
     Inventory& inventory = get_party().get_inventory();
     const std::vector<Item*>& items =
         get_party().get_inventory().get_items();
@@ -80,12 +81,14 @@ void InventoryState::update()
 
         std::cout << "INVENTORY OVERALL" << "\n\n";
 
-        if( items.empty() ) std::cout << "Empty..." << "\n\n";
+        std::cout << "Weight: " << inventory.get_currentWeight() << "/"
+                << inventory.get_capacity() << '\n'
+                << "Coins: " << get_party().get_coins() << " POs" << '\n';
+
+        if( items.empty() ) std::cout << "Inventory empty..." << "\n\n";
         else
         {
-            std::cout << "Items: " << i + 1 << "/" << items.size() << '\n'
-                << "Weight: " << inventory.get_currentWeight() << "/"
-                << inventory.get_capacity() << "\n\n";
+            std::cout << "Items: " << i + 1 << "/" << items.size() << "\n\n";
 
             std::cout << *items[i] << '\n';
 
