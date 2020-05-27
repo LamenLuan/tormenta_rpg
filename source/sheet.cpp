@@ -80,8 +80,8 @@ void Sheet::set_charisma(uint8_t t_charisma)
     if(t_charisma > 0) m_charisma = t_charisma;
 }
 
-// Correct possible negative values to acept negative values that could come
-// from magic debufs.
+// Correct possible negative values to accept negative values that could come
+// from magic debuffs.
 void Sheet::set_maxLife(unsigned short t_maxLife)
 {
     if (t_maxLife <= 0) m_maxLife = 1u;
@@ -90,7 +90,7 @@ void Sheet::set_maxLife(unsigned short t_maxLife)
     if (m_currentLife > m_maxLife) m_currentLife = m_maxLife;
 }
 
-// Correct possible negative values to acept negative values that will come
+// Correct possible negative values to accept negative values that will come
 // from damages.
 void Sheet::set_currentLife(unsigned short t_currentLife)
 {

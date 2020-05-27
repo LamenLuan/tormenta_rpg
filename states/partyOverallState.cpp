@@ -9,9 +9,7 @@ PartyOverallState::PartyOverallState
 {
 }
 
-PartyOverallState::~PartyOverallState()
-{
-}
+PartyOverallState::~PartyOverallState() = default;
 
 void PartyOverallState::update()
 {

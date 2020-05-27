@@ -4,9 +4,7 @@ State::State() : m_quit(false)
 {
 }
 
-State::~State()
-{
-}
+State::~State() = default;
 
 bool State::get_quit() const { return m_quit; }
 

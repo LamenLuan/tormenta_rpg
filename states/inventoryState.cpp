@@ -9,9 +9,7 @@ InventoryState::InventoryState
 {
 }
 
-InventoryState::~InventoryState()
-{
-}
+InventoryState::~InventoryState() = default;
 
 void InventoryState::equipItem(size_t t_index)
 {
