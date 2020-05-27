@@ -66,7 +66,8 @@ void CharacterCreationState::humanBonusSelection
 {
     bool confirmed = false;
     int selected[2], choice;
-    std::vector<std::string> habilities =
+
+    const std::array<std::string, 6> habilities =
     {
         "Strength", "Dexterity", "Constitution", "Inteligence",
         "Wisdom", "Charisma"
@@ -122,7 +123,7 @@ void CharacterCreationState::humanBonusSelection
         }
     }
 
-    for (size_t i = 0; i < 2; i++)
+    for (size_t i = 0; i < 2; ++i)
     {
         switch (selected[i])
         {
@@ -143,7 +144,7 @@ void CharacterCreationState::raceSelection
 )
 {
     int choice = -1;
-    std::vector<std::string> races =
+    const std::array<std::string, 5> races =
         {
             " Dwarf (+4 CON, +2 WIS, -2 DEX)",
             " Elf (+4 DEX, +2 INT, -2 CON)",

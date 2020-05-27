@@ -24,7 +24,7 @@ std::vector<unsigned short> RollSet::roll()
 {
     std::vector<unsigned short> rollSet;
 
-    for (size_t i = 0; i < m_quantity; i++)
+    for (size_t i = 0; i < m_quantity; ++i)
         rollSet.push_back(m_random(m_dice) );
 
     return rollSet;

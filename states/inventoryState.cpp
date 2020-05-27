@@ -31,7 +31,7 @@ void InventoryState::equipItem(size_t t_index)
             << "Equipping the " << items[t_index]->get_name()
             << " for:" << "\n\n";
         
-        for (size_t i = 0; i < 4; i++)
+        for (size_t i = 0; i < 4; ++i)
         {
             if(heroes[i])
             {
