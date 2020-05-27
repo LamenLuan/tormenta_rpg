@@ -24,10 +24,13 @@ public:
     (
         std::unique_ptr<Hero>& t_hero, std::istringstream& input
     );
-    static void loadInventory(Inventory& t_inventory);
+    static void loadInventory
+    (
+        Party& t_party, std::array<std::unique_ptr<Hero>, 4>& t_heroes
+    );
 
     static void saveHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes);
-    static void loadHeroes(Party& t_party);
+    static void loadHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes);
 
     static void loadGame(Party& t_party);
 };

@@ -43,13 +43,19 @@ void MainMenuState::update()
                 NewGameState( get_party(), get_states() )
             )
         ); break;
-        case 2: get_states().push
-        (
-            std::make_unique<GameState>
+        case 2:
+        {
+            FileDealer::loadGame( get_party() );
+
+            get_states().push
             (
-                GameState( get_party(), get_states() )
-            )
-        ); break;
+                std::make_unique<GameState>
+                (
+                    GameState( get_party(), get_states() )
+                )
+            );
+        } break;
+
         default: break;
     }
 }
