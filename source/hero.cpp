@@ -37,7 +37,7 @@ Hero::Hero
 {
     while (m_currentExp >= m_nextLevelExp)
     {
-        m_level++;
+        ++m_level;
         m_nextLevelExp += m_level * 1000u;
     }
 
@@ -77,7 +77,7 @@ void Hero::addExp(int t_exp)
         // Loop allows to up multiple levels in one function call.
         while (m_currentExp >= m_nextLevelExp)
         {
-            m_level++;
+            ++m_level;
             m_maxLife += m_lifePerLevel + modifier(m_constitution);
             m_nextLevelExp += m_level * 1000u;
         }
