@@ -203,6 +203,12 @@ void FileDealer::loadHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes)
 
     heroFile.open("./data/heroes.dat", std::ios::in);
 
+    for (size_t i = 0; i < 4; ++i)
+    {
+        if(t_heroes[i]) t_heroes[i].reset();
+        else break;
+    }
+    
     for(size_t i = 0; i < 4; ++i)
     {
         if( std::getline(heroFile, hero) )
