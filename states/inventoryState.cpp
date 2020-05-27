@@ -66,6 +66,38 @@ void InventoryState::equipItem(size_t t_index)
     }
 }
 
+bool InventoryState::removeItem
+(
+    Inventory& t_inventory, const std::vector<Item*>& t_items,
+    size_t t_index
+)
+{
+    bool quit = false;
+    int choice = -1;
+
+    while (!quit)
+    {
+        system("CLS");
+
+        std::cout << "INVENTORY OVERALL" << "\n\n"
+            << "Do you really want to throw away " 
+            << t_items[t_index]->get_name() << " ?" << "\n\n"
+            << "(1) Yes" << '\n'
+            << "(0) No" << '\n';
+
+        choice = getIntChoice();
+
+        if(choice == 0) break;
+        else if(choice == 1)
+        {
+            t_inventory.removeItem(t_index);
+            quit = true;
+        }
+    }
+
+    return quit;
+}
+
 void InventoryState::update()
 {
     bool previous = false, next = false, equippable = false;
@@ -156,8 +188,7 @@ void InventoryState::update()
 
             case 4:
             {
-                inventory.removeItem(i);
-                return;
+                if( removeItem(inventory, items, i) ) return;
             } break;
 
             default: break;

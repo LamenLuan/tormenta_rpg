@@ -15,6 +15,11 @@ public:
     virtual ~InventoryState();
 
     void equipItem(size_t t_index);
+    bool removeItem
+    (
+        Inventory& t_inventory, const std::vector<Item*>& t_items,
+        size_t t_index
+    );
 
     void update();
 };
