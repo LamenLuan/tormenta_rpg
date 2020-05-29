@@ -289,29 +289,23 @@ void CharacterCreationState::update()
         }
     }
 
-    for ( auto &&i : get_party().get_heroes() )
+    for ( auto &i : get_party().get_heroes() )
     {
         if(!i)
         {
             switch (heroClass)
             {
-                case 0: i = std::make_unique<Warrior>
+                case 0: get_party().addHero
                 (
-                    name, strength, dexterity, constitution, inteligence,
-                    wisdom, charisma, race
+                    new Warrior
+                    (
+                        name, strength, dexterity, constitution, inteligence,
+                        wisdom, charisma, race
+                    ), i
                 ); break;
 
             default:
                 break;
-            }
-
-            if(i)
-            {
-                get_party().get_inventory().set_capacity
-                (
-                    get_party().get_inventory().get_capacity() +
-                        i->get_strength() * 10.f
-                );
             }
 
             break;

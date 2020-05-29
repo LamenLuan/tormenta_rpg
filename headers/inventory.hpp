@@ -15,7 +15,7 @@ public:
     Inventory();
     virtual ~Inventory();
 
-    std::vector<Item*> get_items() const;
+    std::vector<Item*>& get_items();
     float get_capacity() const;
     float get_currentWeight() const;
 
@@ -24,8 +24,6 @@ public:
 
     template<typename T> void addItem(const T& t_item);
     void removeItem(size_t index);
-
-    void reset();
 };
 
 #endif // TORMENTA_INVENTORY_HPP

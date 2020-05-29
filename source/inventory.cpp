@@ -14,7 +14,7 @@ Inventory::~Inventory()
     }
 }
 
-std::vector<Item*> Inventory::get_items() const { return m_items; }
+std::vector<Item*>& Inventory::get_items() { return m_items; }
 float Inventory::get_capacity() const { return m_capacity; }
 float Inventory::get_currentWeight() const { return m_currentWeight; }
 
@@ -51,17 +51,4 @@ void Inventory::removeItem(size_t index)
         delete m_items[index];
         m_items.erase(m_items.begin() + index);
     }
-}
-
-void Inventory::reset()
-{
-    for (auto &i : m_items)
-    {
-        delete i;
-    }
-
-    m_items.clear();
-
-    m_capacity = 0.f;
-    m_currentWeight = 0.f;
 }

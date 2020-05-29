@@ -43,7 +43,7 @@ void GameState::update()
                 get_party(), get_states()
             )
         ); break;
-        case 3: FileDealer::saveHeroes(heroes); break;
+        case 3: FileDealer::saveGame( get_party() ); break;
         default: break;
     }
 }

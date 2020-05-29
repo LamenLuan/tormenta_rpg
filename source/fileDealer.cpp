@@ -141,32 +141,37 @@ void FileDealer::loadEquippedItems
     }
 }
 
-void FileDealer::loadInventory
-(
-    Party& t_party, std::array<std::unique_ptr<Hero>, 4>& t_heroes
-)
+void FileDealer::saveItems(Party& t_party)
+{
+    std::ofstream inventoryFile;
+    inventoryFile.open("./data/inventory.dat", std::ios::out);
+
+    inventoryFile << t_party.get_coins() << '\n';
+
+    for ( auto &i : t_party.get_inventory().get_items() )
+    {
+        inventoryFile << i->getIdAsString() << '\n';
+    }
+    
+    inventoryFile.close();
+}
+
+void FileDealer::loadItems(Party& t_party)
 {
     char itemClass;
+    unsigned int coins;
+
+    Inventory& inventory = t_party.get_inventory();
     std::string itemString;
     std::ifstream inventoryFile;
 
-    Inventory& inventory = t_party.get_inventory();
-
     inventoryFile.open("./data/inventory.dat", std::ios::in);
 
-    inventory.reset();
+    inventoryFile >> coins;
+    t_party.set_coins(coins);
 
-    for (size_t i = 0; i < 4; ++i)
-    {
-        if(t_heroes[i])
-        {
-            inventory.set_capacity
-            (
-                inventory.get_capacity() + (t_heroes[i]->get_strength() * 10.f)
-            );
-        }
-        else break;
-    }
+    // Just skipping one line;
+    std::getline(inventoryFile, itemString);
 
     // Loading the inventory items line by line.
     while( std::getline(inventoryFile, itemString) )
@@ -181,34 +186,32 @@ void FileDealer::loadInventory
     inventoryFile.close();
 }
 
-void FileDealer::saveHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes)
+void FileDealer::saveHeroes(Party& t_party)
 {
-    std::ofstream heroesFile, inventoryFile;
+    std::ofstream heroesFile;
+    std::array<std::unique_ptr<Hero>, 4>& heroes = t_party.get_heroes();
+
     heroesFile.open("./data/heroes.dat", std::ios::out);
 
     for(size_t i = 0; i < 4; ++i)
     {
-        if(t_heroes[i]) heroesFile << t_heroes[i]->getIdAsString() << '\n';
+        if(heroes[i]) heroesFile << heroes[i]->getIdAsString() << '\n';
         else break;
     }
 
     heroesFile.close();
 }
 
-void FileDealer::loadHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes)
+void FileDealer::loadHeroes(Party& t_party)
 {
     char heroClass;
+
     std::string hero;
     std::ifstream heroFile;
+    std::array<std::unique_ptr<Hero>, 4>& heroes = t_party.get_heroes();
 
     heroFile.open("./data/heroes.dat", std::ios::in);
 
-    for (size_t i = 0; i < 4; ++i)
-    {
-        if(t_heroes[i]) t_heroes[i].reset();
-        else break;
-    }
-    
     for(size_t i = 0; i < 4; ++i)
     {
         if( std::getline(heroFile, hero) )
@@ -221,25 +224,33 @@ void FileDealer::loadHeroes(std::array<std::unique_ptr<Hero>, 4>& t_heroes)
 
             switch (heroClass)
             {
-                case 'G': t_heroes[i].reset
+                case 'G': t_party.addHero
                 (
-                    FileDealer::loadHero<Warrior>(input)
+                    FileDealer::loadHero<Warrior>(input), heroes[i]
                 );
                 break;
             } // switch
             
-            if(t_heroes[i]) loadEquippedItems(t_heroes[i], input);
+            if(heroes[i]) loadEquippedItems(heroes[i], input);
         } // if
         else break;
     }
+
     heroFile.close();
+}
+
+void FileDealer::saveGame(Party& t_party)
+{
+    saveHeroes(t_party);
+
+    saveItems(t_party);
 }
 
 void FileDealer::loadGame(Party& t_party)
 {
-    std::array<std::unique_ptr<Hero>, 4>& heroes = t_party.get_heroes();
+    t_party.reset();
 
-    loadHeroes(heroes);
+    loadHeroes(t_party);
 
-    loadInventory(t_party, heroes);
+    loadItems(t_party);
 }
