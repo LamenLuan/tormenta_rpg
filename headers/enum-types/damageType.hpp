@@ -7,8 +7,7 @@ enum class DamageType
     BLUDGEON,
     FIRE,
     PIERCE,
-    SLASH,
-    SPECIAL
+    SLASH
 };
 
 #endif
