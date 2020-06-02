@@ -28,6 +28,10 @@ public:
     void equipArmor(Hero& t_hero, size_t t_index);
     void equipShield(Hero& t_hero, size_t t_index);
 
+    void unequipWeapon(Hero& t_hero);
+    void unequipArmor(Hero& t_hero);
+    void unequipShield(Hero& t_hero);
+
     void reset();
 };
 

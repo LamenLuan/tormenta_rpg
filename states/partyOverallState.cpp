@@ -42,6 +42,21 @@ void PartyOverallState::update()
             }
         }
 
+        if( heroes[i]->get_equippedWeapon() )
+        {
+            std::cout << "(3) Unequip weapon" << '\n';
+        }
+
+        if( heroes[i]->get_equippedArmor() )
+        {
+            std::cout << "(4) Unequip armor" << '\n';
+        }
+
+        if( heroes[i]->get_equippedShield() )
+        {
+            std::cout << "(5) Unequip shield" << '\n';
+        }
+
         std::cout << "(0) Quit" << '\n';
 
         choice = getIntChoice();
@@ -68,6 +83,10 @@ void PartyOverallState::update()
                     next = false;
                 }
             } break;
+
+            case 3: get_party().unequipWeapon(*heroes[i]); break;
+            case 4: get_party().unequipArmor(*heroes[i]); break;
+            case 5: get_party().unequipShield(*heroes[i]); break;
 
             default: break;
         }

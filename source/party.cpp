@@ -131,6 +131,33 @@ void Party::equipShield(Hero& t_hero, size_t t_index)
     m_inventory.removeItem(t_index);
 }
 
+void Party::unequipWeapon(Hero& t_hero)
+{
+    if( t_hero.get_equippedWeapon() )
+    {
+        m_inventory.addItem( *t_hero.get_equippedWeapon() );
+        t_hero.get_equippedWeapon().reset();
+    }
+}
+
+void Party::unequipArmor(Hero& t_hero)
+{
+    if( t_hero.get_equippedArmor() )
+    {
+        m_inventory.addItem( *t_hero.get_equippedArmor() );
+        t_hero.get_equippedArmor().reset();
+    }
+}
+
+void Party::unequipShield(Hero& t_hero)
+{
+    if( t_hero.get_equippedShield() )
+    {
+        m_inventory.addItem( *t_hero.get_equippedShield() );
+        t_hero.get_equippedShield().reset();
+    }
+}
+
 void Party::reset()
 {
     std::vector<Item *>& items = m_inventory.get_items();
