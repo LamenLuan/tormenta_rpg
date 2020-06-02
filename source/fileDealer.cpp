@@ -50,45 +50,47 @@ Item FileDealer::loadItem(std::istringstream& input)
 
 Weapon FileDealer::loadWeapon(std::istringstream& input)
 {
-    unsigned short minCriticalDice, criticalMultiplier;
+    unsigned short minCriticalDice, criticalMultiplier, magicLevel;
     short diceQuantity, diceNumber, damageType, weaponType;
     int price;
     float weight;
     std::string name;
 
-    input >> name >> price >> weight >> diceQuantity >> diceNumber
+    input >> name >> price >> weight >> magicLevel >> diceQuantity >> diceNumber
         >> minCriticalDice >> criticalMultiplier >> damageType >> weaponType;
 
     Utils::ununderscoreSpaces(name);
 
     return Weapon
     (
-        name, price, weight, diceQuantity, static_cast<Dice>(diceNumber),
-        minCriticalDice, criticalMultiplier,
+        name, price, weight, magicLevel, diceQuantity, 
+        static_cast<Dice>(diceNumber), minCriticalDice, criticalMultiplier,
         static_cast<DamageType>(damageType), static_cast<WeaponType>(weaponType)
     );
 }
 
 Armor FileDealer::loadArmor(std::istringstream& input)
 {
+    unsigned short magicLevel;
     int price, armorClassBonus, armorPenalty, maximumDexterity;
     float weight;
     std::string name;
 
-    input >> name >> price >> weight >> armorClassBonus >> armorPenalty
-        >> maximumDexterity;
+    input >> name >> price >> weight >> magicLevel >> armorClassBonus
+        >> armorPenalty >> maximumDexterity;
 
     Utils::ununderscoreSpaces(name);
 
     return Armor
     (
-        name, price, weight, armorClassBonus, armorPenalty, maximumDexterity
+        name, price, weight, magicLevel, armorClassBonus, armorPenalty,
+        maximumDexterity
     );
 }
 
 Shield FileDealer::loadShield(std::istringstream& input)
 {
-    unsigned short minCriticalDice, criticalMultiplier;
+    unsigned short minCriticalDice, criticalMultiplier, magicLevel;
     // Creating dummy variable to read the unecessary WeaponType, shield's
     // weapon type are aways one-handed (rule in the constructor).
     short diceQuantity, diceNumber, damageType, dummy;
@@ -96,7 +98,7 @@ Shield FileDealer::loadShield(std::istringstream& input)
     float weight;
     std::string name;
 
-    input >> name >> price >> weight >> diceQuantity >> diceNumber
+    input >> name >> price >> weight >> magicLevel >> diceQuantity >> diceNumber
         >> minCriticalDice >> criticalMultiplier >> damageType >> dummy
         >> armorClassBonus >> armorPenalty;
 
@@ -104,8 +106,8 @@ Shield FileDealer::loadShield(std::istringstream& input)
 
     return Shield
     (
-        name, price, weight, diceQuantity, static_cast<Dice>(diceNumber),
-        minCriticalDice, criticalMultiplier,
+        name, price, weight, magicLevel, diceQuantity,
+        static_cast<Dice>(diceNumber), minCriticalDice, criticalMultiplier,
         static_cast<DamageType>(damageType), armorClassBonus, armorPenalty
     );
 }

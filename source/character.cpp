@@ -65,43 +65,8 @@ void Character::set_equippedArmor(const Armor& t_armor)
 
 void Character::set_equippedShield(const Shield& t_shield)
 {
-    /*
-    if(m_equippedWeapon)
-    {
-        // Two ifs to avoid problems if m_equippedWeapon is null.
-        if
-        (
-            m_equippedWeapon->get_weaponType() == WeaponType::TWO_HANDED ||
-            m_equippedWeapon->get_weaponType() == WeaponType::POLE_ARM_2H
-        )
-        {
-            m_inventory.addItem(*m_equippedWeapon);
-            m_inventory.set_currentWeight
-            (
-                m_inventory.get_currentWeight() - m_equippedWeapon->get_weight()
-            );
-            m_equippedWeapon.reset();
-        } // if
-    } // if
-    if(m_equippedShield)
-    {
-        m_inventory.addItem(*m_equippedShield);
-        m_inventory.set_currentWeight
-        (
-            m_inventory.get_currentWeight() - m_equippedShield->get_weight()
-        );
-    }
-    */
     m_equippedShield = std::make_unique<Shield>(t_shield);
-    /*
-    m_inventory.set_currentWeight
-    (
-        m_inventory.get_currentWeight() + m_equippedShield->get_weight()
-    );
-    */
 }
-
-
 
 std::string Character::raceName() const
 {
@@ -153,7 +118,7 @@ void Character::naturalWeapon()
         {
             m_naturalWeapon = std::make_unique<Weapon>
             (
-                "Bite", 0, 0.f, 1, Dice::D6, 20, 2, DamageType::PIERCE,
+                "Bite", 0u, 0.f, 0u, 1u, Dice::D6, 20u, 2u, DamageType::PIERCE,
                 WeaponType::ONE_HANDED
             );
         } break;
@@ -161,7 +126,7 @@ void Character::naturalWeapon()
         {
             m_naturalWeapon = std::make_unique<Weapon>
             (
-                "Unarmed attack", 0, 0.f, 1, Dice::D3, 20, 2,
+                "Unarmed attack", 0u, 0.f, 0u, 1u, Dice::D3, 20u, 2u,
                 DamageType::BLUDGEON, WeaponType::ONE_HANDED
             );
         } break;

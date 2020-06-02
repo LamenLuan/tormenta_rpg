@@ -1,12 +1,5 @@
 #include "../headers/item.hpp"
 
-#include <utility>
-
-Item::Item()
-{
-    m_name = "";
-}
-
 Item::Item(std::string t_name, unsigned int t_price, float t_weight)
     :
     m_name( std::move(t_name) ), m_price(t_price), m_weight(t_weight)
@@ -31,11 +24,17 @@ void Item::set_weight(float t_weight)
     if (t_weight >= 0.0f) m_weight = t_weight;
 }
 
-std::string Item::show() const {
+std::string Item::showName() const
+{
+    return m_name;
+}
+
+std::string Item::show() const
+{
     std::stringstream stream;
 
     stream 
-        << "Item: " << m_name << '\n'
+        << "Item: " << showName() << '\n'
         << "Price: " << m_price << " PO" << '\n'
         << "Weight: " << std::fixed << std::setprecision(2) << m_weight << "kg"
             << '\n';

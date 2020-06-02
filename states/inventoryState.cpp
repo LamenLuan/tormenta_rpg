@@ -26,7 +26,7 @@ void InventoryState::equipItem(size_t t_index)
         system("CLS");
 
         std::cout << "INVENTORY OVERALL" << "\n\n"
-            << "Equipping the " << items[t_index]->get_name()
+            << "Equipping the " << items[t_index]->showName()
             << " for:" << "\n\n";
         
         for (size_t i = 0; i < 4; ++i)
@@ -135,10 +135,7 @@ void InventoryState::update()
             }
 
             if
-            (
-                dynamic_cast<Weapon*>(items[i]) ||
-                    dynamic_cast<Armor*>(items[i])
-            )
+            ( dynamic_cast<EquipableItem*>(items[i]) )
             {
                 equippable = true;
                 std::cout << "(3) Equip" << '\n';

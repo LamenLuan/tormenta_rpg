@@ -14,7 +14,7 @@ protected:
     float m_weight{0.0f};
 
 public:
-    Item();
+
     Item(std::string t_name, unsigned int t_price, float t_weight);
     virtual ~Item();
 
@@ -26,6 +26,7 @@ public:
     void set_price(unsigned int t_price);
     void set_weight(float t_weight);
 
+    virtual std::string showName() const;
     virtual std::string show() const;
     std::string itemId() const;
     virtual std::string getIdAsString() const;

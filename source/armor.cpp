@@ -1,13 +1,13 @@
 #include "../headers/armor.hpp"
 
-#include <utility>
-
-Armor::Armor() : Item() {}
-
-Armor::Armor(std::string t_name, unsigned int t_price, float t_weight,
-    int8_t t_armorClassBonus, int8_t t_armorPenalty, int8_t t_maximumDexterity)
+Armor::Armor
+(
+    std::string t_name, unsigned int t_price, float t_weight,
+    uint8_t t_magicLevel, int8_t t_armorClassBonus,
+    int8_t t_armorPenalty, int8_t t_maximumDexterity
+)
     :
-    Item(std::move(t_name), t_price, t_weight),
+    EquipableItem(std::move(t_name), t_price, t_weight, t_magicLevel),
     m_armorClassBonus(t_armorClassBonus), m_armorPenalty(t_armorPenalty),
     m_maximumDexterity(t_maximumDexterity)
 {
@@ -61,7 +61,7 @@ std::string Armor::showArmor() const
 {
     std::stringstream stream;
 
-    stream << m_name << '\n' << armorInfo();
+    stream << showName() << '\n' << armorInfo();
 
     return stream.str();
 }
@@ -89,7 +89,7 @@ std::string Armor::getIdAsString() const
 {
     std::stringstream stream;
 
-    stream << "A " << itemId() << " " <<  armorId();
+    stream << "A " << equipableItemId() << " " <<  armorId();
 
     return stream.str();
 }

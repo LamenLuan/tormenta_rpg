@@ -1,18 +1,14 @@
 #include "../headers/weapon.hpp"
 
-Weapon::Weapon() : Item()
-{
-}
-
 Weapon::Weapon
 (
-        std::string t_name, unsigned int t_price, float t_weight,
-        unsigned short t_quantity, Dice t_dice, uint8_t t_minimumCriticalDice,
-        uint8_t t_criticalMultiplier, DamageType t_Damagetype,
-        WeaponType t_weaponType
+    std::string t_name, unsigned int t_price, float t_weight,
+    uint8_t t_magicLevel, unsigned short t_quantity, Dice t_dice,
+    uint8_t t_minimumCriticalDice, uint8_t t_criticalMultiplier,
+    DamageType t_Damagetype, WeaponType t_weaponType
 )
     : 
-    Item(std::move(t_name), t_price, t_weight),
+    EquipableItem(std::move(t_name), t_price, t_weight, t_magicLevel),
     m_damage(t_quantity, t_dice), m_minCriticalDice(t_minimumCriticalDice),
     m_criticalMultiplier(t_criticalMultiplier), m_damageType(t_Damagetype),
     m_weaponType(t_weaponType)
@@ -87,8 +83,12 @@ std::string Weapon::weaponInfo() const
 
     stream
         << "Weapon Type: " << showWeaponType() << '\n'
-        << "Damage: " << m_damage.show() << '\n'
-        << "Critical: " << get_minCriticalDice() <<
+        << "Damage: " << m_damage.show();
+
+    if( get_magicLevel() ) stream << " + " << get_magicLevel();
+    
+    stream
+        << '\n' << "Critical: " << get_minCriticalDice() <<
             (m_minCriticalDice < 20u ? "-20" : "") << '/' <<
             get_criticalMultiplier() << "x\n"
         << "Damage Type: " << showDamageType() << '\n';
@@ -100,7 +100,7 @@ std::string Weapon::showWeapon() const
 {
     std::stringstream stream;
 
-    stream << m_name << '\n' << weaponInfo();
+    stream << showName() << '\n' << weaponInfo();
 
     return stream.str();
 }
@@ -131,7 +131,7 @@ std::string Weapon::getIdAsString() const
 {
     std::stringstream stream;
 
-    stream << "W " << itemId() << " " << weaponId();
+    stream << "W " << equipableItemId() << " " << weaponId();
 
     return stream.str();
 }

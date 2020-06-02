@@ -10,11 +10,14 @@ private:
     int8_t m_armorPenalty{0};
 
 public:
-    Shield();
-    Shield(std::string t_name, unsigned int t_price, float t_weight,
-        unsigned short t_quantity, Dice t_dice, uint8_t t_minimumCriticalDice,
-        uint8_t t_criticalMultiplier, DamageType t_type,
-        int8_t t_armorClassBonus, int8_t t_armorPenalty);
+
+    Shield
+    (
+        std::string t_name, unsigned int t_price, float t_weight,
+        uint8_t t_magicLevel, unsigned short t_quantity, Dice t_dice,
+        uint8_t t_minimumCriticalDice, uint8_t t_criticalMultiplier,
+        DamageType t_damageType, int8_t t_armorClassBonus, int8_t t_armorPenalty
+    );
     virtual ~Shield();
 
     short get_armorClassBonus() const;
