@@ -96,12 +96,32 @@ std::string Hero::showStats() const
             << std::showpos << " (" << modifier(value) << ")\n";
     };
 
-    showStat(stream, "Strength", strength() );
-    showStat(stream, "Dexterity", dexterity() );
-    showStat(stream, "Constitution", constitution() );
-    showStat(stream, "Inteligence", inteligence() );
-    showStat(stream, "Wisdom", wisdom() );
-    showStat(stream, "Charisma", charisma() );
+    showStat(stream, "Strength", get_strength() );
+
+    if(m_equippedArmor)
+    {
+        unsigned short dexterity = get_dexterity();
+        short auxiliary = m_equippedArmor->get_maximumDexterity(),
+            dexterityModifier = modifier(dexterity);
+
+        stream << "Dexterity" << ": " << std::noshowpos << dexterity;
+
+        if(dexterityModifier > auxiliary)
+        {
+            stream << std::showpos << " (" << auxiliary
+                << ") * Limited by armor *" << '\n';
+        }
+        else
+        {
+            stream << std::showpos << " (" << dexterityModifier << ")\n";
+        }
+    }
+    else showStat(stream, "Dexterity", get_dexterity() );
+
+    showStat(stream, "Constitution", get_constitution() );
+    showStat(stream, "Inteligence", get_inteligence() );
+    showStat(stream, "Wisdom", get_wisdom() );
+    showStat(stream, "Charisma", get_charisma() );
 
     return stream.str();
 }
