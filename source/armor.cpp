@@ -15,17 +15,17 @@ Armor::Armor
 
 Armor::~Armor() = default;
 
-int Armor::get_armorClassBonus() const
+short Armor::get_armorClassBonus() const
 {
     return m_armorClassBonus;
 }
 
-int Armor::get_maximumDexterity() const
+short Armor::get_maximumDexterity() const
 {
     return m_maximumDexterity;
 }
 
-int Armor::get_armorPenalty() const
+short Armor::get_armorPenalty() const
 {
     return m_armorPenalty;
 }
@@ -35,14 +35,19 @@ void Armor::set_armorClassBonus(int8_t t_armorClassBonus)
     m_armorClassBonus = t_armorClassBonus;
 }
 
+void Armor::set_armorPenalty(int8_t t_armorPenalty)
+{
+    m_armorPenalty = t_armorPenalty;
+}
+
 void Armor::set_maximumDexterity(int8_t t_maximumDexterity)
 {
     m_maximumDexterity = t_maximumDexterity;
 }
 
-void Armor::set_armorPenalty(int8_t t_armorPenalty)
+short Armor::totalArmorClassBonus() const
 {
-    m_armorPenalty = t_armorPenalty;
+    return m_armorClassBonus + get_magicLevel();
 }
 
 std::string Armor::armorInfo() const
@@ -50,8 +55,12 @@ std::string Armor::armorInfo() const
     std::stringstream stream;
 
     stream << std::showpos 
-        << "Armor class bonus: " << get_armorClassBonus() << '\n'
-        << "Maximum dexteriry: " << get_maximumDexterity() << '\n'
+        << "Armor class bonus: " << get_armorClassBonus();
+
+    if( get_magicLevel() ) stream << " (+" << get_magicLevel() << ')';
+
+    stream
+        << '\n' << "Maximum dexteriry: " << get_maximumDexterity() << '\n'
         << "Armor penalty: " << get_armorPenalty();
 
     return stream.str();

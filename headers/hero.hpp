@@ -31,7 +31,7 @@ public:
 
     unsigned int get_currentExp() const;
     unsigned int get_nextLevelExp() const;
-    int get_lifePerLevel() const;
+    unsigned short get_lifePerLevel() const;
 
     void set_currentExp(unsigned int t_currentExp);
     void set_nextLevelExp(unsigned int t_nextLevelExp);

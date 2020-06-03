@@ -32,13 +32,21 @@ void Shield::set_armorPenalty(int8_t t_armorPenalty)
     m_armorPenalty = t_armorPenalty;
 }
 
+short Shield::totalArmorClassBonus() const
+{
+    return m_armorClassBonus + get_magicLevel();
+}
+
 std::string Shield::shieldInfo() const
 {
     std::stringstream stream;
 
     stream << std::showpos 
-        << "Armor class bonus: " << get_armorClassBonus() << '\n'
-        << "Armor penalty: " << get_armorPenalty();
+        << "Armor class bonus: " << get_armorClassBonus();
+
+    if( get_magicLevel() ) stream << " (+" << get_magicLevel() << ')';
+    
+    stream << '\n' << "Armor penalty: " << get_armorPenalty();
 
     return stream.str();
 }
