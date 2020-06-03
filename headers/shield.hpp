@@ -26,6 +26,8 @@ public:
     void set_armorClassBonus(int8_t t_armorClassBonus);
     void set_armorPenalty(int8_t t_armorPenalty);
 
+    short totalArmorClassBonus() const;
+
     std::string shieldInfo() const;
     std::string showShield() const;
     std::string show() const;

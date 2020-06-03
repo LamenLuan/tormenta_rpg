@@ -85,7 +85,7 @@ std::string Weapon::weaponInfo() const
         << "Weapon Type: " << showWeaponType() << '\n'
         << "Damage: " << m_damage.show();
 
-    if( get_magicLevel() ) stream << " + " << get_magicLevel();
+    if( get_magicLevel() ) stream << " (+" << get_magicLevel() << ')';
     
     stream
         << '\n' << "Critical: " << get_minCriticalDice() <<

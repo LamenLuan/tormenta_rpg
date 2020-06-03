@@ -39,6 +39,7 @@ public:
     void set_equippedShield(const Shield& t_shield);
     void set_coins(unsigned int t_coins);
     
+    short dexterityModifier() const;
     int armorClass() const;
     int initiativeBonus() const;
     void naturalWeapon();

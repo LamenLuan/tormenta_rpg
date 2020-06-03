@@ -50,7 +50,7 @@ unsigned int Hero::get_currentExp() const { return m_currentExp; }
 
 unsigned int Hero::get_nextLevelExp() const { return m_nextLevelExp; }
 
-int Hero::get_lifePerLevel() const { return m_lifePerLevel; }
+unsigned short Hero::get_lifePerLevel() const { return m_lifePerLevel; }
 
 void Hero::set_currentExp(unsigned int t_currentExp)
 {
@@ -101,14 +101,14 @@ std::string Hero::showStats() const
     if(m_equippedArmor)
     {
         unsigned short dexterity = get_dexterity();
-        short auxiliary = m_equippedArmor->get_maximumDexterity(),
+        short maximumDexterity = m_equippedArmor->get_maximumDexterity(),
             dexterityModifier = modifier(dexterity);
 
         stream << "Dexterity" << ": " << std::noshowpos << dexterity;
 
-        if(dexterityModifier > auxiliary)
+        if(dexterityModifier > maximumDexterity)
         {
-            stream << std::showpos << " (" << auxiliary
+            stream << std::showpos << " (" << maximumDexterity
                 << ") * Limited by armor *" << '\n';
         }
         else
