@@ -82,32 +82,27 @@ std::string Character::raceName() const
     return "";
 }
 
-int Character::dexterity() const
-{
-    int dexterity = m_dexterity;
-
-    if(m_equippedShield) dexterity += m_equippedShield->get_armorPenalty();
+int Character::armorClass() const
+{   
+    short dexterityModifier = modifier(m_dexterity);
+   
     if(m_equippedArmor)
     {
-        dexterity += m_equippedArmor->get_armorPenalty();
-        if(modifier(dexterity) >  m_equippedArmor->get_maximumDexterity() )
-            dexterity = m_equippedArmor->get_maximumDexterity();
+        short auxiliary = 0;
+        
+        auxiliary = m_equippedArmor->get_maximumDexterity();
+        if(dexterityModifier > auxiliary) dexterityModifier = auxiliary;
     }
-
-    return dexterity;
-}
-
-int Character::armorClass() const
-{
-    return 10 + (m_level / 2)
-        + modifier(dexterity() )
+    
+    return 
+        10 + (m_level / 2) + dexterityModifier
         + (m_equippedArmor ? m_equippedArmor->get_armorClassBonus() : 0)
         + (m_equippedShield ? m_equippedShield->get_armorClassBonus() : 0);
 }
 
 int Character::initiativeBonus() const
 {
-    return (m_level / 2) + dexterity();
+    return (m_level / 2) + m_dexterity;
 }
 
 void Character::naturalWeapon()
