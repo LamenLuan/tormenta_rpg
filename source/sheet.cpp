@@ -20,23 +20,23 @@ Sheet::~Sheet() = default;
 
 const std::string &Sheet::get_name() const { return m_name; }
 
-int Sheet::get_level() const { return m_level; }
+unsigned short Sheet::get_level() const { return m_level; }
 
-int Sheet::get_strength() const { return m_strength; }
+unsigned short Sheet::get_strength() const { return m_strength; }
 
-int Sheet::get_dexterity() const { return m_dexterity; }
+unsigned short Sheet::get_dexterity() const { return m_dexterity; }
 
-int Sheet::get_constitution() const { return m_constitution; }
+unsigned short Sheet::get_constitution() const { return m_constitution; }
 
-int Sheet::get_inteligence() const { return m_inteligence; }
+unsigned short Sheet::get_inteligence() const { return m_inteligence; }
 
-int Sheet::get_wisdom() const { return m_wisdom; }
+unsigned short Sheet::get_wisdom() const { return m_wisdom; }
 
-int Sheet::get_charisma() const { return m_charisma; }
+unsigned short Sheet::get_charisma() const { return m_charisma; }
 
-int Sheet::get_maxLife() const { return m_maxLife; }
+unsigned short Sheet::get_maxLife() const { return m_maxLife; }
 
-int Sheet::get_currentLife() const { return m_currentLife; }
+unsigned short Sheet::get_currentLife() const { return m_currentLife; }
 
 Weapon& Sheet::get_naturalWeapon() const { return *m_naturalWeapon; }
 
@@ -109,37 +109,7 @@ void Sheet::set_naturalWeapon(const Weapon& t_naturalWeapon)
     m_naturalWeapon = std::make_unique<Weapon>( t_naturalWeapon );
 }
 
-int Sheet::strength() const
-{
-    return m_strength;
-}
-
-int Sheet::dexterity() const
-{
-    return m_dexterity;
-}
-
-int Sheet::constitution() const
-{
-    return m_constitution;
-}
-
-int Sheet::inteligence() const
-{
-    return m_inteligence;
-}
-
-int Sheet::wisdom() const
-{
-    return m_wisdom;
-}
-
-int Sheet::charisma() const
-{
-    return m_charisma;
-}
-
-int Sheet::modifier(int t_atribute)
+short Sheet::modifier(short t_atribute)
 {
     if (t_atribute % 2 != 0) t_atribute -= 1;
 

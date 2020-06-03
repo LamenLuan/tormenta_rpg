@@ -34,16 +34,16 @@ public:
     virtual ~Sheet();
 
     const std::string& get_name() const;
-    // Returning ints to suport Character::getIdAsString()
-    int get_level() const;
-    int get_strength() const;
-    int get_dexterity() const;
-    int get_constitution() const;
-    int get_inteligence() const;
-    int get_wisdom() const;
-    int get_charisma() const;
-    int get_maxLife() const;
-    int get_currentLife() const;
+    // Returning u_shorts to suport Character::getIdAsString()
+    unsigned short get_level() const;
+    unsigned short get_strength() const;
+    unsigned short get_dexterity() const;
+    unsigned short get_constitution() const;
+    unsigned short get_inteligence() const;
+    unsigned short get_wisdom() const;
+    unsigned short get_charisma() const;
+    unsigned short get_maxLife() const;
+    unsigned short get_currentLife() const;
     Weapon& get_naturalWeapon() const;
 
     void set_name(const std::string& t_name);
@@ -58,14 +58,7 @@ public:
     void set_currentLife(unsigned short t_currentLife);
     void set_naturalWeapon(const Weapon& t_naturalWeapon);
 
-    virtual int strength() const;
-    virtual int dexterity() const;
-    virtual int constitution() const;
-    virtual int inteligence() const;
-    virtual int wisdom() const;
-    virtual int charisma() const;
-
-    static int modifier(int t_atribute);
+    static short modifier(short t_atribute);
     virtual int initiativeBonus() const = 0;
 
     virtual std::string show() const = 0;
