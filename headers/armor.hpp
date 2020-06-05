@@ -1,9 +1,9 @@
-#include "equipableItem.hpp"
+#include "magicalItem.hpp"
 
 #ifndef TORMENTA_ARMOR_HPP
 #define TORMENTA_ARMOR_HPP
 
-class Armor : public EquipableItem
+class Armor : public MagicalItem
 {
 private:
     int8_t m_armorClassBonus{0};
@@ -15,7 +15,7 @@ public:
     Armor
     (
         std::string t_name, unsigned int t_price, float t_weight,
-        uint8_t t_magicLevel, int8_t t_armorClassBonus,
+        uint8_t t_magicalLevel, int8_t t_armorClassBonus,
         int8_t t_armorPenalty, int8_t t_maximumDexterity
     );
     ~Armor();

@@ -1,4 +1,4 @@
-#include "equipableItem.hpp"
+#include "magicalItem.hpp"
 #include "rollSet.hpp"
 #include "./enum-types/damageType.hpp"
 #include "./enum-types/weaponType.hpp"
@@ -6,7 +6,7 @@
 #ifndef TORMENTA_WEAPON_H
 #define TORMENTA_WEAPON_H
 
-class Weapon : public EquipableItem
+class Weapon : public MagicalItem
 {
 
 protected:
@@ -21,7 +21,7 @@ public:
     Weapon
     (
         std::string t_name, unsigned int t_price, float t_weight,
-        uint8_t t_magicLevel, unsigned short t_quantity, Dice t_dice,
+        uint8_t t_magicalLevel, unsigned short t_quantity, Dice t_dice,
         uint8_t t_minimumCriticalDice, uint8_t t_criticalMultiplier,
         DamageType t_Damagetype, WeaponType t_weaponType
     );

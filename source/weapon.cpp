@@ -3,12 +3,12 @@
 Weapon::Weapon
 (
     std::string t_name, unsigned int t_price, float t_weight,
-    uint8_t t_magicLevel, unsigned short t_quantity, Dice t_dice,
+    uint8_t t_magicalLevel, unsigned short t_quantity, Dice t_dice,
     uint8_t t_minimumCriticalDice, uint8_t t_criticalMultiplier,
     DamageType t_Damagetype, WeaponType t_weaponType
 )
     : 
-    EquipableItem(std::move(t_name), t_price, t_weight, t_magicLevel),
+    MagicalItem(std::move(t_name), t_price, t_weight, t_magicalLevel),
     m_damage(t_quantity, t_dice), m_minCriticalDice(t_minimumCriticalDice),
     m_criticalMultiplier(t_criticalMultiplier), m_damageType(t_Damagetype),
     m_weaponType(t_weaponType)
@@ -85,7 +85,7 @@ std::string Weapon::weaponInfo() const
         << "Weapon Type: " << showWeaponType() << '\n'
         << "Damage: " << m_damage.show();
 
-    if( get_magicLevel() ) stream << " (+" << get_magicLevel() << ')';
+    if( get_magicalLevel() ) stream << " (+" << get_magicalLevel() << ')';
     
     stream
         << '\n' << "Critical: " << get_minCriticalDice() <<

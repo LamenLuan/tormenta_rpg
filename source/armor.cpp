@@ -3,11 +3,11 @@
 Armor::Armor
 (
     std::string t_name, unsigned int t_price, float t_weight,
-    uint8_t t_magicLevel, int8_t t_armorClassBonus,
+    uint8_t t_magicalLevel, int8_t t_armorClassBonus,
     int8_t t_armorPenalty, int8_t t_maximumDexterity
 )
     :
-    EquipableItem(std::move(t_name), t_price, t_weight, t_magicLevel),
+    MagicalItem(std::move(t_name), t_price, t_weight, t_magicalLevel),
     m_armorClassBonus(t_armorClassBonus), m_armorPenalty(t_armorPenalty),
     m_maximumDexterity(t_maximumDexterity)
 {
@@ -47,7 +47,7 @@ void Armor::set_maximumDexterity(int8_t t_maximumDexterity)
 
 short Armor::totalArmorClassBonus() const
 {
-    return m_armorClassBonus + get_magicLevel();
+    return m_armorClassBonus + get_magicalLevel();
 }
 
 std::string Armor::armorInfo() const
@@ -57,7 +57,7 @@ std::string Armor::armorInfo() const
     stream << std::showpos 
         << "Armor class bonus: " << get_armorClassBonus();
 
-    if( get_magicLevel() ) stream << " (+" << get_magicLevel() << ')';
+    if( get_magicalLevel() ) stream << " (+" << get_magicalLevel() << ')';
 
     stream
         << '\n' << "Maximum dexteriry: " << get_maximumDexterity() << '\n'

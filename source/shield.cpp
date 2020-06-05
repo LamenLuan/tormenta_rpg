@@ -3,14 +3,14 @@
 Shield::Shield
 (
     std::string t_name, unsigned int t_price, float t_weight,
-    uint8_t t_magicLevel, unsigned short t_quantity, Dice t_dice,
+    uint8_t t_magicalLevel, unsigned short t_quantity, Dice t_dice,
     uint8_t t_minimumCriticalDice, uint8_t t_criticalMultiplier,
     DamageType t_damageType, int8_t t_armorClassBonus, int8_t t_armorPenalty
 )
     :
     Weapon
     (
-        std::move(t_name), t_price, t_weight, t_magicLevel, t_quantity, t_dice,
+        std::move(t_name), t_price, t_weight, t_magicalLevel, t_quantity, t_dice,
         t_minimumCriticalDice, t_criticalMultiplier, t_damageType,
         WeaponType::ONE_HANDED
     ),
@@ -34,7 +34,7 @@ void Shield::set_armorPenalty(int8_t t_armorPenalty)
 
 short Shield::totalArmorClassBonus() const
 {
-    return m_armorClassBonus + get_magicLevel();
+    return m_armorClassBonus + get_magicalLevel();
 }
 
 std::string Shield::shieldInfo() const
@@ -44,7 +44,7 @@ std::string Shield::shieldInfo() const
     stream << std::showpos 
         << "Armor class bonus: " << get_armorClassBonus();
 
-    if( get_magicLevel() ) stream << " (+" << get_magicLevel() << ')';
+    if( get_magicalLevel() ) stream << " (+" << get_magicalLevel() << ')';
     
     stream << '\n' << "Armor penalty: " << get_armorPenalty();
 

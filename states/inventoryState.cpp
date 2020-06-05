@@ -135,7 +135,7 @@ void InventoryState::update()
             }
 
             if
-            ( dynamic_cast<EquipableItem*>(items[i]) )
+            ( dynamic_cast<MagicalItem*>(items[i]) )
             {
                 equippable = true;
                 std::cout << "(3) Equip" << '\n';
