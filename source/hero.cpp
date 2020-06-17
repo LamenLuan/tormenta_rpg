@@ -156,8 +156,8 @@ std::string Hero::getIdAsString() const
     stream << Character::getIdAsString() << " " << m_currentExp;
 
     if(m_equippedWeapon) stream << " " << m_equippedWeapon->getIdAsString();
+    if(m_equippedArmor) stream << " " << m_equippedArmor->getIdAsString();
     if(m_equippedShield) stream << " " << m_equippedShield->getIdAsString();
-    if(m_equippedArmor) stream << " " << m_equippedShield->getIdAsString();
 
     return stream.str();
 }
