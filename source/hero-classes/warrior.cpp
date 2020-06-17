@@ -11,8 +11,8 @@ Warrior::Warrior
 :
     Hero
     (
-        t_name, t_strength, t_dexterity, t_constitution, t_inteligence,
-        t_wisdom, t_charisma, 5u, t_race
+        std::move(t_name), t_strength, t_dexterity, t_constitution,
+        t_inteligence, t_wisdom, t_charisma, 5u, t_race
     )
 {
 }
