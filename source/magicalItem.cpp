@@ -1,5 +1,13 @@
 #include "../headers/magicalItem.hpp"
 
+MagicalItem::MagicalItem() = default;
+
+MagicalItem::MagicalItem(uint8_t t_magicalLevel)
+    :
+    m_magicalLevel(t_magicalLevel)
+{  
+}
+
 MagicalItem::MagicalItem
 (
     std::string t_name, unsigned int t_price, float t_weight,
@@ -35,11 +43,11 @@ std::string MagicalItem::showName() const
     return stream.str();
 }
 
-std::string MagicalItem::equipableItemId() const
+std::string MagicalItem::magicalItemId() const
 {
     std::stringstream stream;
 
-    stream << itemId() << " " << m_magicalLevel;
+    stream << itemId() << " " << get_magicalLevel();
 
     return stream.str();
 }

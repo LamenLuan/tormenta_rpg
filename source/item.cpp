@@ -1,5 +1,7 @@
 #include "../headers/item.hpp"
 
+Item::Item() = default;
+
 Item::Item(std::string t_name, unsigned int t_price, float t_weight)
     :
     m_name( std::move(t_name) ), m_price(t_price), m_weight(t_weight)

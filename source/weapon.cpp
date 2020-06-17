@@ -2,13 +2,28 @@
 
 Weapon::Weapon
 (
+    unsigned short t_quantity, Dice t_dice, uint8_t t_minimumCriticalDice,
+    uint8_t t_criticalMultiplier, DamageType t_Damagetype,
+    WeaponType t_weaponType
+)
+    :
+    MagicalItem(),
+    m_damage(t_quantity, t_dice), m_minCriticalDice(t_minimumCriticalDice),
+    m_criticalMultiplier(t_criticalMultiplier), m_damageType(t_Damagetype),
+    m_weaponType(t_weaponType)
+{
+}
+
+Weapon::Weapon
+(
     std::string t_name, unsigned int t_price, float t_weight,
     uint8_t t_magicalLevel, unsigned short t_quantity, Dice t_dice,
     uint8_t t_minimumCriticalDice, uint8_t t_criticalMultiplier,
     DamageType t_Damagetype, WeaponType t_weaponType
 )
-    : 
-    MagicalItem(std::move(t_name), t_price, t_weight, t_magicalLevel),
+    :
+    Item(std::move(t_name), t_price, t_weight),
+    MagicalItem(t_magicalLevel),
     m_damage(t_quantity, t_dice), m_minCriticalDice(t_minimumCriticalDice),
     m_criticalMultiplier(t_criticalMultiplier), m_damageType(t_Damagetype),
     m_weaponType(t_weaponType)
@@ -131,7 +146,7 @@ std::string Weapon::getIdAsString() const
 {
     std::stringstream stream;
 
-    stream << "W " << equipableItemId() << " " << weaponId();
+    stream << "W " << magicalItemId() << " " << weaponId();
 
     return stream.str();
 }

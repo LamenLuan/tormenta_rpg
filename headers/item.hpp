@@ -14,7 +14,7 @@ protected:
     float m_weight{0.0f};
 
 public:
-
+    Item();
     Item(std::string t_name, unsigned int t_price, float t_weight);
     virtual ~Item();
 

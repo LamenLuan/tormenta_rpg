@@ -6,7 +6,7 @@
 #ifndef TORMENTA_WEAPON_H
 #define TORMENTA_WEAPON_H
 
-class Weapon : public MagicalItem
+class Weapon : public virtual MagicalItem
 {
 
 protected:
@@ -17,6 +17,12 @@ protected:
     WeaponType m_weaponType{WeaponType::ONE_HANDED};
 
 public:
+    Weapon
+    (
+        unsigned short t_quantity, Dice t_dice, uint8_t t_minimumCriticalDice,
+        uint8_t t_criticalMultiplier, DamageType t_Damagetype,
+        WeaponType t_weaponType
+    );
 
     Weapon
     (
@@ -25,6 +31,7 @@ public:
         uint8_t t_minimumCriticalDice, uint8_t t_criticalMultiplier,
         DamageType t_Damagetype, WeaponType t_weaponType
     );
+
     virtual ~Weapon();
 
     RollSet& get_damage();
