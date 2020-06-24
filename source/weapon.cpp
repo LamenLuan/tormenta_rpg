@@ -17,6 +17,21 @@ Weapon::Weapon
 Weapon::Weapon
 (
     std::string t_name, unsigned int t_price, float t_weight,
+    unsigned short t_quantity, Dice t_dice, uint8_t t_minimumCriticalDice,
+    uint8_t t_criticalMultiplier, DamageType t_Damagetype,
+    WeaponType t_weaponType
+)
+    :
+    Item(std::move(t_name), t_price, t_weight),
+    m_damage(t_quantity, t_dice), m_minCriticalDice(t_minimumCriticalDice),
+    m_criticalMultiplier(t_criticalMultiplier), m_damageType(t_Damagetype),
+    m_weaponType(t_weaponType)
+{
+}
+
+Weapon::Weapon
+(
+    std::string t_name, unsigned int t_price, float t_weight,
     uint8_t t_magicalLevel, unsigned short t_quantity, Dice t_dice,
     uint8_t t_minimumCriticalDice, uint8_t t_criticalMultiplier,
     DamageType t_Damagetype, WeaponType t_weaponType

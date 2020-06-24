@@ -24,6 +24,15 @@ public:
         WeaponType t_weaponType
     );
 
+    // Constructor to no-magical weapons.
+    Weapon
+    (
+        std::string t_name, unsigned int t_price, float t_weight,
+        unsigned short t_quantity, Dice t_dice, uint8_t t_minimumCriticalDice,
+        uint8_t t_criticalMultiplier, DamageType t_Damagetype,
+        WeaponType t_weaponType
+    );
+
     Weapon
     (
         std::string t_name, unsigned int t_price, float t_weight,
