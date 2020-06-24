@@ -44,8 +44,8 @@ public:
     virtual ~Weapon();
 
     RollSet& get_damage();
-    int get_minCriticalDice() const;
-    int get_criticalMultiplier() const;
+    unsigned short get_minCriticalDice() const;
+    unsigned short get_criticalMultiplier() const;
     DamageType get_damageType() const;
     WeaponType get_weaponType() const;
 

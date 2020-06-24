@@ -6,7 +6,7 @@
 class MagicalItem : public virtual Item
 {
 private:
-    uint8_t m_magicalLevel{0};
+    uint8_t m_magicalLevel{0u};
 
 public:
     MagicalItem();

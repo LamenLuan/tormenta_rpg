@@ -11,7 +11,7 @@ DefenceItem::DefenceItem(int8_t t_armorClassBonus, int8_t t_armorPenalty)
 DefenceItem::DefenceItem
 (
     std::string t_name, unsigned int t_price, float t_weight,
-    uint8_t t_magicalLevel, int8_t t_armorClassBonus, int8_t t_armorPenalty
+    uint8_t t_magicalLevel, uint8_t t_armorClassBonus, uint8_t t_armorPenalty
 )
     :
     MagicalItem(std::move(t_name), t_price, t_weight, t_magicalLevel),
@@ -21,22 +21,22 @@ DefenceItem::DefenceItem
 
 DefenceItem::~DefenceItem() = default;
 
-short DefenceItem::get_armorClassBonus() const
+unsigned short DefenceItem::get_armorClassBonus() const
 {
     return m_armorClassBonus;
 }
 
-short DefenceItem::get_armorPenalty() const
+unsigned short DefenceItem::get_armorPenalty() const
 {
     return m_armorPenalty;
 }
 
-void DefenceItem::set_armorClassBonus(int8_t t_armorClassBonus)
+void DefenceItem::set_armorClassBonus(uint8_t t_armorClassBonus)
 {
     m_armorClassBonus = t_armorClassBonus;
 }
 
-void DefenceItem::set_armorPenalty(int8_t t_armorPenalty)
+void DefenceItem::set_armorPenalty(uint8_t t_armorPenalty)
 {
     m_armorPenalty = t_armorPenalty;
 }
@@ -50,13 +50,13 @@ std::string DefenceItem::defenceItemInfo() const
 {
     std::stringstream stream;
 
-    stream << std::showpos 
-        << "Armor class bonus: " << get_armorClassBonus();
+    stream 
+        << "Armor class bonus: +" << get_armorClassBonus();
 
     if( get_magicalLevel() ) stream << " (+" << get_magicalLevel() << ')';
 
     stream
-        << '\n' << "Armor penalty: " << get_armorPenalty();
+        << '\n' << "Armor penalty: -" << get_armorPenalty();
 
     return stream.str();
 }

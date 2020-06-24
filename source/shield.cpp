@@ -3,9 +3,9 @@
 Shield::Shield
 (
     std::string t_name, unsigned int t_price, float t_weight,
-    uint8_t t_magicalLevel, int8_t t_armorClassBonus, int8_t t_armorPenalty,
-    unsigned short t_quantity, Dice t_dice, uint8_t t_minimumCriticalDice,
-    uint8_t t_criticalMultiplier
+    uint8_t t_magicalLevel, uint8_t t_armorClassBonus,
+    uint8_t t_armorPenalty, unsigned short t_quantity, Dice t_dice,
+    uint8_t t_minimumCriticalDice, uint8_t t_criticalMultiplier
 )
     :
     Item(std::move(t_name), t_price, t_weight),

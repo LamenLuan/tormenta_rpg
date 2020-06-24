@@ -3,8 +3,8 @@
 Armor::Armor
 (
     std::string t_name, unsigned int t_price, float t_weight,
-    int8_t t_armorClassBonus, int8_t t_armorPenalty,
-    int8_t t_maximumDexterity, ArmorType t_armorType
+    uint8_t t_armorClassBonus, uint8_t t_armorPenalty,
+    uint8_t t_maximumDexterity, ArmorType t_armorType
 )
     :
     Item(std::move(t_name), t_price, t_weight),
@@ -16,8 +16,8 @@ Armor::Armor
 Armor::Armor
 (
     std::string t_name, unsigned int t_price, float t_weight,
-    uint8_t t_magicalLevel, int8_t t_armorClassBonus,
-    int8_t t_armorPenalty, int8_t t_maximumDexterity, ArmorType t_armorType
+    uint8_t t_magicalLevel, uint8_t t_armorClassBonus,
+    uint8_t t_armorPenalty, uint8_t t_maximumDexterity, ArmorType t_armorType
 )
     :
     Item(std::move(t_name), t_price, t_weight),
@@ -29,7 +29,7 @@ Armor::Armor
 
 Armor::~Armor() = default;
 
-short Armor::get_maximumDexterity() const
+unsigned short Armor::get_maximumDexterity() const
 {
     return m_maximumDexterity;
 }
@@ -39,7 +39,7 @@ ArmorType Armor::get_armorType() const
     return m_armorType;
 }
 
-void Armor::set_maximumDexterity(int8_t t_maximumDexterity)
+void Armor::set_maximumDexterity(uint8_t t_maximumDexterity)
 {
     m_maximumDexterity = t_maximumDexterity;
 }
@@ -64,8 +64,8 @@ std::string Armor::armorInfo() const
     std::stringstream stream;
 
     stream << defenceItemInfo() << '\n'
-        << "Maximum dexteriry bonus: "
-        << std::showpos << get_maximumDexterity() << '\n'
+        << "Maximum dexteriry bonus: +"
+        << get_maximumDexterity() << '\n'
         << "Armor type: " << showArmorType();
 
     return stream.str();

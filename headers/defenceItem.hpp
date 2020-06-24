@@ -8,23 +8,24 @@
 class DefenceItem : public virtual MagicalItem
 {
 private:
-    int8_t m_armorClassBonus{0};
-    int8_t m_armorPenalty{0};
+    uint8_t m_armorClassBonus{0};
+    uint8_t m_armorPenalty{0};
 
 public:
     DefenceItem(int8_t t_armorClassBonus, int8_t t_armorPenalty);
     DefenceItem
     (
         std::string t_name, unsigned int t_price, float t_weight,
-        uint8_t t_magicalLevel, int8_t t_armorClassBonus, int8_t t_armorPenalty
+        uint8_t t_magicalLevel, uint8_t t_armorClassBonus,
+        uint8_t t_armorPenalty
     );
     virtual ~DefenceItem();
 
-    short get_armorClassBonus() const;
-    short get_armorPenalty() const;
+    unsigned short get_armorClassBonus() const;
+    unsigned short get_armorPenalty() const;
     
-    void set_armorClassBonus(int8_t t_armorClassBonus);
-    void set_armorPenalty(int8_t t_armorPenalty);
+    void set_armorClassBonus(uint8_t t_armorClassBonus);
+    void set_armorPenalty(uint8_t t_armorPenalty);
 
     short totalArmorClassBonus() const;
 
