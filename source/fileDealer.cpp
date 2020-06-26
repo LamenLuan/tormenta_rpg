@@ -73,19 +73,19 @@ Weapon FileDealer::loadWeapon(std::istringstream& input)
 Armor FileDealer::loadArmor(std::istringstream& input)
 {
     unsigned short magicalLevel;
-    int price, armorClassBonus, armorPenalty, maximumDexterity;
+    int price, armorClassBonus, armorPenalty, maximumDexterity, armorType;
     float weight;
     std::string name;
 
     input >> name >> price >> weight >> magicalLevel >> armorClassBonus
-        >> armorPenalty >> maximumDexterity;
+        >> armorPenalty >> maximumDexterity >> armorType;
 
     Utils::ununderscoreSpaces(name);
 
     return Armor
     (
         name, price, weight, magicalLevel, armorClassBonus, armorPenalty,
-        maximumDexterity
+        maximumDexterity, static_cast<ArmorType>(armorType)
     );
 }
 
