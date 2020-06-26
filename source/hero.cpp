@@ -100,9 +100,9 @@ std::string Hero::showStats() const
 
     if(m_equippedArmor)
     {
-        unsigned short dexterity = get_dexterity();
-        short maximumDexterity = m_equippedArmor->get_maximumDexterity(),
-            dexterityModifier = modifier(dexterity);
+        unsigned short dexterity = get_dexterity(),
+            maximumDexterity = m_equippedArmor->get_maximumDexterity();
+        short dexterityModifier = modifier(dexterity);
 
         stream << "Dexterity" << ": " << std::noshowpos << dexterity;
 
