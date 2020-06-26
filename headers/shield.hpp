@@ -9,6 +9,15 @@ class Shield : public DefenceItem, public Weapon
 private:
 
 public:
+
+    Shield
+    (
+        std::string t_name, unsigned int t_price, float t_weight,
+        uint8_t t_armorClassBonus, uint8_t t_armorPenalty,
+        unsigned short t_quantity, Dice t_dice
+    );
+
+    // For shields with different critical rate/damage.
     Shield
     (
         std::string t_name, unsigned int t_price, float t_weight,
