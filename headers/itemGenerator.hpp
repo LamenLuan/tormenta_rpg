@@ -9,7 +9,9 @@ class ItemGenerator
 private:
     
 public:
-    static Weapon* generateWeapon(size_t t_index);
+    static Weapon generateWeapon(size_t t_index);
+    static Armor generateArmor(size_t t_index);
+    static Shield generateShield(size_t t_index);
 };
 
 #endif
