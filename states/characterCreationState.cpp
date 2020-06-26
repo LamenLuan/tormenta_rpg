@@ -284,7 +284,7 @@ void CharacterCreationState::update()
             if(m_phaseCount == -1)
             {
                 set_quit(true);
-                break;
+                return;
             }
         }
     }

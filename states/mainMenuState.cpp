@@ -17,6 +17,8 @@ void MainMenuState::update()
         {"New game", "Load game", "About"};
     int choice = -1;
 
+    FileDealer::loadGame( get_party() );
+
     // Load option removed if there's no data saved in files.
     if( !get_party().get_heroes()[0] ) options.erase(options.begin() + 1);
 

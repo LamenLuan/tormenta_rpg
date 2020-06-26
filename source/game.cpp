@@ -8,7 +8,6 @@ Game::Game()
     (
         std::make_unique<MainMenuState>( MainMenuState(m_party, m_states) )
     );
-    FileDealer::loadGame(m_party);
 }
 
 Game::~Game() = default;
