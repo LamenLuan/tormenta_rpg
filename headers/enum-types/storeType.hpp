@@ -3,9 +3,8 @@
 
 enum class StoreType
 {
-    BLACKSMITH,
     ARMORER,
-    MERCHANT,
+    WEAPONSMITH,
     GENERAL
 };
 
