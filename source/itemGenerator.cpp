@@ -1,8 +1,8 @@
 #include "../headers/itemGenerator.hpp"
 
-Weapon ItemGenerator::generateWeapon(size_t t_index)
+Item* ItemGenerator::generateWeapon(size_t t_index)
 {
-    const std::array<Weapon, 18> items =
+    const std::array<Weapon, weaponQuantity> items =
     {
         Weapon("Short Sword", 10u, 1.f, 1u, Dice::D6, 19u, 2u, DamageType::SLASH, WeaponType::LIGHT),
         Weapon("Hammer", 1u, 1.f, 1u, Dice::D6, 20u, 2u, DamageType::BLUDGEON, WeaponType::LIGHT),
@@ -25,15 +25,15 @@ Weapon ItemGenerator::generateWeapon(size_t t_index)
 
         Weapon("Spear", 2u, 1.5f, 1u, Dice::D6, 20u, 2u, DamageType::PIERCE, WeaponType::POLE_ARM_1H),
 
-        Weapon("Halberd", 10u, 6.f, 1u, Dice::D10, 20u, 3u, DamageType::SLASH, WeaponType::POLE_ARM_2H),
+        Weapon("Halberd", 10u, 6.f, 1u, Dice::D10, 20u, 3u, DamageType::SLASH, WeaponType::POLE_ARM_2H)
     };
 
-    return Weapon(items[t_index]);
+    return new Weapon(items[t_index]);
 }
 
-Armor ItemGenerator::generateArmor(size_t t_index)
+Item* ItemGenerator::generateArmor(size_t t_index)
 {
-    const std::array<Armor, 12> items = 
+    const std::array<Armor, armorQuantity> items = 
     {
         Armor("Chain Shirt", 100u, 12.f, 4u, 2u, 4u, ArmorType::LIGHT),
         Armor("Leather Armor", 10u, 7.f, 2u, 0u, 6u, ArmorType::LIGHT),
@@ -51,16 +51,32 @@ Armor ItemGenerator::generateArmor(size_t t_index)
         Armor("Splint Armor", 200u, 20.f, 6u, 4u, 0u, ArmorType::HEAVY)
     };
 
-    return Armor(items[t_index]);
+    return new Armor(items[t_index]);
 }
 
-Shield ItemGenerator::generateShield(size_t t_index)
+Item* ItemGenerator::generateShield(size_t t_index)
 {
-    const std::array<Shield, 2> items = 
+    const std::array<Shield, shieldQuantity> items = 
     {
         Shield("Light Shield", 5u, 3.f, 1u, 1u, 1u, Dice::D4),
         Shield("Heavy Shield", 15u, 7.f, 2u, 2u, 1u, Dice::D6)
     };
 
-    return Shield(items[t_index]);
+    return new Shield(items[t_index]);
+}
+
+Item* ItemGenerator::generateDefenceItem(size_t t_index)
+{
+    if(t_index < armorQuantity)
+        return generateArmor(t_index);
+    else
+        return generateShield(t_index - armorQuantity);
+}
+
+Item* ItemGenerator::generateItem(size_t t_index)
+{
+    if(t_index < weaponQuantity)
+        return generateWeapon(t_index);
+    else
+        return generateDefenceItem(t_index - weaponQuantity);
 }

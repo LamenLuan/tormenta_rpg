@@ -1,6 +1,7 @@
 #include <vector>
 
 #include "item.hpp"
+#include "itemGenerator.hpp"
 #include "./enum-types/storeType.hpp"
 
 #ifndef TORMENTA_STORE_HPP
