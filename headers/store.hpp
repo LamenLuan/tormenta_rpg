@@ -16,6 +16,13 @@ private:
 public:
     Store(float t_priceMultiplier, StoreType t_storeType);
 
+    float get_priceMultiplier() const;
+    StoreType get_storeType() const;
+    std::vector<Item*>& get_items();
+
+    void set_priceMultiplier(float t_priceMultiplier);
+    void set_storeType(StoreType t_storeType);
+
     virtual ~Store();
 };
 

@@ -44,3 +44,28 @@ Store::~Store()
         delete i;
     }
 }
+
+float Store::get_priceMultiplier() const
+{
+    return m_priceMultiplier;
+}
+
+StoreType Store::get_storeType() const
+{
+    return m_storeType;
+}
+
+std::vector<Item*>& Store::get_items()
+{
+    return m_items;
+}
+
+void Store::set_priceMultiplier(float t_priceMultiplier)
+{
+    m_priceMultiplier = t_priceMultiplier;
+}
+
+void Store::set_storeType(StoreType t_storeType)
+{
+    m_storeType = t_storeType;
+}
