@@ -13,6 +13,7 @@ NewGameState::~NewGameState() = default;
 
 void NewGameState::update()
 {
+    Store store(1.f, StoreType::GENERAL);
     std::array<std::unique_ptr<Hero>, 4>& heroes = get_party().get_heroes();
 
     get_party().reset();
@@ -21,7 +22,7 @@ void NewGameState::update()
     (
         std::make_unique<CharacterCreationState>
         (
-            CharacterCreationState( get_party(), get_states() )
+            CharacterCreationState( get_party(), get_states())
         )
     );
 
@@ -33,6 +34,18 @@ void NewGameState::update()
 
         // Initial gold for the party.
         get_party().set_coins(100u);
+
+        get_states().push
+        (
+            std::make_unique<StoreState>
+            (
+                StoreState( get_party(), get_states(), store)
+            )
+        );
+
+        get_states().top()->update();
+
+        get_states().pop();
 
         get_states().push
         (
