@@ -10,6 +10,6 @@ int main() {
     }
 
     system("CLS");
-    
+
     return 0;
 }
