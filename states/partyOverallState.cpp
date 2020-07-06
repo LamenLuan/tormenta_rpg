@@ -17,6 +17,7 @@ void PartyOverallState::update()
     int choice = -1;
     std::array<std::unique_ptr<Hero>, 4>& heroes = get_party().get_heroes();
 
+    // For loop because we have a heroes array.
     for (size_t i = 0; !get_quit();)
     {
         system("CLS");
