@@ -1,6 +1,6 @@
 #include "characterCreationState.hpp"
 #include "gameState.hpp"
-#include "../../headers/store.hpp"
+#include "storeState.hpp"
 
 #ifndef TORMENTA_NEW_GAME_STATE_HPP
 #define TORMENTA_NEW_GAME_STATE_HPP
